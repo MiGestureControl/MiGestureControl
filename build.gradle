@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: "jacoco"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repo.typesafe.com/typesafe/releases/"
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+jacocoTestReport {
+    doFirst {
+        classDirectories = files('build/classes/main/')
+    }
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "build/reports/coverageHtml"
+    }
+}
+
+task runMain(type: JavaExec) {
+    main = 'main.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
