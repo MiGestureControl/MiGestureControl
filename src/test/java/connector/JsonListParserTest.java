@@ -16,7 +16,7 @@ public class JsonListParserTest {
 
     String toPase;
 //    String path = "src/test/resources/jsonList/jsonList2.json";
-    String path = "src/test/resources/jsonList/auto.json";
+    String path = "src/test/resources/jsonList/jsonList2.json";
 
 
     @Before
@@ -27,8 +27,8 @@ public class JsonListParserTest {
 
     @Test
     public void testParseList() throws Exception {
-        System.out.println(toPase);
+        //System.out.println(toPase);
         boolean bool = JsonListParser.parseList(this.toPase);
-        assertTrue(false);
+        assertTrue(bool);
     }
 }
