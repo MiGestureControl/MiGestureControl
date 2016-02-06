@@ -12,8 +12,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import org.json.*;
-
 import javax.net.ssl.HttpsURLConnection;
 
 /**
@@ -25,7 +23,7 @@ public class FhemConector extends UntypedActor {
 
     public FhemConector() {
         try {
-            this.fhemURL = new URL("http://localhost:8083/fhem?cmd=jsonlist&XHR=1");
+            this.fhemURL = new URL("http://localhost:8083/fhem?cmd=jsonlist2&XHR=1");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -38,8 +36,7 @@ public class FhemConector extends UntypedActor {
             String content = this.getContentStringFromURL(this.fhemURL);
 
             if(content!=null){
-                this.parseJson(content);
-                getSender().tell(content, getSelf());
+                getSender().tell(JsonListParser.parseList(content), getSelf());
             }
         }
 
@@ -135,42 +132,42 @@ public class FhemConector extends UntypedActor {
         }
     }
 
-    private void parseJson(String content) {
-
-        JSONObject resultSet = new JSONObject(content);
-
-        JSONArray results = resultSet.getJSONArray("Results");
-
-        for (Object object : results) {
-
-            if (object instanceof JSONObject) {
-                JSONObject tempList = (JSONObject) object;
-
-                if (tempList.get("list").equals("FS20")) {
-                    System.out.println((tempList.get("list")));
-                    System.out.println(tempList);
-
-                    JSONArray tempDevices = tempList.getJSONArray("devices");
-
-                    for (Object tempDevice : tempDevices) {
-                        if (tempDevice instanceof JSONObject) {
-                            JSONObject device = (JSONObject) tempDevice;
-
-                            if (device.get("NAME").equals("ReadingLight")) {
-                                System.out.println(device);
-
-                                if (device.get("STATE").equals("off")) {
-                                    this.
-                                            sendCommand("?cmd=set%20" + device.get("NAME") + "%20" + "on" + "&XHR=1");
-                                } else {
-                                    this.sendCommand("?cmd=set%20" + device.get("NAME") + "%20" + "off" + "&XHR=1");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    private void parseJson(String content) {
+//
+//        JSONObject resultSet = new JSONObject(content);
+//
+//        JSONArray results = resultSet.getJSONArray("Results");
+//
+//        for (Object object : results) {
+//
+//            if (object instanceof JSONObject) {
+//                JSONObject tempList = (JSONObject) object;
+//
+//                if (tempList.get("list").equals("FS20")) {
+//                    System.out.println((tempList.get("list")));
+//                    System.out.println(tempList);
+//
+//                    JSONArray tempDevices = tempList.getJSONArray("devices");
+//
+//                    for (Object tempDevice : tempDevices) {
+//                        if (tempDevice instanceof JSONObject) {
+//                            JSONObject device = (JSONObject) tempDevice;
+//
+//                            if (device.get("NAME").equals("ReadingLight")) {
+//                                System.out.println(device);
+//
+//                                if (device.get("STATE").equals("off")) {
+//                                    this.
+//                                            sendCommand("?cmd=set%20" + device.get("NAME") + "%20" + "on" + "&XHR=1");
+//                                } else {
+//                                    this.sendCommand("?cmd=set%20" + device.get("NAME") + "%20" + "off" + "&XHR=1");
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
