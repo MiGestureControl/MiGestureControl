@@ -1,0 +1,2230 @@
+{
+  "Arg": "",
+  "Results": [
+    {
+      "Name": "Outdoor",
+      "PossibleSets": "dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dimdown dimup dimupdown off off-for-timer on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle dim:slider,0,6.25,100 blink off-till intervals",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride Light Light_map structexclude userattr",
+      "Internals": {
+        "BTN": "11",
+        "DEF": "1234 11",
+        "NAME": "Outdoor",
+        "NR": "17",
+        "STATE": "off",
+        "TYPE": "FS20",
+        "XMIT": "1234"
+      },
+      "Readings": {
+        "state": {
+          "Value": "off",
+          "Time": "2016-02-02 11:30:02"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "Light": "AllLights",
+        "group": "Single Lights",
+        "icon": "light_outdoor",
+        "room": "Light",
+        "userattr": "Light Light_map structexclude"
+      }
+    },
+    {
+      "Name": "rr_Father",
+      "PossibleSets": "state:home,gotosleep,absent,gone mood:-,calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rr_locationHome rr_locationWayhome rr_locationUnderway rr_autoGoneAfter:12,16,24,26,28,30,36,48,60 rr_showAllStates:0,1 rr_realname:group,alias rr_states rr_locations rr_moods rr_moodDefault rr_moodSleepy rr_passPresenceTo event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents,rgr_Parents",
+        "NAME": "rr_Father",
+        "NR": "56",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Parents,",
+        "STATE": "gone",
+        "TYPE": "ROOMMATE"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "17191:01:43",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "1031462",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerPresence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:16:17",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:26:52",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "lastDurAbsence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDurPresence": {
+          "Value": "00:10:35",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "lastLocation": {
+          "Value": "home",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "lastMood": {
+          "Value": "calm",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "location": {
+          "Value": "underway",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "mood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "state": {
+          "Value": "gone",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-16 13:46:02"
+        }
+      },
+      "Attributes": {
+        "alias": "Status",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*gone:user_ext_away:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Father",
+        "icon": "status_available",
+        "room": "Residents",
+        "rr_autoGoneAfter": "0.1",
+        "sortby": "0",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "rgr_Children",
+      "PossibleSets": "addRoommate addGuest state:home,gotosleep,absent,gone removeRoommate:rr_Daughter,rr_Son,rr_Baby",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rgr_showAllStates:0,1 rgr_states event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "NAME": "rgr_Children",
+        "NR": "52",
+        "NTFY_ORDER": "50-rgr_Children",
+        "ROOMMATES": "rr_Daughter,rr_Son,rr_Baby",
+        "STATE": "gotosleep",
+        "TYPE": "RESIDENTS"
+      },
+      "Readings": {
+        "lastActivity": {
+          "Value": "gotosleep",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastActivityBy": {
+          "Value": "Baby",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastArrival": {
+          "Value": "2015-10-02 14:20:43",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastAwake": {
+          "Value": "2014-02-17 20:45:12",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "lastDeparture": {
+          "Value": "2015-09-30 14:35:34",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurAbsence": {
+          "Value": "47:45:09",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastDurAbsence_cr": {
+          "Value": "2865",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:01",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurSleep": {
+          "Value": "29:47:11",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "lastSleep": {
+          "Value": "2014-02-16 14:58:01",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "lastState": {
+          "Value": "gone",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "presence": {
+          "Value": "present",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsAbsent": {
+          "Value": "0",
+          "Time": "2015-10-02 13:38:42"
+        },
+        "residentsAsleep": {
+          "Value": "0",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "residentsAwoken": {
+          "Value": "0",
+          "Time": "2014-02-16 14:06:48"
+        },
+        "residentsGone": {
+          "Value": "2",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsGotosleep": {
+          "Value": "1",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsGuests": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:25"
+        },
+        "residentsHome": {
+          "Value": "0",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "residentsTotal": {
+          "Value": "3",
+          "Time": "2014-02-16 14:31:05"
+        },
+        "residentsTotalAbsent": {
+          "Value": "2",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsTotalPresent": {
+          "Value": "1",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsTotalWayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:25"
+        },
+        "state": {
+          "Value": "gotosleep",
+          "Time": "2015-10-02 14:20:43"
+        }
+      },
+      "Attributes": {
+        "alias": "Children",
+        "devStateIcon": ".*home:status_available:absent .*absent:status_away_1:home .*gone:status_standby:home .*none:control_building_empty .*gotosleep:status_night:asleep .*asleep:status_night:awoken .*awoken:status_available:home",
+        "group": "Home State",
+        "icon": "control_building_filled",
+        "room": "Residents",
+        "sortby": "3",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "WEBtablet",
+      "PossibleSets": "clearSvgCache:noArg rereadicons:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings CORS:0,1 HTTPS:1,0 CssFiles JavaScripts SVGcache:1,0 addStateEvent csrfToken alarmTimeout allowedCommands allowfrom basicAuth basicAuthMsg closeConn:1,0 column defaultRoom endPlotNow:1,0 endPlotToday:1,0 fwcompress:0,1 hiddengroup hiddenroom iconPath longpoll:0,1 longpollSVG:1,0 menuEntries ploteditor:always,onClick,never plotfork:1,0 plotmode:gnuplot,gnuplot-scroll,SVG plotEmbed:0,1 plotsize nrAxis redirectCmds:0,1 refresh reverseLogs:0,1 roomIcons sortRooms smallscreen:unused stylesheetPrefix touchpad:unused webname codemirrorParam devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "8085 global",
+        "FD": "8",
+        "NAME": "WEBtablet",
+        "NR": "9",
+        "NTFY_ORDER": "50-WEBtablet",
+        "PORT": "8085",
+        "STATE": "Initialized",
+        "TYPE": "FHEMWEB"
+      },
+      "Readings": {},
+      "Attributes": {
+        "hiddenroom": "DashboardRoom",
+        "iconPath": "openautomation:fhemSVG",
+        "room": "System",
+        "sortRooms": "Light Cinema Residents Sensors System",
+        "stylesheetPrefix": "ios7"
+      }
+    },
+    {
+      "Name": "rr_Son",
+      "PossibleSets": "state:home,gotosleep,absent,gone mood:-,calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rr_locationHome rr_locationWayhome rr_locationUnderway rr_autoGoneAfter:12,16,24,26,28,30,36,48,60 rr_showAllStates:0,1 rr_realname:group,alias rr_states rr_locations rr_moods rr_moodDefault rr_moodSleepy rr_passPresenceTo event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents,rgr_Children",
+        "NAME": "rr_Son",
+        "NR": "59",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Children,",
+        "STATE": "gone",
+        "TYPE": "ROOMMATE"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "17190:30:34",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "1031431",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerPresence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:58:00",
+          "Time": "2014-02-16 14:58:00"
+        },
+        "lastAwake": {
+          "Value": "2014-02-16 14:06:44",
+          "Time": "2014-02-16 14:06:44"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:58:01",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "lastDurAbsence": {
+          "Value": "00:23:50",
+          "Time": "2014-02-16 14:58:00"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "lastDurSleep": {
+          "Value": "00:00:11",
+          "Time": "2014-02-16 14:06:44"
+        },
+        "lastLocation": {
+          "Value": "home",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "lastMood": {
+          "Value": "calm",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "lastSleep": {
+          "Value": "2014-02-16 14:06:33",
+          "Time": "2014-02-16 14:06:33"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "location": {
+          "Value": "underway",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "mood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:58:01"
+        },
+        "state": {
+          "Value": "gone",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-16 13:46:38"
+        }
+      },
+      "Attributes": {
+        "alias": "Status",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*gone:user_ext_away:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Son",
+        "icon": "status_available",
+        "room": "Residents",
+        "sortby": "0",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "CUL_0",
+      "PossibleSets": "bWidth freq hmPairForSec hmPairSerial led patable rAmpl raw reopen sens",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings do_not_notify:1,0 dummy:1,0 showtime:1,0 model:CUL,CUN sendpool addvaltrigger rfmode:SlowRF,HomeMatic,MAX,WMBus_T,WMBus_S hmId hmProtocolEvents:0_off,1_dump,2_dumpFull,3_dumpTrigger event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CMDS": "",
+        "Clients": ":FS20:FHT.*:KS300:USF1000:BS:HMS: :CUL_EM:CUL_WS:CUL_FHTTK:CUL_HOERMANN: :ESA2000:CUL_IR:CUL_TX:Revolt:IT:UNIRoll:SOMFY :STACKABLE_CC:CUL_RFR:",
+        "DEF": "none 0000",
+        "FHTID": "0000",
+        "NAME": "CUL_0",
+        "NR": "16",
+        "STATE": "???",
+        "TYPE": "CUL",
+        "initString": "X21"
+      },
+      "Readings": {},
+      "Attributes": {
+        "dummy": "1",
+        "room": "System"
+      }
+    },
+    {
+      "Name": "rg_Guest1",
+      "PossibleSets": "state:home,gotosleep,absent,none mood:-,calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rg_locationHome rg_locationWayhome rg_locationUnderway rg_autoGoneAfter:12,16,24,26,28,30,36,48,60 rg_showAllStates:0,1 rg_realname:group,alias rg_states rg_locations rg_moods rg_moodDefault rg_moodSleepy event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CHANGED": "null",
+        "DEF": "rgr_Residents,rgr_Guests",
+        "NAME": "rg_Guest1",
+        "NR": "54",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Guests,",
+        "STATE": "none",
+        "TYPE": "GUEST"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastAwake": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:09:20",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastDurAbsence": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:03",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastDurSleep": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastLocation": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastMood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastSleep": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastState": {
+          "Value": "home",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "location": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "mood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "state": {
+          "Value": "none",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        }
+      },
+      "Attributes": {
+        "alias": "Guest1",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*none:control_building_empty:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Guests",
+        "icon": "scene_visit_guests",
+        "rg_autoGoneAfter": "0.01",
+        "rg_realname": "alias",
+        "room": "Residents",
+        "sortby": "1",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "rgr_Parents",
+      "PossibleSets": "addRoommate addGuest state:home,gotosleep,absent,gone removeRoommate:rr_Father,rr_Mother",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rgr_showAllStates:0,1 rgr_states event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "NAME": "rgr_Parents",
+        "NR": "51",
+        "NTFY_ORDER": "50-rgr_Parents",
+        "ROOMMATES": "rr_Father,rr_Mother",
+        "STATE": "home",
+        "TYPE": "RESIDENTS"
+      },
+      "Readings": {
+        "lastActivity": {
+          "Value": "gone",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastActivityBy": {
+          "Value": "Father",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:16:17",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastAwake": {
+          "Value": "2014-02-15 16:39:35",
+          "Time": "2014-02-15 16:39:35"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:16:16",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastDurAbsence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:03",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastDurSleep": {
+          "Value": "00:02:44",
+          "Time": "2014-02-15 16:39:35"
+        },
+        "lastSleep": {
+          "Value": "2014-02-15 16:36:51",
+          "Time": "2014-02-15 16:36:51"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "presence": {
+          "Value": "present",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "residentsAbsent": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "residentsAsleep": {
+          "Value": "0",
+          "Time": "2014-02-16 13:31:53"
+        },
+        "residentsAwoken": {
+          "Value": "0",
+          "Time": "2014-02-16 13:31:53"
+        },
+        "residentsGone": {
+          "Value": "1",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "residentsGotosleep": {
+          "Value": "0",
+          "Time": "2014-02-15 16:36:51"
+        },
+        "residentsGuests": {
+          "Value": "0",
+          "Time": "2014-02-15 16:13:39"
+        },
+        "residentsHome": {
+          "Value": "1",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "residentsTotal": {
+          "Value": "2",
+          "Time": "2014-02-16 13:48:12"
+        },
+        "residentsTotalAbsent": {
+          "Value": "1",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "residentsTotalPresent": {
+          "Value": "1",
+          "Time": "2014-02-16 14:26:52"
+        },
+        "residentsTotalWayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:13:39"
+        },
+        "state": {
+          "Value": "home",
+          "Time": "2014-02-16 14:16:17"
+        }
+      },
+      "Attributes": {
+        "alias": "Parents",
+        "devStateIcon": ".*home:status_available:absent .*absent:status_away_1:home .*gone:status_standby:home .*none:control_building_empty .*gotosleep:status_night:asleep .*asleep:status_night:awoken .*awoken:status_available:home",
+        "group": "Home State",
+        "icon": "control_building_filled",
+        "room": "Residents",
+        "sortby": "2",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "SVG_01_Garden",
+      "PossibleSets": "copyGplotFile:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings fixedoffset fixedrange startDate plotsize nrAxis label title plotfunction devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "Log.Garden:SVG_01_Garden:CURRENT",
+        "GPLOTFILE": "SVG_01_Garden",
+        "LOGDEVICE": "Log.Garden",
+        "LOGFILE": "CURRENT",
+        "NAME": "SVG_01_Garden",
+        "NR": "25",
+        "STATE": "initialized",
+        "TYPE": "SVG"
+      },
+      "Readings": {},
+      "Attributes": {
+        "label": "\"Temp: Min $data{min1}, Max $data{max1}, Last $data{currval1}\"",
+        "room": "Sensors",
+        "startDate": "2013-08-13"
+      }
+    },
+    {
+      "Name": "Log.Garden",
+      "PossibleSets": "absorb:Log.Cellar,Log.Dewpoint,Logfile addRegexpPart removeRegexpPart reopen",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 logtype nrarchive archivedir archivecmd addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "demolog/garden.log Sens.Out:T:.*",
+        "NAME": "Log.Garden",
+        "NR": "23",
+        "NTFY_ORDER": "50-Log.Garden",
+        "REGEXP": "Sens.Out:T:.*",
+        "STATE": "active",
+        "TYPE": "FileLog",
+        "currentlogfile": "demolog/garden.log",
+        "logfile": "demolog/garden.log"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "WEB",
+      "PossibleSets": "clearSvgCache:noArg rereadicons:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings CORS:0,1 HTTPS:1,0 CssFiles JavaScripts SVGcache:1,0 addStateEvent csrfToken alarmTimeout allowedCommands allowfrom basicAuth basicAuthMsg closeConn:1,0 column defaultRoom endPlotNow:1,0 endPlotToday:1,0 fwcompress:0,1 hiddengroup hiddenroom iconPath longpoll:0,1 longpollSVG:1,0 menuEntries ploteditor:always,onClick,never plotfork:1,0 plotmode:gnuplot,gnuplot-scroll,SVG plotEmbed:0,1 plotsize nrAxis redirectCmds:0,1 refresh reverseLogs:0,1 roomIcons sortRooms smallscreen:unused stylesheetPrefix touchpad:unused webname codemirrorParam devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CONNECTS": "3",
+        "DEF": "8083 global",
+        "FD": "6",
+        "NAME": "WEB",
+        "NR": "5",
+        "NTFY_ORDER": "50-WEB",
+        "PORT": "8083",
+        "STATE": "Initialized",
+        "TYPE": "FHEMWEB"
+      },
+      "Readings": {},
+      "Attributes": {
+        "JavaScripts": "codemirror/fhem_codemirror.js",
+        "defaultRoom": "Light",
+        "hiddenroom": "DashboardRoom",
+        "iconPath": "openautomation:fhemSVG",
+        "room": "System",
+        "sortRooms": "Light Cinema Residents Sensors System"
+      }
+    },
+    {
+      "Name": "AllResidentsAway",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 disabledForIntervals forwardReturnValue:0,1 showTriggerTime:0,1 addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents:(absent|gone) set AllLights off;set lcCinema scene AllOff",
+        "NAME": "AllResidentsAway",
+        "NR": "60",
+        "NTFY_ORDER": "50-AllResidentsAway",
+        "REGEXP": "rgr_Residents:(absent|gone)",
+        "STATE": "active",
+        "TYPE": "notify"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Residents"
+      }
+    },
+    {
+      "Name": "Office",
+      "PossibleSets": "off off-for-timer on on-for-timer on-till reset timer toggle blink off-till intervals",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride Light Light_map structexclude userattr",
+      "Internals": {
+        "BTN": "12",
+        "DEF": "1234 12",
+        "NAME": "Office",
+        "NR": "18",
+        "STATE": "off",
+        "TYPE": "FS20",
+        "XMIT": "1234"
+      },
+      "Readings": {
+        "state": {
+          "Value": "off",
+          "Time": "2016-02-02 17:55:32"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "Light": "AllLights",
+        "group": "Single Lights",
+        "icon": "light_office",
+        "model": "fs20st",
+        "room": "Light",
+        "userattr": "Light Light_map structexclude"
+      }
+    },
+    {
+      "Name": "Log.Dewpoint",
+      "PossibleSets": "absorb:Log.Cellar,Log.Garden,Logfile addRegexpPart removeRegexpPart reopen",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 logtype nrarchive archivedir archivecmd addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "demolog/dewpoint.log .*dewpoint.*",
+        "NAME": "Log.Dewpoint",
+        "NR": "28",
+        "NTFY_ORDER": "50-Log.Dewpoint",
+        "REGEXP": ".*dewpoint.*",
+        "STATE": "active",
+        "TYPE": "FileLog",
+        "currentlogfile": "demolog/dewpoint.log",
+        "logfile": "demolog/dewpoint.log"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "rg_Guest2",
+      "PossibleSets": "state:home,gotosleep,absent,none mood:-,calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rg_locationHome rg_locationWayhome rg_locationUnderway rg_autoGoneAfter:12,16,24,26,28,30,36,48,60 rg_showAllStates:0,1 rg_realname:group,alias rg_states rg_locations rg_moods rg_moodDefault rg_moodSleepy event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CHANGED": "null",
+        "DEF": "rgr_Residents,rgr_Guests",
+        "NAME": "rg_Guest2",
+        "NR": "55",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Guests,",
+        "STATE": "none",
+        "TYPE": "GUEST"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "lastAwake": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:00:45",
+          "Time": "2014-02-16 14:00:46"
+        },
+        "lastDurAbsence": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:03",
+          "Time": "2014-02-16 14:00:46"
+        },
+        "lastDurSleep": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastLocation": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "lastMood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "lastSleep": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:29"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "location": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "mood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:00:46"
+        },
+        "state": {
+          "Value": "none",
+          "Time": "2014-02-16 14:01:22"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:29"
+        }
+      },
+      "Attributes": {
+        "alias": "Guest2",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*none:control_building_empty:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Guests",
+        "icon": "scene_visit_guests",
+        "rg_autoGoneAfter": "0.01",
+        "rg_realname": "alias",
+        "room": "Residents",
+        "sortby": "1",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "ResidentsComeHome",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 disabledForIntervals forwardReturnValue:0,1 showTriggerTime:0,1 addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents:home set Outdoor on",
+        "NAME": "ResidentsComeHome",
+        "NOTIFYDEV": "rgr_Residents",
+        "NR": "61",
+        "NTFY_ORDER": "50-ResidentsComeHome",
+        "REGEXP": "rgr_Residents:home",
+        "STATE": "active",
+        "TYPE": "notify"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Residents"
+      }
+    },
+    {
+      "Name": "WEBphone",
+      "PossibleSets": "clearSvgCache:noArg rereadicons:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings CORS:0,1 HTTPS:1,0 CssFiles JavaScripts SVGcache:1,0 addStateEvent csrfToken alarmTimeout allowedCommands allowfrom basicAuth basicAuthMsg closeConn:1,0 column defaultRoom endPlotNow:1,0 endPlotToday:1,0 fwcompress:0,1 hiddengroup hiddenroom iconPath longpoll:0,1 longpollSVG:1,0 menuEntries ploteditor:always,onClick,never plotfork:1,0 plotmode:gnuplot,gnuplot-scroll,SVG plotEmbed:0,1 plotsize nrAxis redirectCmds:0,1 refresh reverseLogs:0,1 roomIcons sortRooms smallscreen:unused stylesheetPrefix touchpad:unused webname codemirrorParam devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "8084 global",
+        "FD": "7",
+        "NAME": "WEBphone",
+        "NR": "7",
+        "NTFY_ORDER": "50-WEBphone",
+        "PORT": "8084",
+        "STATE": "Initialized",
+        "TYPE": "FHEMWEB"
+      },
+      "Readings": {},
+      "Attributes": {
+        "hiddenroom": "DashboardRoom",
+        "iconPath": "openautomation:fhemSVG",
+        "room": "System",
+        "sortRooms": "Light Cinema Residents Sensors System",
+        "stylesheetPrefix": "smallscreen"
+      }
+    },
+    {
+      "Name": "Livingroom",
+      "PossibleSets": "dim0% dim100% dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dimdown dimup dimupdown off off-for-timer on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle dim:slider,0,6.25,100 blink intervals off-till",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride Light Light_map structexclude userattr",
+      "Internals": {
+        "BTN": "13",
+        "DEF": "1234 13",
+        "NAME": "Livingroom",
+        "NR": "19",
+        "STATE": "dim56%",
+        "TYPE": "FS20",
+        "XMIT": "1234"
+      },
+      "Readings": {
+        "state": {
+          "Value": "dim56%",
+          "Time": "2016-02-02 10:37:29"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "Light": "AllLights",
+        "eventMap": "off:dim0% on:dim100%",
+        "group": "Single Lights",
+        "icon": "light_pendant_light",
+        "model": "fs20di",
+        "room": "Light",
+        "userattr": "Light Light_map structexclude",
+        "webCmd": "dim"
+      }
+    },
+    {
+      "Name": "ReadingLight",
+      "PossibleSets": "dim0% dim100% dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dimdown dimup dimupdown off off-for-timer on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle dim:slider,0,6.25,100 blink off-till intervals",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 userattr",
+      "Internals": {
+        "BTN": "02",
+        "DEF": "0001 02",
+        "NAME": "ReadingLight",
+        "NR": "41",
+        "STATE": "dim56%",
+        "TYPE": "FS20",
+        "XMIT": "0001"
+      },
+      "Readings": {
+        "state": {
+          "Value": "dim56%",
+          "Time": "2016-02-02 10:16:39"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "eventMap": "off:dim0% on:dim100%",
+        "group": "Light",
+        "icon": "light_floor_lamp",
+        "room": "Cinema",
+        "userattr": "lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0",
+        "webCmd": "on:off:dim"
+      }
+    },
+    {
+      "Name": "autocreate",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings autosave filelog device_room weblink weblink_room disable ignoreTypes devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "NAME": "autocreate",
+        "NOTIFYDEV": "global",
+        "NR": "14",
+        "NTFY_ORDER": "50-autocreate",
+        "STATE": "active",
+        "TYPE": "autocreate"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "System"
+      }
+    },
+    {
+      "Name": "outdoorNotifier",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 disabledForIntervals forwardReturnValue:0,1 showTriggerTime:0,1 addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "Outdoor:.* set Office $EVENT",
+        "NAME": "outdoorNotifier",
+        "NOTIFYDEV": "Outdoor",
+        "NR": "33",
+        "NTFY_ORDER": "50-outdoorNotifier",
+        "REGEXP": "Outdoor:.*",
+        "STATE": "active",
+        "TYPE": "notify"
+      },
+      "Readings": {},
+      "Attributes": {
+        "group": "Notify",
+        "icon": "light_ceiling_light",
+        "room": "Light"
+      }
+    },
+    {
+      "Name": "Alarm",
+      "PossibleSets": "dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dimdown dimup dimupdown off off-for-timer on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle dim:slider,0,6.25,100 blink intervals off-till",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride Light Light_map structexclude userattr",
+      "Internals": {
+        "BTN": "14",
+        "DEF": "1234 14",
+        "NAME": "Alarm",
+        "NR": "21",
+        "STATE": "on",
+        "TYPE": "FS20",
+        "XMIT": "1234"
+      },
+      "Readings": {
+        "state": {
+          "Value": "on",
+          "Time": "2016-02-02 10:25:17"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "Light": "AllLights",
+        "follow-on-for-timer": "1",
+        "group": "Single Lights",
+        "icon": "light_wall_2",
+        "room": "Light",
+        "userattr": "Light Light_map structexclude",
+        "webCmd": "blink 5 1"
+      }
+    },
+    {
+      "Name": "anyViews",
+      "PossibleSets": "lock:noArg unlock:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 dashboard_colcount:1,2,3,4,5 dashboard_debug:0,1 dashboard_lockstate:dont-use-this-attribut dashboard_rowtopheight dashboard_rowbottomheight dashboard_row:top,center,bottom,top-center,center-bottom,top-center-bottom dashboard_showhelper:dont-use-this-attribut dashboard_showtooglebuttons:0,1 dashboard_tabcount:1,2,3,4,5,6,7 dashboard_activetab:1,2,3,4,5,6,7 dashboard_tab1name dashboard_tab2name dashboard_tab3name dashboard_tab4name dashboard_tab5name dashboard_tab1groups dashboard_tab2groups dashboard_tab3groups dashboard_tab4groups dashboard_tab5groups dashboard_tab1sorting dashboard_tab2sorting dashboard_tab3sorting dashboard_tab4sorting dashboard_tab5sorting dashboard_width dashboard_rowcenterheight dashboard_rowcentercolwidth dashboard_showfullsize:0,1 dashboard_showtabs:tabs-and-buttonbar-at-the-top,tabs-and-buttonbar-on-the-bottom,tabs-and-buttonbar-hidden dashboard_tab1icon dashboard_tab2icon dashboard_tab3icon dashboard_tab4icon dashboard_tab5icon dashboard_webfrontendfilter dashboard_customcss dashboard_tab6name dashboard_tab7name dashboard_tab6groups dashboard_tab7groups dashboard_tab6sorting dashboard_tab7sorting dashboard_tab6icon dashboard_tab7icon devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "NAME": "anyViews",
+        "NR": "46",
+        "STATE": "Initialized",
+        "TYPE": "Dashboard",
+        "VERSION": "2.13"
+      },
+      "Readings": {
+        "lockstate": {
+          "Value": "0",
+          "Time": "2015-09-30 19:09:19"
+        },
+        "state": {
+          "Value": "Initialized",
+          "Time": "2016-02-02 12:53:50"
+        }
+      },
+      "Attributes": {
+        "dashboard_colcount": "2",
+        "dashboard_row": "top-center",
+        "dashboard_rowcentercolwidth": "400",
+        "dashboard_rowtopheight": "205",
+        "dashboard_tab1groups": "Home State,Light,AV,Single Lights",
+        "dashboard_tab1name": "Dashboard Demo",
+        "dashboard_tab1sorting": "t0c100,Light,true,518,129:t0c100,Home State,true,496,204:t0c0,Single Lights,true,522,209:t0c0,AV,true,221,170:",
+        "dashboard_tabcount": "1",
+        "dashboard_width": "80%"
+      }
+    },
+    {
+      "Name": "rr_Baby",
+      "PossibleSets": "state:home,gotosleep,absent,gone mood:calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rr_locationHome rr_locationWayhome rr_locationUnderway rr_autoGoneAfter:12,16,24,26,28,30,36,48,60 rr_showAllStates:0,1 rr_realname:group,alias rr_states rr_locations rr_moods rr_moodDefault rr_moodSleepy rr_passPresenceTo event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents,rgr_Children",
+        "NAME": "rr_Baby",
+        "NR": "62",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Children,",
+        "STATE": "gotosleep",
+        "TYPE": "ROOMMATE"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "00:00:00",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "0",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "durTimerPresence": {
+          "Value": "2960:07:52",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerPresence_cr": {
+          "Value": "177608",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2015-10-02 14:20:43",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastAwake": {
+          "Value": "2014-02-17 20:45:12",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "lastDeparture": {
+          "Value": "2015-09-30 14:35:34",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurAbsence": {
+          "Value": "47:45:09",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastDurAbsence_cr": {
+          "Value": "2865",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:01",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastDurSleep": {
+          "Value": "30:13:59",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "lastLocation": {
+          "Value": "home",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastMood": {
+          "Value": "calm",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "lastSleep": {
+          "Value": "2014-02-16 14:31:13",
+          "Time": "2014-02-16 14:31:13"
+        },
+        "lastState": {
+          "Value": "gone",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "location": {
+          "Value": "home",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "mood": {
+          "Value": "sleepy",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "presence": {
+          "Value": "present",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "state": {
+          "Value": "gotosleep",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-16 14:30:21"
+        }
+      },
+      "Attributes": {
+        "alias": "Status",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*gone:user_ext_away:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Baby",
+        "icon": "status_available",
+        "room": "Residents",
+        "sortby": "0",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "SVG_02_Cellar",
+      "PossibleSets": "copyGplotFile:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings fixedoffset fixedrange startDate plotsize nrAxis label title plotfunction devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "Log.Cellar:SVG_02_Cellar:CURRENT",
+        "GPLOTFILE": "SVG_02_Cellar",
+        "LOGDEVICE": "Log.Cellar",
+        "LOGFILE": "CURRENT",
+        "NAME": "SVG_02_Cellar",
+        "NR": "27",
+        "STATE": "initialized",
+        "TYPE": "SVG"
+      },
+      "Readings": {},
+      "Attributes": {
+        "label": "\"Temp: Min $data{min1}, Max $data{max1}, Last $data{currval1}\"",
+        "room": "Sensors",
+        "startDate": "2013-08-13"
+      }
+    },
+    {
+      "Name": "sunRise",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 disabledForIntervals skip_next:0,1 alignTime devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "*{sunrise()} set Office on",
+        "NAME": "sunRise",
+        "NR": "31",
+        "NTM": "07:21:44",
+        "REP": "-1",
+        "STATE": "Next: 07:21:44",
+        "TRIGGERTIME": "1454480504",
+        "TRIGGERTIME_FMT": "2016-02-03 07:21:44",
+        "TYPE": "at"
+      },
+      "Readings": {},
+      "Attributes": {
+        "group": "Timer",
+        "icon": "weather_sunrise",
+        "room": "Light"
+      }
+    },
+    {
+      "Name": "Cellar",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev do_not_notify:0,1 showtime:0,1 model:S300TH,KS300,ASH2200 ignore:0,1 event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CODE": "1",
+        "DEF": "1 -1 -3.5",
+        "NAME": "Cellar",
+        "NR": "24",
+        "STATE": "T: 21.1  H: 54.6",
+        "TYPE": "CUL_WS",
+        "corr1": "-1",
+        "corr2": "-3.5",
+        "corr3": "0",
+        "corr4": "0"
+      },
+      "Readings": {
+        "DEVFAMILY": {
+          "Value": "WS300",
+          "Time": "2013-08-13 08:00:48"
+        },
+        "DEVTYPE": {
+          "Value": "S300TH",
+          "Time": "2013-08-13 08:00:48"
+        },
+        "dewpoint": {
+          "Value": "11.6",
+          "Time": "2013-08-13 08:00:48"
+        },
+        "humidity": {
+          "Value": "54.6",
+          "Time": "2013-08-13 08:00:48"
+        },
+        "state": {
+          "Value": "T: 21.1  H: 54.6",
+          "Time": "2013-08-13 08:00:48"
+        },
+        "temperature": {
+          "Value": "21.1",
+          "Time": "2013-08-13 08:00:48"
+        }
+      },
+      "Attributes": {
+        "group": "Sensors",
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "FHEMWEB:127.0.0.1:53720",
+      "PossibleSets": "clearSvgCache:noArg rereadicons:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings CORS:0,1 HTTPS:1,0 CssFiles JavaScripts SVGcache:1,0 addStateEvent csrfToken alarmTimeout allowedCommands allowfrom basicAuth basicAuthMsg closeConn:1,0 column defaultRoom endPlotNow:1,0 endPlotToday:1,0 fwcompress:0,1 hiddengroup hiddenroom iconPath longpoll:0,1 longpollSVG:1,0 menuEntries ploteditor:always,onClick,never plotfork:1,0 plotmode:gnuplot,gnuplot-scroll,SVG plotEmbed:0,1 plotsize nrAxis redirectCmds:0,1 refresh reverseLogs:0,1 roomIcons sortRooms smallscreen:unused stylesheetPrefix touchpad:unused webname codemirrorParam devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "FD": "4",
+        "LASTACCESS": "1454444914",
+        "NAME": "FHEMWEB:127.0.0.1:53720",
+        "NR": "66",
+        "SNAME": "WEB",
+        "STATE": "Connected",
+        "TEMPORARY": "1",
+        "TYPE": "FHEMWEB"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "hidden"
+      }
+    },
+    {
+      "Name": "lcCinema",
+      "PossibleSets": "remove:AllOff,Break,Cinema,WatchTV save set setcmd scene:AllOff,Break,Cinema,WatchTV",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings followDevices:1 switchingOrder event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "Projector Screen TV CeilingLight ReadingLight",
+        "HAS_DataDumper": "1",
+        "HAS_JSON": "0",
+        "NAME": "lcCinema",
+        "NR": "44",
+        "NTFY_ORDER": "50-lcCinema",
+        "STATE": "Initialized",
+        "TYPE": "LightScene"
+      },
+      "Readings": {
+        "state": {
+          "Value": "Cinema",
+          "Time": "2016-02-02 10:11:56"
+        }
+      },
+      "Attributes": {
+        "alias": "Scenes",
+        "devStateIcon": "AllOff:control_home Break:rc_PAUSE Cinema:scene_cinema WatchTV:it_television",
+        "group": "Control",
+        "icon": "scene_scene",
+        "room": "Cinema",
+        "webCmd": "scene"
+      }
+    },
+    {
+      "Name": "et",
+      "PossibleSets": "clear:noArg flush:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "demolog/eventTypes.txt",
+        "NAME": "et",
+        "NR": "15",
+        "NTFY_ORDER": "50-et",
+        "STATE": "active",
+        "TYPE": "eventTypes"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "System"
+      }
+    },
+    {
+      "Name": "rr_Mother",
+      "PossibleSets": "state:home,gotosleep,absent,gone mood:calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rr_locationHome rr_locationWayhome rr_locationUnderway rr_autoGoneAfter:12,16,24,26,28,30,36,48,60 rr_showAllStates:0,1 rr_realname:group,alias rr_states rr_locations rr_moods rr_moodDefault rr_moodSleepy rr_passPresenceTo event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents,rgr_Parents",
+        "NAME": "rr_Mother",
+        "NR": "57",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Parents,",
+        "STATE": "home",
+        "TYPE": "ROOMMATE"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence": {
+          "Value": "17191:12:18",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerPresence_cr": {
+          "Value": "1031472",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:16:17",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:16:16",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastDurAbsence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:02",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastLocation": {
+          "Value": "home",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastMood": {
+          "Value": "calm",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "location": {
+          "Value": "home",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "mood": {
+          "Value": "calm",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "presence": {
+          "Value": "present",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "state": {
+          "Value": "home",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-16 13:46:09"
+        }
+      },
+      "Attributes": {
+        "alias": "Status",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*gone:user_ext_away:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Mother",
+        "icon": "status_available",
+        "room": "Residents",
+        "rr_autoGoneAfter": "0.1",
+        "rr_passPresenceTo": "rr_Baby",
+        "sortby": "0",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "anyViews_weblink",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings htmlattr devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "htmlCode {DashboardAsHtml(\"anyViews\")}",
+        "LINK": "{DashboardAsHtml(\"anyViews\")}",
+        "NAME": "anyViews_weblink",
+        "NR": "48",
+        "STATE": "initialized",
+        "TYPE": "weblink",
+        "WLTYPE": "htmlCode"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "DashboardRoom"
+      }
+    },
+    {
+      "Name": "Screen",
+      "PossibleSets": "up:noArg down:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings setList event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 userattr",
+      "Internals": {
+        "NAME": "Screen",
+        "NR": "38",
+        "STATE": "up",
+        "TYPE": "dummy"
+      },
+      "Readings": {
+        "state": {
+          "Value": "up",
+          "Time": "2016-02-02 10:12:26"
+        }
+      },
+      "Attributes": {
+        "devStateIcon": "down:fts_garage_door_100:up up:fts_garage_door_10:down",
+        "group": "AV",
+        "room": "Cinema",
+        "setList": "up:noArg down:noArg",
+        "userattr": "lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0",
+        "webCmd": "down:up"
+      }
+    },
+    {
+      "Name": "TV",
+      "PossibleSets": "on:noArg off:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings setList event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 userattr",
+      "Internals": {
+        "NAME": "TV",
+        "NR": "37",
+        "STATE": "off",
+        "TYPE": "dummy"
+      },
+      "Readings": {
+        "state": {
+          "Value": "off",
+          "Time": "2016-02-02 10:12:35"
+        }
+      },
+      "Attributes": {
+        "devStateIcon": "on:control_on_off:off off:control_home:on",
+        "group": "AV",
+        "room": "Cinema",
+        "setList": "on:noArg off:noArg",
+        "userattr": "lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0",
+        "webCmd": "on:off"
+      }
+    },
+    {
+      "Name": "TABLETUI",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings directoryindex devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "ftui ./www/tablet/ Tablet-UI",
+        "NAME": "TABLETUI",
+        "NR": "64",
+        "STATE": "TABLETUI",
+        "TYPE": "HTTPSRV"
+      },
+      "Readings": {},
+      "Attributes": {}
+    },
+    {
+      "Name": "global",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings archivecmd apiversion archivedir configfile lastinclude logfile modpath nrarchive pidfilename port statefile title mseclog:1,0 version nofork:1,0 logdir holiday2we autoload_undefined_devices:1,0 dupTimeout latitude longitude altitude backupcmd backupdir backupsymlink backup_before_update exclude_from_update motd restoreDirs uniqueID sendStatistics:onUpdate,manually,never updateInBackground:1,0 showInternalValues:1,0 stacktrace:1,0  devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "<no definition>",
+        "NAME": "global",
+        "NR": "1",
+        "STATE": "<no definition>",
+        "TYPE": "Global"
+      },
+      "Readings": {},
+      "Attributes": {
+        "autoload_undefined_devices": "1",
+        "backup_before_update": "0",
+        "configfile": "fhem2.cfg",
+        "logfile": "-",
+        "modpath": ".",
+        "motd": "FHEM demo version",
+        "room": "System",
+        "sendStatistics": "never",
+        "statefile": "./demolog/fhem.save",
+        "updateInBackground": "1",
+        "userattr": "devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride",
+        "verbose": "3",
+        "version": "$Id: fhem.pl 6913 2014-11-08 10:32:44Z rudolfkoenig $"
+      }
+    },
+    {
+      "Name": "Logfile",
+      "PossibleSets": "absorb:Log.Cellar,Log.Dewpoint,Log.Garden addRegexpPart removeRegexpPart reopen",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 logtype nrarchive archivedir archivecmd addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "./log/fhem-%Y-%m.log fakelog",
+        "NAME": "Logfile",
+        "NR": "12",
+        "NTFY_ORDER": "50-Logfile",
+        "REGEXP": "fakelog",
+        "STATE": "active",
+        "TYPE": "FileLog",
+        "currentlogfile": "./log/fhem-2016-02.log",
+        "logfile": "./log/fhem-%Y-%m.log"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "System"
+      }
+    },
+    {
+      "Name": "sunSet",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 disabledForIntervals skip_next:0,1 alignTime devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "*{sunset()} set Office off",
+        "NAME": "sunSet",
+        "NR": "32",
+        "NTM": "17:57:08",
+        "REP": "-1",
+        "STATE": "Next: 17:57:08",
+        "TRIGGERTIME": "1454518628",
+        "TRIGGERTIME_FMT": "2016-02-03 17:57:08",
+        "TYPE": "at"
+      },
+      "Readings": {},
+      "Attributes": {
+        "group": "Timer",
+        "icon": "weather_sunset",
+        "room": "Light"
+      }
+    },
+    {
+      "Name": "Log.Cellar",
+      "PossibleSets": "absorb:Log.Dewpoint,Log.Garden,Logfile addRegexpPart removeRegexpPart reopen",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 logtype nrarchive archivedir archivecmd addStateEvent:0,1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "demolog/cellar.log Cellar:T:.*",
+        "NAME": "Log.Cellar",
+        "NOTIFYDEV": "Cellar",
+        "NR": "26",
+        "NTFY_ORDER": "50-Log.Cellar",
+        "REGEXP": "Cellar:T:.*",
+        "STATE": "active",
+        "TYPE": "FileLog",
+        "currentlogfile": "demolog/cellar.log",
+        "logfile": "demolog/cellar.log"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "dew_all",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings disable:0,1 max_timediff absFeuchte devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CMD_TYPE": "dewpoint",
+        "DEF": "dewpoint .*",
+        "DEV_REGEXP": ".*",
+        "HUM_NAME": "humidity",
+        "NAME": "dew_all",
+        "NEW_NAME": "dewpoint",
+        "NR": "29",
+        "NTFY_ORDER": "10-dew_all",
+        "STATE": "active",
+        "TEMP_NAME": "temperature",
+        "TYPE": "dewpoint"
+      },
+      "Readings": {},
+      "Attributes": {
+        "group": "Helper",
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "rr_Daughter",
+      "PossibleSets": "state:home,gotosleep,absent,gone mood:-,calm,relaxed,happy,excited,lonely,sad,bored,stressed,uncomfortable,sleepy,angry,toggle location",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rr_locationHome rr_locationWayhome rr_locationUnderway rr_autoGoneAfter:12,16,24,26,28,30,36,48,60 rr_showAllStates:0,1 rr_realname:group,alias rr_states rr_locations rr_moods rr_moodDefault rr_moodSleepy rr_passPresenceTo event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "rgr_Residents,rgr_Children",
+        "NAME": "rr_Daughter",
+        "NR": "58",
+        "RESIDENTGROUPS": "rgr_Residents,rgr_Children,",
+        "STATE": "gone",
+        "TYPE": "ROOMMATE"
+      },
+      "Readings": {
+        "durTimerAbsence": {
+          "Value": "17190:30:36",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerAbsence_cr": {
+          "Value": "1031431",
+          "Time": "2016-02-02 21:28:35"
+        },
+        "durTimerPresence": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerPresence_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep": {
+          "Value": "00:00:00",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "durTimerSleep_cr": {
+          "Value": "0",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:57:58",
+          "Time": "2014-02-16 14:57:58"
+        },
+        "lastAwake": {
+          "Value": "2014-02-16 14:02:48",
+          "Time": "2014-02-16 14:02:48"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:57:59",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "lastDurAbsence": {
+          "Value": "00:23:49",
+          "Time": "2014-02-16 14:57:58"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "lastDurSleep": {
+          "Value": "00:08:12",
+          "Time": "2014-02-16 14:02:48"
+        },
+        "lastLocation": {
+          "Value": "home",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "lastMood": {
+          "Value": "calm",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "lastSleep": {
+          "Value": "2014-02-16 13:54:36",
+          "Time": "2014-02-16 13:54:36"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "location": {
+          "Value": "underway",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "mood": {
+          "Value": "-",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:57:59"
+        },
+        "state": {
+          "Value": "gone",
+          "Time": "2015-09-30 14:26:53"
+        },
+        "wayhome": {
+          "Value": "0",
+          "Time": "2014-02-16 13:46:26"
+        }
+      },
+      "Attributes": {
+        "alias": "Status",
+        "devStateIcon": ".*home:user_available:absent .*absent:user_away:home .*gone:user_ext_away:home .*gotosleep:scene_toilet:asleep .*asleep:scene_sleeping:awoken .*awoken:scene_sleeping_alternat:home .*:user_unknown",
+        "group": "Daughter",
+        "icon": "status_available",
+        "room": "Residents",
+        "sortby": "0",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "FHEMWEB:127.0.0.1:53727",
+      "PossibleSets": "clearSvgCache:noArg rereadicons:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings CORS:0,1 HTTPS:1,0 CssFiles JavaScripts SVGcache:1,0 addStateEvent csrfToken alarmTimeout allowedCommands allowfrom basicAuth basicAuthMsg closeConn:1,0 column defaultRoom endPlotNow:1,0 endPlotToday:1,0 fwcompress:0,1 hiddengroup hiddenroom iconPath longpoll:0,1 longpollSVG:1,0 menuEntries ploteditor:always,onClick,never plotfork:1,0 plotmode:gnuplot,gnuplot-scroll,SVG plotEmbed:0,1 plotsize nrAxis redirectCmds:0,1 refresh reverseLogs:0,1 roomIcons sortRooms smallscreen:unused stylesheetPrefix touchpad:unused webname codemirrorParam devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "FD": "13",
+        "LASTACCESS": "1454444940",
+        "NAME": "FHEMWEB:127.0.0.1:53727",
+        "NR": "67",
+        "SNAME": "WEB",
+        "STATE": "Connected",
+        "TEMPORARY": "1",
+        "TYPE": "FHEMWEB"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "hidden"
+      }
+    },
+    {
+      "Name": "rgr_Residents",
+      "PossibleSets": "addRoommate addGuest state:home,gotosleep,absent,gone removeRoommate:rr_Father,rr_Mother,rr_Daughter,rr_Son,rr_Baby removeGuest:rg_Guest1,rg_Guest2",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rgr_showAllStates:0,1 rgr_states event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "GUESTS": "rg_Guest1,rg_Guest2",
+        "NAME": "rgr_Residents",
+        "NR": "50",
+        "NTFY_ORDER": "50-rgr_Residents",
+        "ROOMMATES": "rr_Father,rr_Mother,rr_Daughter,rr_Son,rr_Baby",
+        "STATE": "home",
+        "TYPE": "RESIDENTS"
+      },
+      "Readings": {
+        "lastActivity": {
+          "Value": "gotosleep",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastActivityBy": {
+          "Value": "Baby",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:16:17",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastAwake": {
+          "Value": "2014-02-16 14:02:48",
+          "Time": "2014-02-16 14:02:48"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:16:16",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastDurAbsence": {
+          "Value": "00:00:01",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:02",
+          "Time": "2014-02-16 14:16:16"
+        },
+        "lastDurSleep": {
+          "Value": "00:00:00",
+          "Time": "2014-02-16 14:02:48"
+        },
+        "lastSleep": {
+          "Value": "2014-02-16 14:02:48",
+          "Time": "2014-02-16 14:02:48"
+        },
+        "lastState": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "presence": {
+          "Value": "present",
+          "Time": "2014-02-16 14:16:17"
+        },
+        "residentsAbsent": {
+          "Value": "0",
+          "Time": "2015-10-02 13:38:42"
+        },
+        "residentsAsleep": {
+          "Value": "0",
+          "Time": "2014-02-17 20:45:12"
+        },
+        "residentsAwoken": {
+          "Value": "0",
+          "Time": "2014-02-16 14:06:49"
+        },
+        "residentsGone": {
+          "Value": "3",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsGotosleep": {
+          "Value": "1",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsGuests": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsHome": {
+          "Value": "1",
+          "Time": "2015-09-30 14:35:34"
+        },
+        "residentsTotal": {
+          "Value": "5",
+          "Time": "2014-02-16 14:31:05"
+        },
+        "residentsTotalAbsent": {
+          "Value": "3",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsTotalPresent": {
+          "Value": "2",
+          "Time": "2015-10-02 14:20:43"
+        },
+        "residentsTotalWayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:13:39"
+        },
+        "state": {
+          "Value": "home",
+          "Time": "2014-02-16 14:16:17"
+        }
+      },
+      "Attributes": {
+        "alias": "Residents",
+        "devStateIcon": ".*home:status_available:absent .*absent:status_away_1:home .*gone:status_standby:home .*none:control_building_empty .*gotosleep:status_night:asleep .*asleep:status_night:awoken .*awoken:status_available:home",
+        "group": "Home State",
+        "icon": "control_building_filled",
+        "room": "Residents",
+        "sortby": "2",
+        "webCmd": "state"
+      }
+    },
+    {
+      "Name": "Garden",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev do_not_notify:0,1 showtime:0,1 model:ks300 rainadjustment:0,1 ignore:0,1 event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "CODE": "1234",
+        "DEF": "1234",
+        "NAME": "Garden",
+        "NR": "22",
+        "RAINUNIT": "255",
+        "STATE": "defined",
+        "TYPE": "KS300",
+        "WINDUNIT": "1"
+      },
+      "Readings": {
+        "avg_day": {
+          "Value": "T: 17.2  H: 73  W: 0.0  R: 0.0",
+          "Time": "2013-08-13 08:03:17"
+        },
+        "avg_month": {
+          "Value": "T: 21.0  H: 33  W: 30.1  R: 30.4",
+          "Time": "2013-08-13 00:02:53"
+        },
+        "cum_day": {
+          "Value": "2013-08-13 00:02:53 T: 494797  H: 2112387  W: 502.6  R: 81.9",
+          "Time": "2013-08-13 08:03:17"
+        },
+        "cum_month": {
+          "Value": "17 T: 336.9  H: 574  W: 511.5  R: 30.4",
+          "Time": "2013-08-13 00:02:53"
+        },
+        "dewpoint": {
+          "Value": "13.2",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "humidity": {
+          "Value": "72",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "israining": {
+          "Value": "no",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "rain": {
+          "Value": "81.9",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "rain_raw": {
+          "Value": "321",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "rain_raw_adj": {
+          "Value": "321",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "state": {
+          "Value": "defined",
+          "Time": "2016-02-02 12:53:50"
+        },
+        "temperature": {
+          "Value": "18.3",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "tsecs": {
+          "Value": "1376805797",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "unknown1": {
+          "Value": "a",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "unknown2": {
+          "Value": "7",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "unknown3": {
+          "Value": "1",
+          "Time": "2013-08-13 15:03:17"
+        },
+        "wind": {
+          "Value": "0.5",
+          "Time": "2013-08-13 15:03:17"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "group": "Sensors",
+        "room": "Sensors"
+      }
+    },
+    {
+      "Name": "CeilingLight",
+      "PossibleSets": "dim0% dim100% dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dimdown dimup dimupdown off off-for-timer on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle dim:slider,0,6.25,100 off-till intervals blink",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings IODev follow-on-for-timer:1,0 follow-on-timer do_not_notify:1,0 ignore:1,0 dummy:1,0 showtime:1,0 event-on-change-reading event-on-update-reading event-min-interval stateFormat model:dummyDimmer,dummySender,dummySimple,fs20as1,fs20as4,fs20bf,fs20bs,fs20di,fs20di10,fs20du,fs20fms,fs20hgs,fs20irl,fs20kse,fs20ls,fs20ms2,fs20pira,fs20piri,fs20piru,fs20rgbsa,fs20rst,fs20rsu,fs20s16,fs20s20,fs20s4,fs20s4a,fs20s4m,fs20s4u,fs20s4ub,fs20s8,fs20s8m,fs20sa,fs20sd,fs20si3,fs20sig,fs20sm4,fs20sm8,fs20sn,fs20sr,fs20ss,fs20st,fs20st2,fs20str,fs20su,fs20sv,fs20tc1,fs20tc6,fs20tfk,fs20tk,fs20ue1,fs20usr,fs20uts,fs20ws1,fs20ze devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 userattr",
+      "Internals": {
+        "BTN": "01",
+        "DEF": "0001 01",
+        "NAME": "CeilingLight",
+        "NR": "40",
+        "STATE": "dim87%",
+        "TYPE": "FS20",
+        "XMIT": "0001"
+      },
+      "Readings": {
+        "state": {
+          "Value": "dim87%",
+          "Time": "2016-02-02 10:16:33"
+        }
+      },
+      "Attributes": {
+        "IODev": "CUL_0",
+        "eventMap": "off:dim0% on:dim100%",
+        "group": "Light",
+        "icon": "light_ceiling_light",
+        "model": "dummyDimmer",
+        "room": "Cinema",
+        "userattr": "lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0",
+        "webCmd": "on:off:dim"
+      }
+    },
+    {
+      "Name": "telnetPort",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings globalpassword password allowfrom SSL connectTimeout connectInterval encoding:utf8,latin1 devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "7072 global",
+        "FD": "5",
+        "NAME": "telnetPort",
+        "NR": "3",
+        "NTFY_ORDER": "50-telnetPort",
+        "PORT": "7072",
+        "STATE": "Initialized",
+        "TYPE": "telnet"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "System"
+      }
+    },
+    {
+      "Name": "Projector",
+      "PossibleSets": "on:noArg off:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings setList event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 userattr",
+      "Internals": {
+        "NAME": "Projector",
+        "NR": "35",
+        "STATE": "off",
+        "TYPE": "dummy"
+      },
+      "Readings": {
+        "state": {
+          "Value": "off",
+          "Time": "2016-02-02 10:16:42"
+        }
+      },
+      "Attributes": {
+        "devStateIcon": "on:control_on_off:off off:control_home:on",
+        "group": "AV",
+        "room": "Cinema",
+        "setList": "on:noArg off:noArg",
+        "userattr": "lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0",
+        "webCmd": "on:off"
+      }
+    },
+    {
+      "Name": "AllLights",
+      "PossibleSets": "blink dim06% dim100% dim12% dim18% dim25% dim31% dim37% dim43% dim50% dim56% dim62% dim68% dim75% dim81% dim87% dim93% dim:slider,0,6.25,100 dimdown dimup dimupdown intervals off off-for-timer off-till on on-100-for-timer-prev on-for-timer on-old-for-timer on-old-for-timer-prev on-till ramp-off-time ramp-on-time reset sendstate timer toggle",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings clientstate_priority clientstate_behavior:relative,relativeKnown,absolute,last event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "ATTR": "Light",
+        "DEF": "Light Alarm Livingroom Office Outdoor",
+        "NAME": "AllLights",
+        "NR": "20",
+        "NTFY_ORDER": "50-AllLights",
+        "STATE": "undefined",
+        "TYPE": "structure"
+      },
+      "Readings": {
+        "LastDevice": {
+          "Value": "Office",
+          "Time": "2016-02-02 17:55:32"
+        },
+        "LastDevice_Abs": {
+          "Value": "Office",
+          "Time": "2016-02-02 17:55:32"
+        },
+        "state": {
+          "Value": "undefined",
+          "Time": "2016-02-02 17:55:32"
+        }
+      },
+      "Attributes": {
+        "devStateIcon": "undefined:light_question",
+        "group": "Structure",
+        "icon": "light_light",
+        "room": "Light"
+      }
+    },
+    {
+      "Name": "SVG_03_Dewpoint",
+      "PossibleSets": "copyGplotFile:noArg",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings fixedoffset fixedrange startDate plotsize nrAxis label title plotfunction devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "Log.Dewpoint:SVG_03_Dewpoint:CURRENT",
+        "GPLOTFILE": "SVG_03_Dewpoint",
+        "LOGDEVICE": "Log.Dewpoint",
+        "LOGFILE": "CURRENT",
+        "NAME": "SVG_03_Dewpoint",
+        "NR": "30",
+        "STATE": "initialized",
+        "TYPE": "SVG"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Sensors",
+        "startDate": "2013-08-13"
+      }
+    },
+    {
+      "Name": "wlCinema",
+      "PossibleSets": "",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings htmlattr devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "DEF": "htmlCode {LightScene_2html(\"lcCinema\")}",
+        "LINK": "{LightScene_2html(\"lcCinema\")}",
+        "NAME": "wlCinema",
+        "NR": "42",
+        "STATE": "initialized",
+        "TYPE": "weblink",
+        "WLTYPE": "htmlCode"
+      },
+      "Readings": {},
+      "Attributes": {
+        "room": "Cinema"
+      }
+    },
+    {
+      "Name": "rgr_Guests",
+      "PossibleSets": "addRoommate addGuest state:none,home,gotosleep,absent,gone removeGuest:rg_Guest1,rg_Guest2",
+      "PossibleAttrs": "verbose:0,1,2,3,4,5 room group comment alias eventMap userReadings rgr_showAllStates:0,1 rgr_states event-on-change-reading event-on-update-reading event-min-interval stateFormat devStateIcon devStateStyle icon lightSceneParamsToSave lightSceneRestoreOnlyIfChanged:1,0 sortby structexclude webCmd widgetOverride userattr",
+      "Internals": {
+        "GUESTS": "rg_Guest1,rg_Guest2",
+        "NAME": "rgr_Guests",
+        "NR": "53",
+        "NTFY_ORDER": "50-rgr_Guests",
+        "STATE": "none",
+        "TYPE": "RESIDENTS"
+      },
+      "Readings": {
+        "lastActivity": {
+          "Value": "none",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastActivityBy": {
+          "Value": "Guests",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastArrival": {
+          "Value": "2014-02-16 14:09:17",
+          "Time": "2014-02-16 14:09:17"
+        },
+        "lastDeparture": {
+          "Value": "2014-02-16 14:09:20",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastDurAbsence": {
+          "Value": "00:00:04",
+          "Time": "2014-02-16 14:09:17"
+        },
+        "lastDurPresence": {
+          "Value": "00:00:03",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "lastState": {
+          "Value": "home",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "presence": {
+          "Value": "absent",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsAbsent": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:17"
+        },
+        "residentsAsleep": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        },
+        "residentsAwoken": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        },
+        "residentsGone": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        },
+        "residentsGotosleep": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        },
+        "residentsGuests": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsHome": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsTotal": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsTotalAbsent": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:17"
+        },
+        "residentsTotalPresent": {
+          "Value": "0",
+          "Time": "2014-02-16 14:09:20"
+        },
+        "residentsTotalWayhome": {
+          "Value": "0",
+          "Time": "2014-02-15 16:16:27"
+        },
+        "state": {
+          "Value": "none",
+          "Time": "2014-02-16 14:09:20"
+        }
+      },
+      "Attributes": {
+        "alias": "Guests",
+        "devStateIcon": ".*home:status_available:absent .*absent:status_away_1:home .*gone:status_standby:home .*none:control_building_empty .*gotosleep:status_night:asleep .*asleep:status_night:awoken .*awoken:status_available:home",
+        "group": "Home State",
+        "icon": "control_building_filled",
+        "room": "Residents",
+        "sortby": "4",
+        "webCmd": "state"
+      }
+    }
+  ],
+  "totalResultsReturned": 51
+}

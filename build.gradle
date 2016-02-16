@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: "jacoco"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repo.typesafe.com/typesafe/releases/"
+    }
+
+    maven {
+        url "http://hc.apache.org/httpcomponents-client"
+    }
+}
+
+dependencies {
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.10', version: '2.2.1'
+
+    compile group: 'io.fastjson', name: 'boon', version: '0.33'
+
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+
+    compile files('lib/gluegen-rt.jar')
+    compile files('lib/jogl-all.jar')
+    compile files('lib/ufdw.jar')
+}
+
+jacocoTestReport {
+    doFirst {
+        classDirectories = files('build/classes/main/')
+    }
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "build/reports/coverageHtml"
+    }
+}
+
+task runMain(type: JavaExec) {
+    main = 'main.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
