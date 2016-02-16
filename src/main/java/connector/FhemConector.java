@@ -32,12 +32,12 @@ public class FhemConector extends UntypedActor {
 
     public void onReceive(Object message) {
         if (message instanceof GetDevices) {
-            //System.out.println(((GetDevices) message).message);
+            /*//System.out.println(((GetDevices) message).message);
             String content = this.getContentStringFromURL(this.fhemURL);
 
             if(content!=null){
                 getSender().tell(JsonListParser.parseList(content), getSelf());
-            }
+            }*/
         }
 
         unhandled(message);

@@ -19,6 +19,10 @@ dependencies {
     compile group: 'io.fastjson', name: 'boon', version: '0.33'
 
     testCompile group: 'junit', name: 'junit', version: '4.+'
+
+    compile files('lib/gluegen-rt.jar')
+    compile files('lib/jogl-all.jar')
+    compile files('lib/ufdw.jar')
 }
 
 jacocoTestReport {
