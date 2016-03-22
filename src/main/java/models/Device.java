@@ -5,18 +5,51 @@ package models;
  */
 public class Device {
 
-    private String Name;
-    private String PossibleSets;
-    private String PossibleAttrs;
-    private Internals Internals;
+    private String id;
+    private String name;
+    private String possibleSets;
+    private String possibleAttrs;
+    private Internals internals;
+    private double[] devicePoint;
+
+    public boolean deviceOn = false; // nur zum Testen
+
+    public Device(String name, double[] devicePoint){
+        this.name = name;
+        this.devicePoint = devicePoint;
+    }
+
+    public void turnOn()
+    {
+        // Gerät anschalten
+        System.out.println(name + ": On");
+        deviceOn = true;
+    }
+
+    public void turnOff() {
+        System.out.println(name + ": Off");
+        deviceOn = false;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double[] getDevicePoint() {
+        return devicePoint;
+    }
 
     @Override
     public String toString() {
         return "Device{" +
-                "Name='" + Name + '\'' +
-                ", PossibleSets='" + PossibleSets + '\'' +
-                ", PossibleAttrs='" + PossibleAttrs + '\'' +
-                ", Internals=" + Internals +
+                "Name='" + name + '\'' +
+                ", PossibleSets='" + possibleSets + '\'' +
+                ", PossibleAttrs='" + possibleAttrs + '\'' +
+                ", Internals=" + internals +
                 "}\n";
     }
 }
