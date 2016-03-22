@@ -6,58 +6,95 @@ import messages.GestureMessage;
 import models.Device;
 import models.DeviceList;
 
-import static kinector.GestureRecognizer.GetLinePointingToDevice;
+import static kinector.GestureRecognizer.getPointingLine;
 
-/**
- * Created by johan on 20.03.2016.
+/** Aktor-Klasse zum Interpretieren von erkannten Gesten.
+ *
+ * Diese Klasse dient als Aktor und behandelt GestureMessages. Anhand der erhaltenen Gesten-Daten werden Methode-Aufrufe
+ * zum Ändern von Geräte-Zuständen durchgeführt. Zudem können neue Geräte-Positionen im Konfigurationsmodus ermittelt werden.
  */
 public class GestureInterpreter extends UntypedActor {
 
+    /**
+     * Zugehöriger DeviceList, die die Devices enthält. (vorrübergehende Lösung)
+     */
     DeviceList deviceList;
 
-    public GestureInterpreter(){
+    /**
+     * Boolean, der Kennzeichnet, ob sich der Interpreter im Konfigurationsmodus befindet.
+     */
+    boolean configModeActive = true;
+
+    /**
+     * Zwischengespeicherte Line zum Bestimmen einer Geräte-Position.
+     */
+    private Line savedConfigLine;
+
+    /**
+     * Konstruktor der Klasse GestureInterpreter
+     * <p/>
+     * Dieser Konstruktor erhält über einen statischen Methoden-Aufruf eine Referenz auf die verwendete
+     * DeviceList.
+     */
+    public GestureInterpreter() {
         deviceList = DeviceList.getDeviceList();
     }
-    boolean configActive = true;
 
+
+    /**
+     * Aktor-Methode zum Empfangen von Aktor-Nachrichten.
+     * <p/>
+     * Diese Methode empfängt Aktor-Nachrichten und überprüft, ob es sich bei einer erhaltenen Nachricht um
+     * eine GestureMessage handelt. Ist der GestureInterpreter im Konfigurationsmodus, wird eine Methode zum Bestimmen
+     * einer Geräte-Position aufgerufen. Ist dies nicht der Fall wird die Geste mitsamt des zugehörigen Skelettes an
+     * eine Methode zum Auslösen Geräte-Statusänderungen weitergegeben.
+     *
+     * @param message Empfangene Aktor-Nachricht
+     */
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof GestureMessage) {
 
+            // Empfangene Skelett-Daten
             Skeleton skeleton = ((GestureMessage) message).skeleton;
+
+            // Empfangene Gesten-Daten
             GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
-            if (configActive) {
-
-                if (detectedGesture != GestureRecognizer.Gesture.None) {
-                        System.out.println("DONE");
-                        GetDevicePosition(skeleton, detectedGesture);
-                }
-            }
-            else
-            {
-                    UpdateDeviceBasedOnGesture(skeleton, detectedGesture);
+            if (configModeActive) {
+                getDevicePosition(skeleton);
+            } else {
+                UpdateDeviceBasedOnGesture(skeleton, detectedGesture);
             }
         }
     }
 
-    private void UpdateDeviceBasedOnGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture)
-    {
-        if(gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            Device closestDevice = pointingTowardsFhemDevice(skeleton, gesture);
-            if (closestDevice != null) {
+    /**
+     * Methode zum Auslösen Geräte-Statusänderungen.
+     * <p/>
+     * Diese Methode erhält erkannte Gesten sowie das zugehörige Skelett und führt auf Basis dieser Informationen eine
+     * Geräte-Statusänderung durch. Hierbei werden die unterschiedlichen auslösenden Gesten-Typen unterschieden und
+     * entsprechend eine Statusänderung ausgelöst.
+     *
+     * @param skeleton Empfangene Skelett-Daten
+     * @param gesture  Empfangene Gesten-Daten
+     */
+    private void UpdateDeviceBasedOnGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture) {
+        if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
+            Device device = getDevice(skeleton);
+            if (device != null) {
                 switch (gesture) {
                     case LeftHand_PointingTowardsDevice_DefaultActivate:
                     case RightHand_PointingTowardsDevice_DefaultActivate: {
-                        if (!closestDevice.deviceOn) {
-                            closestDevice.turnOn();
+                        if (!device.deviceOn) {
+                            device.turnOn();
                         }
                         break;
                     }
                     case LeftHand_PointingTowardsDevice_DefaultDeactivate:
                     case RightHand_PointingTowardsDevice_DefaultDeactivate: {
-                        if (closestDevice.deviceOn) {
-                            closestDevice.turnOff();
+                        if (device.deviceOn) {
+                            device.turnOff();
                         }
                         break;
                     }
@@ -66,18 +103,14 @@ public class GestureInterpreter extends UntypedActor {
                         break;
                 }
             }
-        }
-
-        else if(gesture == GestureRecognizer.Gesture.BothHands_ActivateAll){
-            for(Device device : deviceList.getDevicesAsArrayList()){
+        } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
+            for (Device device : deviceList.getDevicesAsArrayList()) {
                 if (!device.deviceOn) {
                     device.turnOn();
                 }
             }
-        }
-
-        else if(gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll){
-            for(Device device : deviceList.getDevicesAsArrayList()){
+        } else if (gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll) {
+            for (Device device : deviceList.getDevicesAsArrayList()) {
                 if (device.deviceOn) {
                     device.turnOff();
                 }
@@ -85,42 +118,54 @@ public class GestureInterpreter extends UntypedActor {
         }
     }
 
-    public Device pointingTowardsFhemDevice(Skeleton skeleton, GestureRecognizer.Gesture gesture){
-        Line line = GetLinePointingToDevice(skeleton, gesture);
-        Device pointingToDevice = null;
-        double shortestAngle = 20;
+    /**
+     * Methode zum Ermitteln eines Gerätes.
+     * <p/>
+     * Diese Methode erhält Skelett-Daten und bestimmt anhand dieser mittels eines Aufrufs
+     * der statischen Methode getPointingLine(...) eine neue Line ausgehend von der zeigenden Hand.
+     * Darauffolgend wird überprüft, ob in Richtung der Line ein Geräte vorhanden ist. Hierfür wird
+     * der Winkel zwischen der Line und den Geräte-Positionen berechnet. Das Gerät mit dem geringsten Winkel zur
+     * Line wird als erkanntes Gerät zurückgegeben.
+     *
+     * @param skeleton Empfangene Skelett-Daten
+     * @return Erkanntes Gerät
+     */
+    public Device getDevice(Skeleton skeleton) {
+        Line line = getPointingLine(skeleton);
+        Device detectedDevice = null;
+        double maxAngle = 20;
 
-        for(Device device : deviceList.getDevicesAsArrayList())
-        {
+        for (Device device : deviceList.getDevicesAsArrayList()) {
             double angleToPoint = Math.abs(line.angleToGivenPoint(device.getDevicePoint()));
-            if (angleToPoint <= shortestAngle)
-            {
-                shortestAngle = angleToPoint;
-                pointingToDevice = device;
+            if (angleToPoint <= maxAngle) {
+                maxAngle = angleToPoint;
+                detectedDevice = device;
             }
         }
-        return pointingToDevice;
+        return detectedDevice;
     }
 
-    private Line savedFirstLine;
-    private void GetDevicePosition(Skeleton skeleton, GestureRecognizer.Gesture gesture)
-    {
-        Line line = GetLinePointingToDevice(skeleton, gesture);
-        if (savedFirstLine == null)
-        {
-            savedFirstLine = line;
+    /**
+     * Methode zum Ermitteln eines neuen Geräte-Position.
+     * <p/>
+     * Diese Methode erhält Skelett-Daten und bestimmt anhand dieser eine neue GerätePosition. Hierfür muss die
+     * Methode zwei Mal aufgerufen werden. Beim ersten Mal wird eine Line erzeugt und zwischengespeichert. Beim
+     * zweiten Mal wird mit einer weiteren erzeugten Line sowie der gespeicherten Line eine Position errechnet.
+     *
+     * @param skeleton Empfangene Skelett-Daten
+     * @return Erkanntes Gerät
+     */
+    private void getDevicePosition(Skeleton skeleton) {
+        Line line = getPointingLine(skeleton);
+        if (savedConfigLine == null) {
+            savedConfigLine = line;
             System.out.println("Erste Linie gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
-        }
-        else
-        {
-            double[] point = line.calcLineIntersection(savedFirstLine);
+        } else {
+            double[] point = line.calcLineIntersection(savedConfigLine);
             System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
-            savedFirstLine = null;
-            configActive = false;
+            savedConfigLine = null;
+            configModeActive = false;
             deviceList.addDevice(new Device("demoDevice", point));
         }
     }
-
-
-
 }
