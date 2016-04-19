@@ -1,42 +1,30 @@
 package main;
 
 import akka.actor.*;
-import connector.FhemConector;
-import kinector.GestureRecognizer;
-import kinector.GestureInterpreter;
-import kinector.Kinector;
-import messages.GetDevices;
-import models.DeviceModel;
-import scala.concurrent.duration.Duration;
+import messages.ConfigureDeviceWithIDMessage;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.io.InputStreamReader;
 
 /**
  * Created by hagen on 01.02.16.
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-
-        System.out.println("ff");
-
+    public static void main(String[] args) {
 
         final ActorSystem system = ActorSystem.create("mySystem");
-        final Inbox inbox = Inbox.create(system);
+        final ActorRef dispatcher = system.actorOf(Props.create(DispatchActor.class), "Dispatcher");
 
-        final ActorRef fhemConector = system.actorOf(Props.create(FhemConector.class), "FhemConector");
-        final ActorRef deviceModel = system.actorOf(Props.create(DeviceModel.class), "DeviceModel");
-        final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
-        final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+        try{
+            System.in.read();
+            dispatcher.tell(new ConfigureDeviceWithIDMessage("hue_HUEDevice3"), ActorRef.noSender());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-        //greeter.tell(new GetDevices("akka"), ActorRef.noSender());
-
-        system.scheduler().
-                schedule(Duration.Zero(), Duration.create(5, TimeUnit.SECONDS), fhemConector, new GetDevices(" "), system.dispatcher(), deviceModel);
-        final Kinector kinector = new Kinector(gestureRecognizer);
     }
 
 }

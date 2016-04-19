@@ -1,4 +1,4 @@
-package models;
+package connector.models;
 
 
 /**
@@ -12,38 +12,23 @@ public class Internals {
     private String STATE;
     private String TYPE;
 
+
     public Internals() {}
 
     public String getNAME() {
         return NAME;
     }
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
-    }
-
     public String getNR() {
         return NR;
-    }
-
-    public void setNR(String NR) {
-        this.NR = NR;
     }
 
     public String getSTATE() {
         return STATE;
     }
 
-    public void setSTATE(String STATE) {
-        this.STATE = STATE;
-    }
-
     public String getTYPE() {
         return TYPE;
-    }
-
-    public void setTYPE(String TYPE) {
-        this.TYPE = TYPE;
     }
 
     @Override

@@ -35,16 +35,8 @@ public class Kinector extends J4KSDK {
 
     @Override
     public void onSkeletonFrameEvent(boolean[] flags, float[] positions, float[] orientations, byte[] state) {
-        //for(int i=0;i<getSkeletonCountLimit();i++)
-        //{
-            //Skeleton skeleton = Skeleton.getSkeleton(i, flags,positions, orientations,state,this);
-            ArrayList<Skeleton> skeletons = new ArrayList<Skeleton>(Arrays.asList(this.getSkeletons()));
 
-            /*for(Skeleton skeleton : skeletons){
-                if(!skeleton.isTracked()){
-                    skeletons.remove(skeleton);
-                }
-            }*/
+        ArrayList<Skeleton> skeletons = new ArrayList<Skeleton>(Arrays.asList(this.getSkeletons()));
 
         Iterator<Skeleton> skelIterator = skeletons.iterator();
         while (skelIterator.hasNext()) {
@@ -58,11 +50,6 @@ public class Kinector extends J4KSDK {
         for(int i = 0; i < skeletons.size(); i++){
             skeletons.get(i).setPlayerID(i);
         }
-
-            //System.out.println(skeleton.isTracked());
-            //if(skeleton.isTracked()) {
             actor.tell(new SkeletonMessage(skeletons), ActorRef.noSender());
-            //}
-        //}
     }
 }

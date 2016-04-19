@@ -1,10 +1,17 @@
 package kinector;
 
+import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
+import deviceManagement.models.Device;
+import deviceManagement.models.DevicesMessage;
+import deviceManagement.models.FS20State;
 import edu.ufl.digitalworlds.j4k.Skeleton;
+import messages.ConfigureDeviceWithIDMessage;
 import messages.GestureMessage;
-import models.Device;
-import models.DeviceList;
+import messages.SetAllDevicesMessage;
+import messages.SetDeviceLocationMessage;
+
+import java.util.Hashtable;
 
 import static kinector.GestureRecognizer.getPointingLine;
 
@@ -15,31 +22,20 @@ import static kinector.GestureRecognizer.getPointingLine;
  */
 public class GestureInterpreter extends UntypedActor {
 
-    /**
-     * Zugehöriger DeviceList, die die Devices enthält. (vorrübergehende Lösung)
-     */
-    DeviceList deviceList;
+    ActorRef dispatcher;
+
+    Hashtable<String, Device> devices;
 
     /**
      * Boolean, der Kennzeichnet, ob sich der Interpreter im Konfigurationsmodus befindet.
      */
-    boolean configModeActive = true;
+    boolean configModeActive = false;
+    String currentConfigDevice;
 
     /**
      * Zwischengespeicherte Line zum Bestimmen einer Geräte-Position.
      */
     private Line savedConfigLine;
-
-    /**
-     * Konstruktor der Klasse GestureInterpreter
-     * <p/>
-     * Dieser Konstruktor erhält über einen statischen Methoden-Aufruf eine Referenz auf die verwendete
-     * DeviceList.
-     */
-    public GestureInterpreter() {
-        deviceList = DeviceList.getDeviceList();
-    }
-
 
     /**
      * Aktor-Methode zum Empfangen von Aktor-Nachrichten.
@@ -61,11 +57,21 @@ public class GestureInterpreter extends UntypedActor {
             // Empfangene Gesten-Daten
             GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
-            if (configModeActive) {
+            if (configModeActive &&
+                    detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll &&
+                    detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
                 getDevicePosition(skeleton);
             } else {
-                UpdateDeviceBasedOnGesture(skeleton, detectedGesture);
+                interpretGesture(skeleton, detectedGesture);
             }
+        } else if(message instanceof DevicesMessage){
+            if(dispatcher == null){
+                dispatcher = getSender();
+            }
+            devices = ((DevicesMessage) message).devices;
+        } else if(message instanceof ConfigureDeviceWithIDMessage){
+            this.currentConfigDevice = ((ConfigureDeviceWithIDMessage) message).id;
+            configModeActive = true;
         }
     }
 
@@ -79,23 +85,21 @@ public class GestureInterpreter extends UntypedActor {
      * @param skeleton Empfangene Skelett-Daten
      * @param gesture  Empfangene Gesten-Daten
      */
-    private void UpdateDeviceBasedOnGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture) {
+    private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
             Device device = getDevice(skeleton);
             if (device != null) {
                 switch (gesture) {
                     case LeftHand_PointingTowardsDevice_DefaultActivate:
                     case RightHand_PointingTowardsDevice_DefaultActivate: {
-                        if (!device.deviceOn) {
-                            device.turnOn();
-                        }
+                            System.out.println("on");
+                            dispatcher.tell(device.turnOn(), getSelf());
                         break;
                     }
                     case LeftHand_PointingTowardsDevice_DefaultDeactivate:
                     case RightHand_PointingTowardsDevice_DefaultDeactivate: {
-                        if (device.deviceOn) {
-                            device.turnOff();
-                        }
+                        System.out.println("off");
+                        dispatcher.tell(device.turnOff(), getSelf());
                         break;
                     }
 
@@ -104,20 +108,11 @@ public class GestureInterpreter extends UntypedActor {
                 }
             }
         } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
-            for (Device device : deviceList.getDevicesAsArrayList()) {
-                if (!device.deviceOn) {
-                    device.turnOn();
-                }
-            }
+                 dispatcher.tell(new SetAllDevicesMessage(FS20State.ON), getSelf());
         } else if (gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            for (Device device : deviceList.getDevicesAsArrayList()) {
-                if (device.deviceOn) {
-                    device.turnOff();
-                }
-            }
+                dispatcher.tell(new SetAllDevicesMessage(FS20State.OFF), getSelf());
         }
     }
-
     /**
      * Methode zum Ermitteln eines Gerätes.
      * <p/>
@@ -133,15 +128,20 @@ public class GestureInterpreter extends UntypedActor {
     public Device getDevice(Skeleton skeleton) {
         Line line = getPointingLine(skeleton);
         Device detectedDevice = null;
-        double maxAngle = 20;
 
-        for (Device device : deviceList.getDevicesAsArrayList()) {
-            double angleToPoint = Math.abs(line.angleToGivenPoint(device.getDevicePoint()));
-            if (angleToPoint <= maxAngle) {
-                maxAngle = angleToPoint;
-                detectedDevice = device;
+        double maxAngle = 30;
+
+        for (Device device : devices.values()) {
+            if(device.point != null) {
+
+                double angleToPoint = Math.abs(line.angleToGivenPoint(device.point));
+                if (angleToPoint <= maxAngle) {
+                    maxAngle = angleToPoint;
+                    detectedDevice = device;
+                }
             }
         }
+        System.out.println(detectedDevice);
         return detectedDevice;
     }
 
@@ -165,7 +165,12 @@ public class GestureInterpreter extends UntypedActor {
             System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
             savedConfigLine = null;
             configModeActive = false;
-            deviceList.addDevice(new Device("demoDevice", point));
+
+            // deviceList.addDevice(new Device("demoDevice", point));
+            if(dispatcher != null){
+                dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point), getSelf());
+            }
+
         }
     }
 }
