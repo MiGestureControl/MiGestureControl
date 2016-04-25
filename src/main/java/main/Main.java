@@ -19,7 +19,7 @@ public class Main {
 
         try{
             System.in.read();
-            dispatcher.tell(new ConfigureDeviceWithIDMessage("hue_HUEDevice3"), ActorRef.noSender());
+            dispatcher.tell(new ConfigureDeviceWithIDMessage("hue_HUEDevice1"), ActorRef.noSender());
         } catch (IOException e) {
             e.printStackTrace();
         }

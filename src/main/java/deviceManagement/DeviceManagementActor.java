@@ -6,6 +6,7 @@ import connector.models.FhemJsonList;
 import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
+import messages.GetAllDevicesMessage;
 import messages.SetAllDevicesMessage;
 import messages.SetDeviceLocationMessage;
 
@@ -47,6 +48,10 @@ public class DeviceManagementActor extends UntypedActor {
                     getSender().tell(device.turnOff(), getSelf());
                 }
             }
+        }else if (message instanceof GetAllDevicesMessage) {
+
+            getSender().tell(new DevicesMessage(devices),getSelf());
+
         }
     }
 

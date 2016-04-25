@@ -47,7 +47,7 @@ public class DispatchActor extends UntypedActor {
 
 
     public DispatchActor() {
-        new HTTPServer().bindRoute("127.0.0.1", 8080, system);
+        new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
 
 
         system.scheduler().schedule(
@@ -93,6 +93,18 @@ public class DispatchActor extends UntypedActor {
                 lastDebounceState = ((SetAllDevicesMessage) message).state;
             }
 
+        }else if (message instanceof GetAllDevicesMessage) {
+            this.deviceManagementActor.forward(message, getContext());
+        }else if (message instanceof ConfigureDeviceWithIDMessage) {
+            System.out.println(((ConfigureDeviceWithIDMessage) message).id);
+            // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
+            //this.deviceManagementActor.forward(message, getContext());
+            getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
+        }else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+            System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
+            // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
+            //this.deviceManagementActor.forward(message, getContext());
+            getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
         }
 
 

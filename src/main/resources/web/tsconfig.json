@@ -2,14 +2,14 @@
   "compilerOptions": {
     "target": "ES5",
     "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": true
+    "sourceMap": true
   },
   "files": [
+    "typings/main.d.ts",
     "app/bootstrap.ts"
-  ]
+  ],
+  "compileOnSave": false
 }

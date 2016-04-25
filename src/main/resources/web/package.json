@@ -1,16 +1,49 @@
 {
-  "private": true,
+  "name": "waddle",
+  "version": "0.0.1",
+  "description": "",
+  "author": "waddle",
+  "license": "no license yet",
+  "main": "index.js",
+  "repository": "https://github.com/MI-HSHarz/waddle",
   "scripts": {
-    "dev": "tsc --watch"
+    "build": "webpack --progress --profile --colors --display-error-details --display-cached",
+    "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
+    "dev-server": "webpack-dev-server --inline --progress --profile --colors --display-error-details --display-cached --port 3000",
+    "typings": "typings",
+    "lint": "tsconfig-lint",
+    "postinstall": "typings install"
   },
   "devDependencies": {
-    "typescript": "1.7.5"
+    "css-loader": "^0.23.0",
+    "es6-shim": "^0.34.0",
+    "exports-loader": "^0.6.3",
+    "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.3",
+    "raw-loader": "0.5.1",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.0",
+    "ts-loader": "^0.8.1",
+    "tsconfig-lint": "^0.11.0",
+    "tslint": "^3.7.1",
+    "tslint-loader": "^2.1.3",
+    "typedoc": "^0.3.12",
+    "typescript": "^1.8.10",
+    "typings": "^0.7.12",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
-    "systemjs": "0.19.6",
-    "rxjs": "5.0.0-beta.0",
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.1"
+    "angular2": "2.0.0-beta.15",
+    "zone.js": "0.6.10",
+    "gulp": "^3.9.0",
+    "es6-shim": "0.35.0",
+    "es6-promise": "^3.1.2",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2"
   }
 }

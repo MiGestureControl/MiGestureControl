@@ -1,58 +1,78 @@
-import {Component} from 'angular2/core';
-import {TodoStore, Todo} from './services/store';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/forkJoin';
+
+import 'zone.js';
+import 'reflect-metadata';
+
+import {enableProdMode} from "angular2/core";
+import {Component, provide} from 'angular2/core';
+import {ROUTER_DIRECTIVES,
+    RouteConfig,
+    ROUTER_PROVIDERS,
+    LocationStrategy,
+    HashLocationStrategy,
+    Router} from 'angular2/router';
+import {CORE_DIRECTIVES} from "angular2/common";
+import {DevicesComponent} from "./components/devicelist.component.ts";
+import {RouterOutlet} from "angular2/router";
+import {DocsComponent} from "./components/docs.component";
+
+declare var System: any;
 
 @Component({
-	selector: 'todo-app',
-	templateUrl: 'app/app.html'
+    selector: 'app',
+    directives: [
+        ROUTER_DIRECTIVES,
+        CORE_DIRECTIVES
+    ],
+    template: `
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">
+                <div>MiGestureControl</div>
+            </a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
+            </ul>
+
+            <ul class="side-nav" id="mobile-demo">
+                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
+            </ul>
+
+        </div>
+    </nav>
+</div>
+<main class="mdl-layout__content">
+    <router-outlet ></router-outlet>
+</main>
+        `
 })
-export default class TodoApp {
-	todoStore: TodoStore;
-	newTodoText = '';
 
-	constructor(todoStore: TodoStore) {
-		this.todoStore = todoStore;
-	}
+@RouteConfig([
+    {
+        path: '/',
+        component: DevicesComponent,
+        name: 'Devices'
+    },
+    {
+        path: '/docs',
+        component: DocsComponent,
+        name: 'Docs'
+    }
+])
 
-	stopEditing(todo: Todo, editedTitle: string) {
-		todo.title = editedTitle;
-		todo.editing = false;
-	}
+export class App {
 
-	cancelEditingTodo(todo: Todo) {
-		todo.editing = false;
-	}
+    constructor(private _router: Router) {
+        // enableProdMode();
+    }
 
-	updateEditingTodo(todo: Todo, editedTitle: string) {
-		editedTitle = editedTitle.trim();
-		todo.editing = false;
-
-		if (editedTitle.length === 0) {
-			return this.todoStore.remove(todo);
-		}
-
-		todo.title = editedTitle;
-	}
-
-	editTodo(todo: Todo) {
-		todo.editing = true;
-	}
-
-	removeCompleted() {
-		this.todoStore.removeCompleted();
-	}
-
-	toggleCompletion(todo: Todo) {
-		this.todoStore.toggleCompletion(todo);
-	}
-
-	remove(todo: Todo){
-		this.todoStore.remove(todo);
-	}
-
-	addTodo() {
-		if (this.newTodoText.trim().length) {
-			this.todoStore.add(this.newTodoText);
-			this.newTodoText = '';
-		}
-	}
 }

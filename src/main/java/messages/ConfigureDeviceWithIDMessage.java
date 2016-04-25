@@ -3,7 +3,7 @@ package messages;
 import java.io.Serializable;
 
 /**
- * Created by johan on 19.04.2016.
+ * Created by hagen on 19/04/16.
  */
 public class ConfigureDeviceWithIDMessage implements Serializable {
     public final String id;
