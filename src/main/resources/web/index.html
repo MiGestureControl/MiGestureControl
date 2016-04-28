@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-framework="angular2">
+	<head>
+		<meta charset="utf-8">
+		<title>MiGestureControl</title>
+
+        <link href="assets/css/material-icons.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css" media="screen,projection"/>
+
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+
+		<script>
+			(function($){
+				$(function(){
+					$(".button-collapse").sideNav();
+				}); // end of document ready
+			})(jQuery); // end of jQuery name space
+		</script>
+
+		<script>
+			function myFunction() {
+				(function($){
+					$(function(){
+						$('.slider').slider({full_width: true});
+					}); // end of document ready
+				})(jQuery); // end of jQuery name space
+			}
+		</script>
+
+
+	</head>
+	<body>
+        <app></app>
+
+        <script src="../build/vendor.js"></script>
+        <script src="../build/app.js"></script>
+	</body>
+</html>
