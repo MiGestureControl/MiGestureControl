@@ -56,7 +56,7 @@ public class DeviceManagementActor extends UntypedActor {
     }
 
     private  void updateFhemDevice(FhemDevice fhemDevice){
-        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
+//        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
 
             System.out.println(fhemDevice.getName());
             Device device = devices.get(fhemDevice.getName());
@@ -68,12 +68,12 @@ public class DeviceManagementActor extends UntypedActor {
             }
 
             devices.put(device.id, device);
-        }
+//        }
     }
 
 
     private void addFhemDevice(FhemDevice fhemDevice){
-        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
+//        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
             Device device = new Device();
 
             device.id = fhemDevice.getName();
@@ -89,7 +89,7 @@ public class DeviceManagementActor extends UntypedActor {
             //System.out.println(device.id);
 
             devices.put(device.id, device);
-        }
+//        }
     }
 
 
