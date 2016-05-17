@@ -38,12 +38,12 @@ declare var System: any;
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Devices']" >Geräte</a></li>
                 <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
-                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Devices']" >Geräte</a></li>
                 <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
             </ul>
 
