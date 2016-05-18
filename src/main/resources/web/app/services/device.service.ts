@@ -32,6 +32,11 @@ export class DevicesService {
             .map((res: Response) => res.json());
     }
 
+    deleteDevice(id: string): any {
+        return this._http.delete(this.apiBaseUrl + "/" + id, {headers: headers()})
+            .map((res: Response) => res.json());
+    }
+
     private setDevices(devices: Device[]) {
         this._devices = devices;
         this.devicesSubject.next(this._devices);
@@ -41,4 +46,8 @@ export class DevicesService {
 export class Device {
     id: string;
     state: string;
+    locationX:number:
+    locationY:number:
+    locationZ:number:
+
 }
