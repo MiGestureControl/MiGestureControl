@@ -15,9 +15,9 @@ public class Device implements Switcheble{
 
     public FS20State state;
 
-    public Double locationX = 0.0;
-    public Double locationY = 0.0;
-    public Double locationZ = 0.0;
+    public Double locationX = Double.MAX_VALUE;
+    public Double locationY = Double.MAX_VALUE;
+    public Double locationZ = Double.MAX_VALUE;
 
 
     @Override

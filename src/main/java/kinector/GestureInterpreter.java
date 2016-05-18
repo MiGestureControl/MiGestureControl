@@ -145,15 +145,16 @@ public class GestureInterpreter extends UntypedActor {
                     point[2] = device.locationZ;
                     double angleToPoint = Math.abs(line.angleToGivenPoint(point));
 
-                    System.out.println("Angle to Device: " + angleToPoint);
+                    //System.out.println("Angle to Device: " + angleToPoint);
 
                     if (angleToPoint <= maxAngle) {
-                        maxAngle = angleToPoint;
+
                         detectedDevice = device;
                     }
                 }
             }
             System.out.println("Detected device: " + detectedDevice);
+
             return detectedDevice;
         }
 
@@ -176,7 +177,9 @@ public class GestureInterpreter extends UntypedActor {
             savedConfigLine = line;
             System.out.println("Erste Linie gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
         } else {
-            double[] point = line.calcLineIntersection(savedConfigLine);
+            //double[] point = line.calcLineIntersection(savedConfigLine);
+
+            double[] point = savedConfigLine.calcLineIntersection(line);
             System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
             savedConfigLine = null;
             configModeActive = false;
