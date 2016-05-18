@@ -59,6 +59,10 @@ webpackJsonp([0],{
 	        return this._http.get(this.apiBaseUrl + "/" + id, { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
+	    DevicesService.prototype.deleteDevice = function (id) {
+	        return this._http.delete(this.apiBaseUrl + "/" + id, { headers: comon_1.headers() })
+	            .map(function (res) { return res.json(); });
+	    };
 	    DevicesService.prototype.setDevices = function (devices) {
 	        this._devices = devices;
 	        this.devicesSubject.next(this._devices);
@@ -1479,13 +1483,24 @@ webpackJsonp([0],{
 	            console.log("fehler bei der Einrichtung aufgetretten");
 	        });
 	    };
+	    DevicesComponent.prototype.delete = function (id) {
+	        this._devicesService.deleteDevice(id).subscribe(function (res) {
+	            console.log("gelöscht");
+	        }, function (error) {
+	            console.log("fehler beim löschen aufgetretten");
+	        });
+	    };
 	    DevicesComponent.prototype.edit = function (id) {
-	        console.log("edit geklickt");
+	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
+	            console.log("Einrichtung erfolgt");
+	        }, function (error) {
+	            console.log("fehler bei der Einrichtung aufgetretten");
+	        });
 	    };
 	    DevicesComponent = __decorate([
 	        core_1.Component({
 	            selector: 'Devices',
-	            template: "\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices\" class=\"collection-item avatar\">\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">{{device.id}}</span>\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n                <div class=\"secondary-content\">\n                <div *ngIf=\"device.locationX == 0.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"add(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                </div>\n                <div *ngIf=\"device.locationX != 0.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">delete_forever</i></a>\n                </div>\n\n                </div>\n            </li>\n        </ul>\n\n    "
+	            template: "\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices\" class=\"collection-item avatar\">\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">{{device.id}}</span>\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n                <div class=\"secondary-content\">\n                <div *ngIf=\"device.locationX == 0.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"add(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                </div>\n                <div *ngIf=\"device.locationX != 0.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\" ><i class=\"material-icons\">delete_forever</i></a>\n                </div>\n\n                </div>\n            </li>\n        </ul>\n\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DevicesComponent);

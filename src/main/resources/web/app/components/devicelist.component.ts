@@ -1,11 +1,18 @@
 import {Component} from 'angular2/core';
 import {Device, DevicesService} from "../services/device.service";
+import {searchFilterPipe} from "../pipes/searchFilterPipe";
 
 @Component({
     selector: 'Devices',
+    pipes: [
+        searchFilterPipe
+    ],
     template: `
+        <div class="input-field col s6">
+          <input #listFilter (keyup)="0" placeholder="Suche" id="first_name" type="text" class="validate">
+        </div>
         <ul class="collection">
-            <li *ngFor="#device of devices" class="collection-item avatar">
+            <li *ngFor="#device of devices | searchFilter:listFilter.value" class="collection-item avatar">
                 <i class="material-icons circle"><i class="material-icons">local_florist</i></i>
                 <span class="title">{{device.id}}</span>
                 <p>{{device.state}}<br>
@@ -17,7 +24,7 @@ import {Device, DevicesService} from "../services/device.service";
                 </div>
                 <div *ngIf="device.locationX != 0.0">
                     <a class="btn-floating btn waves-effect waves-light" (click)="edit(device.id)" ><i class="material-icons">mode_edit</i></a>
-                    <a class="btn-floating btn waves-effect waves-light" (click)="edit(device.id)" ><i class="material-icons">delete_forever</i></a>
+                    <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)" ><i class="material-icons">delete_forever</i></a>
                 </div>
 
                 </div>
@@ -54,7 +61,25 @@ export class DevicesComponent {
         );
     }
 
+    delete(id: string) {
+        this._devicesService.deleteDevice(id).subscribe(
+            res => {
+                console.log("gelöscht");
+            },
+            error => {
+                console.log("fehler beim löschen aufgetretten");
+            }
+        );
+    }
+
     edit(id: string) {
-        console.log("edit geklickt");
+        this._devicesService.enterEditModeForDevice(id).subscribe(
+            res => {
+                console.log("Einrichtung erfolgt");
+            },
+            error => {
+                console.log("fehler bei der Einrichtung aufgetretten");
+            }
+        );
     }
 }
