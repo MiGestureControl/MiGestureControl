@@ -56,7 +56,6 @@ local.properties
 .cache
 .history
 .lib/
-dist/*
 target/
 lib_managed/
 src_managed/
@@ -170,7 +169,6 @@ $RECYCLE.BIN/
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
