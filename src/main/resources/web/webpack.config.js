@@ -27,8 +27,9 @@ module.exports = {
     },
 
     resolve: {
-        modulesDirectories: ["node_modules", "app/assets/sass"],
-        extensions: ['', '.ts', '.js', '.json', '.css', '.scss' , '.html']
+        // ensure loader extensions match
+        modulesDirectories: ["node_modules", "assets/sass"],
+        extensions: ['','.ts','.js','.json', '.css', '.scss', '.html']
     },
 
     module: {
@@ -52,10 +53,12 @@ module.exports = {
             { test: /\.json$/,  loader: 'json-loader' },
 
             // Support for CSS as raw text
-            { test: /\.css$/,   loader: 'raw-loader' },
-
-            // support for .html as raw text
-            { test: /\.html$/,  loader: 'raw-loader' },
+            {
+                test: /\.css$/,   loader: 'raw-loader'
+            },
+            { test: /\.scss$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader"),
+            },
             {
                 test: /\.(|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
@@ -79,7 +82,7 @@ module.exports = {
 
     plugins: [
         new CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js', minChunks: Infinity}),
-        new ExtractTextPlugin("materialize-waddle.css",{allChunks: false})
+        new ExtractTextPlugin("materialize.css",{allChunks: false})
     ],
 
     // Other module loader config

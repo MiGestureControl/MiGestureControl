@@ -41,4 +41,8 @@ export class DevicesService {
 export class Device {
     id: string;
     state: string;
+    locationX:number:
+    locationY:number:
+    locationZ:number:
+
 }
