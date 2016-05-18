@@ -26,7 +26,10 @@
 			function myFunction() {
 				(function($){
 					$(function(){
-						$('.slider').slider({full_width: true});
+						$('.slider').slider({
+							full_width: true,
+							interval: 12000}
+						);
 					}); // end of document ready
 				})(jQuery); // end of jQuery name space
 			}

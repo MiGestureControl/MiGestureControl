@@ -6,7 +6,10 @@ import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
 import edu.ufl.digitalworlds.j4k.Skeleton;
-import messages.*;
+import messages.ConfigureDeviceWithIDMessage;
+import messages.GestureMessage;
+import messages.SetAllDevicesMessage;
+import messages.SetDeviceLocationMessage;
 
 import java.util.Hashtable;
 
@@ -132,19 +135,25 @@ public class GestureInterpreter extends UntypedActor {
 
         if(line != null) {
             for (Device device : devices.values()) {
-                if (device.point != null) {
+                if(device.locationX != null &&
+                        device.locationY != null &&
+                        device.locationZ != null) {
 
-                    double angleToPoint = Math.abs(line.angleToGivenPoint(device.point));
+                    double[] point = new double[3];
+                    point[0] = device.locationX;
+                    point[1] = device.locationY;
+                    point[2] = device.locationZ;
+                    double angleToPoint = Math.abs(line.angleToGivenPoint(point));
 
                     System.out.println("Angle to Device: " + angleToPoint);
 
                     if (angleToPoint <= maxAngle) {
+                        maxAngle = angleToPoint;
                         detectedDevice = device;
                     }
                 }
             }
             System.out.println("Detected device: " + detectedDevice);
-
             return detectedDevice;
         }
 
@@ -167,8 +176,7 @@ public class GestureInterpreter extends UntypedActor {
             savedConfigLine = line;
             System.out.println("Erste Linie gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
         } else {
-            double[] point = savedConfigLine.calcLineIntersection(line);
-
+            double[] point = line.calcLineIntersection(savedConfigLine);
             System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
             savedConfigLine = null;
             configModeActive = false;
@@ -176,7 +184,6 @@ public class GestureInterpreter extends UntypedActor {
             // deviceList.addDevice(new Device("demoDevice", point));
             if(dispatcher != null){
                 dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point), getSelf());
-                tempConfigActor.tell(new ConfigureDeviceFinishedMessage(), getSelf());
             }
 
         }

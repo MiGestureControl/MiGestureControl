@@ -29,7 +29,7 @@ public class DispatchActor extends UntypedActor {
             = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
 
     final ActorRef deviceManagementActor
-            = system.actorOf(Props.create(DeviceManagementActor.class), "deviceManagementActor");
+            = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
 
     final ActorRef howToUseDeviceManagementActor
             = system.actorOf(Props.create(deviceManagement.HowToUseDeviceManagementActor.class),  "HowToUseDeviceManagementActor");
@@ -63,7 +63,7 @@ public class DispatchActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof FhemJsonList) {
-            //System.out.println("FhemJsonList");
+
 
             this.deviceManagementActor.tell(message, getSelf());
 
@@ -73,16 +73,23 @@ public class DispatchActor extends UntypedActor {
             this.gestureInterpreter.tell(message, getSelf());
 
         }else if(message instanceof SetDeviceStateMessage){
+
             System.out.println("SetDeviceStateMessage");
             System.out.println(((SetDeviceStateMessage) message).deviceID);
             this.fhemConector.tell(message, getSelf());
+
         } else if(message instanceof SetDeviceLocationMessage){
+
             System.out.println("SetDeviceLocationMessage");
             this.deviceManagementActor.tell(message, getSelf());
+
         } else if(message instanceof ConfigureDeviceWithIDMessage) {
+
             System.out.println("ConfigureDeviceWithIDMessage");
             this.gestureInterpreter.tell(message, getSelf());
+
         } else if(message instanceof SetAllDevicesMessage){
+
             if(((SetAllDevicesMessage) message).state != lastDebounceState){
                 if(System.nanoTime() + debounceTime > lastDebounceStartTime ){
                     lastDebounceStartTime = System.nanoTime();
@@ -94,8 +101,11 @@ public class DispatchActor extends UntypedActor {
             }
 
         }else if (message instanceof GetAllDevicesMessage) {
+
             this.deviceManagementActor.forward(message, getContext());
+
         }else if (message instanceof ConfigureDeviceWithIDMessage) {
+
             System.out.println(((ConfigureDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             this.gestureInterpreter.forward(message, getContext());
@@ -110,7 +120,6 @@ public class DispatchActor extends UntypedActor {
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
         }
-
 
         unhandled(message);
     }

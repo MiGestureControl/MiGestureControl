@@ -2,6 +2,7 @@ package deviceManagement.models;
 
 import messages.SetDeviceStateMessage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -10,16 +11,23 @@ import java.util.Arrays;
 public class Device implements Switcheble{
     public String id;
 
-    public double[] point;
+//    public double[] point;
 
     public FS20State state;
+
+    public Double locationX = 0.0;
+    public Double locationY = 0.0;
+    public Double locationZ = 0.0;
+
 
     @Override
     public String toString() {
         return "Device{" +
                 "id='" + id + '\'' +
-                ", point=" + Arrays.toString(point) +
                 ", state=" + state +
+                ", locationX=" + locationX +
+                ", locationY=" + locationY +
+                ", locationZ=" + locationZ +
                 '}';
     }
 

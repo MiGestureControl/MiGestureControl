@@ -6,12 +6,19 @@ import connector.models.FhemJsonList;
 import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
-import messages.ConfigureDeviceFinishedMessage;
 import messages.GetAllDevicesMessage;
 import messages.SetAllDevicesMessage;
 import messages.SetDeviceLocationMessage;
+import org.boon.json.JsonFactory;
+import org.boon.json.ObjectMapper;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Created by hagen on 28/03/16.
@@ -19,9 +26,74 @@ import java.util.Hashtable;
 public class DeviceManagementActor extends UntypedActor {
 
     Hashtable<String, Device> devices = new Hashtable();
+    String configPath;
+
+    class MIGCConfig {
+        @Override
+        public String toString() {
+            return "MIGCConfig{" +
+                    "devices=" + devices +
+                    '}';
+        }
+
+        List<Device> devices = new ArrayList<>();
+    }
+
+//    public DeviceManagementActor() {
+//    }
+
+    public DeviceManagementActor(String configPath) {
+        //Wenn der String leer ist dann laden wir keine Konfig
+        if (configPath.length() > 0) {
+            this.configPath= configPath;
+
+            try {
+                File f = new File(configPath);
+                if(f.exists() && !f.isDirectory()) {
+                    byte[] encoded = Files.readAllBytes(Paths.get(configPath));
+
+                    //ist der Inhalt der Configdatei nicht vorhandne dann parsen wir sie nicht
+                    if (encoded.length > 0) {
+                        String configString = new String(encoded, StandardCharsets.UTF_8);
+                        System.out.println(configPath);
+                        //System.out.println(configString);
+
+                        ObjectMapper mapper =  JsonFactory.create();
+                        MIGCConfig config = mapper.fromJson(configString, MIGCConfig.class);
+                        System.out.println(config);
+
+                        for (Device dev :config.devices) {
+                            this.devices.put(dev.id, dev);
+                        }
+
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    private void saveConfig(){
+        ObjectMapper mapper =  JsonFactory.create();
+        MIGCConfig migcConfig = new MIGCConfig();
+        migcConfig.devices = new ArrayList<>(this.devices.values());
+
+        try {
+            FileOutputStream fos =  new FileOutputStream(new File(configPath));
+            mapper.writeValue(fos, migcConfig);
+
+            System.out.println("saveConfig");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onReceive(Object message) throws Exception {
+        //Liste von Geräten vom Connector
         if (message instanceof FhemJsonList) {
             FhemJsonList fhemJsonList = (FhemJsonList) message;
 
@@ -36,9 +108,20 @@ public class DeviceManagementActor extends UntypedActor {
             }
 
             getSender().tell(new DevicesMessage(devices), getSelf());
+
+            //setzen des neuen Orts für ein Gerät
         } else if(message instanceof SetDeviceLocationMessage){
+
             SetDeviceLocationMessage setDeviceLocationMessage = (SetDeviceLocationMessage) message;
-            devices.get(setDeviceLocationMessage.id).point = setDeviceLocationMessage.point;
+            Device device = devices.get(setDeviceLocationMessage.id);
+            if (device != null) {
+                device.locationX = setDeviceLocationMessage.locationX;
+                device.locationY = setDeviceLocationMessage.locationY;
+                device.locationZ = setDeviceLocationMessage.locationZ;
+            }
+
+            this.saveConfig();
+
         } else if(message instanceof SetAllDevicesMessage){
             FS20State state = ((SetAllDevicesMessage)message).state;
 
@@ -57,9 +140,9 @@ public class DeviceManagementActor extends UntypedActor {
     }
 
     private  void updateFhemDevice(FhemDevice fhemDevice){
-        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
+//        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
 
-            //System.out.println(fhemDevice.getName());
+//            System.out.println(fhemDevice.getName());
             Device device = devices.get(fhemDevice.getName());
 
             if (fhemDevice.getInternals().getSTATE().equals("on")){
@@ -69,12 +152,12 @@ public class DeviceManagementActor extends UntypedActor {
             }
 
             devices.put(device.id, device);
-        }
+//        }
     }
 
 
     private void addFhemDevice(FhemDevice fhemDevice){
-        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
+//        if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
             Device device = new Device();
 
             device.id = fhemDevice.getName();
@@ -90,7 +173,7 @@ public class DeviceManagementActor extends UntypedActor {
             //System.out.println(device.id);
 
             devices.put(device.id, device);
-        }
+//        }
     }
 
 

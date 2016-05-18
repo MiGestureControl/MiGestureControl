@@ -18,7 +18,6 @@ import {Device, DevicesService} from "../services/device.service";
             </li>
         </ul>
 
-
     `
 })
 
@@ -40,7 +39,12 @@ export class DevicesComponent {
 
     add(id: string) {
         this._devicesService.enterEditModeForDevice(id).subscribe(
-            console.log("Einrichtung erfolgt")
+            res => {
+                console.log("Einrichtung erfolgt");
+            },
+            error => {
+                console.log("fehler bei der Einrichtung aufgetretten");
+            }
         );
     }
 
