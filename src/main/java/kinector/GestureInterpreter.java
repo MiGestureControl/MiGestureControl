@@ -30,6 +30,8 @@ public class GestureInterpreter extends UntypedActor {
      * Boolean, der Kennzeichnet, ob sich der Interpreter im Konfigurationsmodus befindet.
      */
     boolean configModeActive = false;
+    ActorRef tempConfigActor;
+
     String currentConfigDevice;
 
     /**
@@ -58,8 +60,8 @@ public class GestureInterpreter extends UntypedActor {
             GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
             if (configModeActive &&
-                    detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll &&
-                    detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
+                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll ||
+                    detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
                 getDevicePosition(skeleton);
             } else {
                 interpretGesture(skeleton, detectedGesture);
@@ -72,6 +74,7 @@ public class GestureInterpreter extends UntypedActor {
         } else if(message instanceof ConfigureDeviceWithIDMessage){
             this.currentConfigDevice = ((ConfigureDeviceWithIDMessage) message).id;
             configModeActive = true;
+            tempConfigActor = getSender();
         }
     }
 
@@ -126,29 +129,35 @@ public class GestureInterpreter extends UntypedActor {
      * @return Erkanntes Gerät
      */
     public Device getDevice(Skeleton skeleton) {
-        Line line = getPointingLine(skeleton);
         Device detectedDevice = null;
+        Line line = getPointingLine(skeleton);
+        double maxAngle = 15;
 
-        double maxAngle = 30;
+        if(line != null) {
+            for (Device device : devices.values()) {
+                if(device.locationX != null &&
+                        device.locationY != null &&
+                        device.locationZ != null) {
 
-        for (Device device : devices.values()) {
-            if(device.locationX != null &&
-                    device.locationY != null &&
-                    device.locationZ != null) {
-                double[] point = new double[3];
-                point[0] = device.locationX;
-                point[1] = device.locationY;
-                point[2] = device.locationZ;
+                    double[] point = new double[3];
+                    point[0] = device.locationX;
+                    point[1] = device.locationY;
+                    point[2] = device.locationZ;
+                    double angleToPoint = Math.abs(line.angleToGivenPoint(point));
 
-                double angleToPoint = Math.abs(line.angleToGivenPoint(point));
-                if (angleToPoint <= maxAngle) {
-                    maxAngle = angleToPoint;
-                    detectedDevice = device;
+                    System.out.println("Angle to Device: " + angleToPoint);
+
+                    if (angleToPoint <= maxAngle) {
+                        maxAngle = angleToPoint;
+                        detectedDevice = device;
+                    }
                 }
             }
+            System.out.println("Detected device: " + detectedDevice);
+            return detectedDevice;
         }
-        System.out.println(detectedDevice);
-        return detectedDevice;
+
+        return null;
     }
 
     /**

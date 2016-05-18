@@ -66,14 +66,9 @@ public class DispatchActor extends UntypedActor {
 
 
             this.deviceManagementActor.tell(message, getSelf());
-//            double[] point = new double[3];
-//            point[0] = 1.0;
-//            point[1] = 1.0;
-//            point[2] = 1.0;
-//            this.deviceManagementActor.tell(new SetDeviceLocationMessage("AllLights", point),getSelf());
 
         }else if(message instanceof DevicesMessage){
-            System.out.println("DevicesMessage");
+            //System.out.println("DevicesMessage");
 
             this.gestureInterpreter.tell(message, getSelf());
 
@@ -113,16 +108,17 @@ public class DispatchActor extends UntypedActor {
 
             System.out.println(((ConfigureDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
-            //this.deviceManagementActor.forward(message, getContext());
-            getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
+            this.gestureInterpreter.forward(message, getContext());
 
-        }else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+        }/*else if (message instanceof ConfigureDeviceFinishedMessage) {
+            this.deviceManagementActor.forward(message, getContext());
+            // Blablabla
 
+        }*/ else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
-
         }
 
         unhandled(message);

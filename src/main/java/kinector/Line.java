@@ -67,11 +67,11 @@ public class Line {
             return new double[]{Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE};
         }
 
-        double[] pqVector = new double[]{givenLine.point[0] - this.point[0],
+        double[] qpVector = new double[]{givenLine.point[0] - this.point[0],
                 givenLine.point[1] - this.point[1],
                 givenLine.point[2] - this.point[2]};
 
-        double firstScalar = VectorHelper.calcScalarProduct(perpendicularVectorToGivenLine, pqVector) /
+        double firstScalar = VectorHelper.calcScalarProduct(perpendicularVectorToGivenLine, qpVector) /
                 VectorHelper.calcScalarProduct(perpendicularVectorToGivenLine, this.vector);
 
         double[] tempVector = VectorHelper.multiplyWithScalar(this.vector, firstScalar);
@@ -86,11 +86,11 @@ public class Line {
             return new double[]{Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE};
         }
 
-        double[] qpVector = new double[]{this.point[0] - givenLine.point[0],
+        double[] pqVector = new double[]{this.point[0] - givenLine.point[0],
                 this.point[1] - givenLine.point[1],
                 this.point[2] - givenLine.point[2]};
 
-        double secondScalar = VectorHelper.calcScalarProduct(perpendicularVectorFromGivenLine, qpVector) /
+        double secondScalar = VectorHelper.calcScalarProduct(perpendicularVectorFromGivenLine, pqVector) /
                 VectorHelper.calcScalarProduct(perpendicularVectorFromGivenLine, givenLine.vector);
 
         tempVector = VectorHelper.multiplyWithScalar(this.vector, secondScalar);
@@ -99,9 +99,9 @@ public class Line {
                 this.point[1] + tempVector[1],
                 this.point[2] + tempVector[2]};
 
-        double[] middlePoint = {(firstPoint[0] + secondPoint[0] / 2),
-                (firstPoint[1] + secondPoint[1] / 2),
-                (firstPoint[2] + secondPoint[2] / 2)};
+        double[] middlePoint = {((firstPoint[0] + secondPoint[0]) / 2),
+                ((firstPoint[1] + secondPoint[1]) / 2),
+                ((firstPoint[2] + secondPoint[2]) / 2)};
         return middlePoint;
     }
 

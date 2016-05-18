@@ -36,7 +36,7 @@ public class DeviceManagementActor extends UntypedActor {
                     '}';
         }
 
-        List<Device> devices = new ArrayList<>();
+        List<Device> devices = new ArrayList<Device>();
     }
 
 //    public DeviceManagementActor() {
@@ -79,7 +79,7 @@ public class DeviceManagementActor extends UntypedActor {
     private void saveConfig(){
         ObjectMapper mapper =  JsonFactory.create();
         MIGCConfig migcConfig = new MIGCConfig();
-        migcConfig.devices = new ArrayList<>(this.devices.values());
+        migcConfig.devices = new ArrayList<Device>(this.devices.values());
 
         try {
             FileOutputStream fos =  new FileOutputStream(new File(configPath));
