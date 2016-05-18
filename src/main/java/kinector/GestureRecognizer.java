@@ -99,10 +99,14 @@ public class GestureRecognizer extends UntypedActor {
         Hand[] handGestures = getHandPosition(skeleton);
 
         // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
-        if (handGestures[0] == Hand.RightHand_Pointer)
+        if (handGestures[0] == Hand.RightHand_Pointer) {
             return new Line(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
-        else
+        }
+        else if (handGestures[1] == Hand.LeftHand_Pointer) {
             return new Line(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
+        }
+
+        return null;
     }
 
     /** Methode zum Ermitteln einer Geste.

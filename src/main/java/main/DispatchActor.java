@@ -63,12 +63,12 @@ public class DispatchActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof FhemJsonList) {
-            System.out.println("FhemJsonList");
+            //System.out.println("FhemJsonList");
 
             this.deviceManagementActor.tell(message, getSelf());
 
         }else if(message instanceof DevicesMessage){
-            System.out.println("DevicesMessage");
+            //System.out.println("DevicesMessage");
 
             this.gestureInterpreter.tell(message, getSelf());
 
@@ -98,9 +98,13 @@ public class DispatchActor extends UntypedActor {
         }else if (message instanceof ConfigureDeviceWithIDMessage) {
             System.out.println(((ConfigureDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
-            //this.deviceManagementActor.forward(message, getContext());
-            getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
-        }else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+            this.gestureInterpreter.forward(message, getContext());
+
+        }/*else if (message instanceof ConfigureDeviceFinishedMessage) {
+            this.deviceManagementActor.forward(message, getContext());
+            // Blablabla
+
+        }*/ else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());

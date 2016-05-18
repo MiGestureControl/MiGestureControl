@@ -6,6 +6,7 @@ import connector.models.FhemJsonList;
 import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
+import messages.ConfigureDeviceFinishedMessage;
 import messages.GetAllDevicesMessage;
 import messages.SetAllDevicesMessage;
 import messages.SetDeviceLocationMessage;
@@ -58,7 +59,7 @@ public class DeviceManagementActor extends UntypedActor {
     private  void updateFhemDevice(FhemDevice fhemDevice){
         if (fhemDevice.getInternals().getTYPE().equals("HUEDevice")){
 
-            System.out.println(fhemDevice.getName());
+            //System.out.println(fhemDevice.getName());
             Device device = devices.get(fhemDevice.getName());
 
             if (fhemDevice.getInternals().getSTATE().equals("on")){

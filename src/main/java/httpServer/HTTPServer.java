@@ -28,7 +28,7 @@ public class HTTPServer extends HttpApp {
 
     private final ActorRef dispatchActor;
     private final ActorSystem system;
-    private final Timeout timeout = new Timeout(Duration.create(5, "seconds"));
+    private final Timeout timeout = new Timeout(Duration.create(30, "seconds"));
 
 
     public HTTPServer(ActorRef dispatchActor, ActorSystem system) {
