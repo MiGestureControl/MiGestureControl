@@ -132,8 +132,8 @@ public class HTTPServer extends HttpApp {
                 pathPrefix("assets").route(
                         getFromResourceDirectory("web/assets/")
                 ),
-                pathPrefix("build").route(
-                        getFromResourceDirectory("web/build/")
+                pathPrefix("dist").route(
+                        getFromResourceDirectory("web/dist/")
                 ),
                 pathPrefix("app").route(
                         getFromResourceDirectory("web/app/")
