@@ -7,10 +7,15 @@ import java.io.Serializable;
  */
 public class SetDeviceLocationMessage implements Serializable {
     public final String id;
-    public final double[] point;
+
+    public Double locationX;
+    public Double locationY;
+    public Double locationZ;
 
     public SetDeviceLocationMessage(String id, double[] point){
         this.id = id;
-        this.point = point;
+        this.locationX = point[0];
+        this.locationY = point[1];
+        this.locationZ = point[2];
     }
 }

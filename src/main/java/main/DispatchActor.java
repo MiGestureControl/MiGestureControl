@@ -29,7 +29,7 @@ public class DispatchActor extends UntypedActor {
             = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
 
     final ActorRef deviceManagementActor
-            = system.actorOf(Props.create(DeviceManagementActor.class), "deviceManagementActor");
+            = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
 
     final ActorRef howToUseDeviceManagementActor
             = system.actorOf(Props.create(deviceManagement.HowToUseDeviceManagementActor.class),  "HowToUseDeviceManagementActor");
@@ -63,9 +63,14 @@ public class DispatchActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof FhemJsonList) {
-            System.out.println("FhemJsonList");
+
 
             this.deviceManagementActor.tell(message, getSelf());
+//            double[] point = new double[3];
+//            point[0] = 1.0;
+//            point[1] = 1.0;
+//            point[2] = 1.0;
+//            this.deviceManagementActor.tell(new SetDeviceLocationMessage("AllLights", point),getSelf());
 
         }else if(message instanceof DevicesMessage){
             System.out.println("DevicesMessage");
@@ -73,16 +78,23 @@ public class DispatchActor extends UntypedActor {
             this.gestureInterpreter.tell(message, getSelf());
 
         }else if(message instanceof SetDeviceStateMessage){
+
             System.out.println("SetDeviceStateMessage");
             System.out.println(((SetDeviceStateMessage) message).deviceID);
             this.fhemConector.tell(message, getSelf());
+
         } else if(message instanceof SetDeviceLocationMessage){
+
             System.out.println("SetDeviceLocationMessage");
             this.deviceManagementActor.tell(message, getSelf());
+
         } else if(message instanceof ConfigureDeviceWithIDMessage) {
+
             System.out.println("ConfigureDeviceWithIDMessage");
             this.gestureInterpreter.tell(message, getSelf());
+
         } else if(message instanceof SetAllDevicesMessage){
+
             if(((SetAllDevicesMessage) message).state != lastDebounceState){
                 if(System.nanoTime() + debounceTime > lastDebounceStartTime ){
                     lastDebounceStartTime = System.nanoTime();
@@ -112,7 +124,6 @@ public class DispatchActor extends UntypedActor {
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
 
         }
-
 
         unhandled(message);
     }

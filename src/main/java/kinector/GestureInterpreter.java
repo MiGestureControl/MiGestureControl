@@ -132,9 +132,15 @@ public class GestureInterpreter extends UntypedActor {
         double maxAngle = 30;
 
         for (Device device : devices.values()) {
-            if(device.point != null) {
+            if(device.locationX != null &&
+                    device.locationY != null &&
+                    device.locationZ != null) {
+                double[] point = new double[3];
+                point[0] = device.locationX;
+                point[1] = device.locationY;
+                point[2] = device.locationZ;
 
-                double angleToPoint = Math.abs(line.angleToGivenPoint(device.point));
+                double angleToPoint = Math.abs(line.angleToGivenPoint(point));
                 if (angleToPoint <= maxAngle) {
                     maxAngle = angleToPoint;
                     detectedDevice = device;

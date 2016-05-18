@@ -17,12 +17,6 @@ public class Main {
         final ActorSystem system = ActorSystem.create("mySystem");
         final ActorRef dispatcher = system.actorOf(Props.create(DispatchActor.class), "Dispatcher");
 
-        try{
-            System.in.read();
-            dispatcher.tell(new ConfigureDeviceWithIDMessage("hue_HUEDevice1"), ActorRef.noSender());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
     }
