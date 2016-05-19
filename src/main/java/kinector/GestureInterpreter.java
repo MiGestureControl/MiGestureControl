@@ -150,38 +150,60 @@ public class GestureInterpreter extends UntypedActor {
 
         // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
         if (handGestures[0] == GestureRecognizer.Hand.RightHand_Pointer) {
+
+            double maxAngle = 15;
             line = getPointingLine(skeleton, GestureRecognizer.Hand.RightHand_Pointer);
-        }
-        else if (handGestures[1] == GestureRecognizer.Hand.LeftHand_Pointer) {
-            line = getPointingLine(skeleton, GestureRecognizer.Hand.LeftHand_Pointer);
-        }
-        double maxAngle = 15;
 
-        if(line != null) {
-            for (Device device : devices.values()) {
-                if(device.locationX != null &&
-                        device.locationY != null &&
-                        device.locationZ != null) {
+            if(line != null) {
+                for (Device device : devices.values()) {
+                    if(device.locationX_Right != null &&
+                            device.locationY_Right != null &&
+                            device.locationZ_Right != null) {
 
-                    double[] point = new double[3];
-                    point[0] = device.locationX;
-                    point[1] = device.locationY;
-                    point[2] = device.locationZ;
-                    double angleToPoint = Math.abs(line.angleToGivenPoint(point));
+                        double[] point = new double[3];
+                        point[0] = device.locationX_Right;
+                        point[1] = device.locationY_Right;
+                        point[2] = device.locationZ_Right;
+                        double angleToPoint = Math.abs(line.angleToGivenPoint(point));
 
-                    //System.out.println("Angle to Device: " + angleToPoint);
+                        if (angleToPoint <= maxAngle) {
 
-                    if (angleToPoint <= maxAngle) {
-
-                        detectedDevice = device;
+                            detectedDevice = device;
+                        }
                     }
                 }
+                System.out.println("Detected device: " + detectedDevice);
+
+                return detectedDevice;
             }
-            System.out.println("Detected device: " + detectedDevice);
+        } else if (handGestures[1] == GestureRecognizer.Hand.LeftHand_Pointer) {
 
-            return detectedDevice;
+            double maxAngle = 15;
+            line = getPointingLine(skeleton, GestureRecognizer.Hand.LeftHand_Pointer);
+
+            if(line != null) {
+                for (Device device : devices.values()) {
+                    if(device.locationX_Left != null &&
+                            device.locationY_Left != null &&
+                            device.locationZ_Left != null) {
+
+                        double[] point = new double[3];
+                        point[0] = device.locationX_Left;
+                        point[1] = device.locationY_Left;
+                        point[2] = device.locationZ_Left;
+                        double angleToPoint = Math.abs(line.angleToGivenPoint(point));
+
+                        if (angleToPoint <= maxAngle) {
+
+                            detectedDevice = device;
+                        }
+                    }
+                }
+                System.out.println("Detected device: " + detectedDevice);
+
+                return detectedDevice;
+            }
         }
-
         return null;
     }
 
@@ -233,10 +255,7 @@ public class GestureInterpreter extends UntypedActor {
                 if(dispatcher != null){
                     dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.LEFT), getSelf());
                 }
-
             }
         }
-
-
     }
 }
