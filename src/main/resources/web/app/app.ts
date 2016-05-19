@@ -69,7 +69,7 @@ declare var System: any;
         name: 'Docs'
     }
     {
-        path: '/devices:id',
+        path: '/device/:id',
         component: DeviceDetailComponent,
         name: 'DeviceDetail'
     }

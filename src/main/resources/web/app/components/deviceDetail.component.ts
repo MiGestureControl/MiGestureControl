@@ -5,7 +5,9 @@ import {Device, DevicesService} from "../services/device.service";
     selector: 'DeviceDetail',
 
     template: `
-        test
+        <div class="container">
+            <h3>test</h3>
+        </div>
 
     `
 })

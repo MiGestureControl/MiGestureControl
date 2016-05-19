@@ -27,8 +27,13 @@ export class DevicesService {
             );
     }
 
-    enterEditModeForDevice(id: string): any {
+    enterRightEditModeForDevice(id: string): any {
         return this._http.get(this.apiBaseUrl + "/" + id, {headers: headers()})
+            .map((res: Response) => res.json());
+    }
+
+    enterLeftEditModeForDevice(id: string): any {
+        return this._http.get(this.apiBaseUrl + "/" + id + "left", {headers: headers()})
             .map((res: Response) => res.json());
     }
 
@@ -46,10 +51,10 @@ export class DevicesService {
 export class Device {
     id: string;
     state: string;
-    locationX_Left:number;
-    locationY_Left:number;
-    locationZ_Left:number;
-    locationX_Right:number;
-    locationY_Right:number;
-    locationZ_Right:number;
+    locationX_Left: number;
+    locationY_Left: number;
+    locationZ_Left: number;
+    locationX_Right: number;
+    locationY_Right: number;
+    locationZ_Right: number;
 }

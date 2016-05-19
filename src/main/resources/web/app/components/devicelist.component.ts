@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
 import {Device, DevicesService} from "../services/device.service";
-import {searchFilterPipe} from "../pipes/searchFilterPipe";
+import {SearchFilterPipe} from "../pipes/searchFilterPipe";
 
 @Component({
     selector: 'Devices',
     pipes: [
-        searchFilterPipe
+        SearchFilterPipe
     ],
     template: `
         <div class="input-field col s6">
@@ -13,18 +13,24 @@ import {searchFilterPipe} from "../pipes/searchFilterPipe";
         </div>
         <ul class="collection">
             <li *ngFor="#device of devices | searchFilter:listFilter.value" class="collection-item avatar">
+
                 <i class="material-icons circle"><i class="material-icons">local_florist</i></i>
-                <span class="title">{{device.id}}</span>
+                <span class="title">
+                    {{device.id}}
+                </span>
+
                 <p>{{device.state}}<br>
                     Second Line
                 </p>
+
                 <div class="secondary-content">
                 <!--<div *ngIf="device.locationX >= 1000.0">-->
-                    <a class="btn-floating btn waves-effect waves-light" (click)="add(device.id)"  ><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn waves-effect waves-light" (click)="addLeft(device.id)"  ><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn waves-effect waves-light" (click)="addRight(device.id)"  ><i class="material-icons">add</i></a>
                 <!--</div>-->
                 <!--<div *ngIf="device.locationX <= 1000.0">-->
-                    <a class="btn-floating btn waves-effect waves-light" (click)="edit(device.id)" ><i class="material-icons">mode_edit</i></a>
-                    <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)" ><i class="material-icons">delete_forever</i></a>
+                    <a href="#/device/{{device.id}}" class="btn-floating btn waves-effect waves-light"><i class="material-icons">mode_edit</i></a>
+                    <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)"  ><i class="material-icons">delete_forever</i></a>
                 <!--</div>-->
 
                 </div>
@@ -50,8 +56,19 @@ export class DevicesComponent {
         this.interval = setInterval(() => this._devicesService.load(), 5000 );
     }
 
-    add(id: string) {
-        this._devicesService.enterEditModeForDevice(id).subscribe(
+    addRight(id: string) {
+        this._devicesService.enterRightEditModeForDevice(id).subscribe(
+            res => {
+                console.log("Einrichtung erfolgt");
+            },
+            error => {
+                console.log("fehler bei der Einrichtung aufgetretten");
+            }
+        );
+    }
+
+    addLeft(id: string) {
+        this._devicesService.enterLeftEditModeForDevice(id).subscribe(
             res => {
                 console.log("Einrichtung erfolgt");
             },
