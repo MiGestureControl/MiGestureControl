@@ -174,7 +174,7 @@ public class HTTPServer extends HttpApp {
                                         delete(handleWith(removeLocationForDeviceWithIDHandler, deviceId))
                                 ),
                                 path("devicesleft", deviceId).route(
-                                        get(handleWith(configureLeftHandLocationForDeviceWithIDHandler, deviceId)),
+                                        get(handleWith(configureLeftHandLocationForDeviceWithIDHandler, deviceId))
                                 )
                         )
 

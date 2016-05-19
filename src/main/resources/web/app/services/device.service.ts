@@ -15,7 +15,7 @@ export class DevicesService {
     constructor(private _http: Http) {}
     
     public load() {
-        return this._http.get(this.apiBaseUrl, {headers: headers()})
+        return this._http.get(this.apiBaseUrl + "/devices", {headers: headers()})
             .map((res: Response) => res.json())
             .subscribe(
                 (devices: Device[]) => {

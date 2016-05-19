@@ -47,7 +47,7 @@ webpackJsonp([0],{
 	    }
 	    DevicesService.prototype.load = function () {
 	        var _this = this;
-	        return this._http.get(this.apiBaseUrl, { headers: comon_1.headers() })
+	        return this._http.get(this.apiBaseUrl + "/devices", { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); })
 	            .subscribe(function (devices) {
 	            _this.setDevices(devices);
