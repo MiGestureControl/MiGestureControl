@@ -8,24 +8,24 @@ import {Device, DevicesService} from "../services/device.service";
             <h3>test</h3>
             <div class="row">
                 <div class="col s6 m12">
-                    <div class="card blue-grey lighten-2">
-                        <div class="card-content white-text">
+                    <div class="card">
+                        <div class="card-content">
                             <span class="card-title">Linke Hand konfigurieren</span>
                             <p>I am a very simple card. I am good at containing small bits of information.
                             I am convenient because I require little markup to use effectively.</p>
                         </div>
                         <div class="card-action">
-                          <a class="btn-floating btn waves-effect waves-light" (click)="addLeft(device.id)"  ><i class="material-icons">add</i></a>
+                          <a class="waves-effect waves-light btn" (click)="addLeft(device.id)"  ><i class="material-icons">add</i></a>
                         </div>
                     </div>
-                    <div class="card blue-grey lighten-2">
-                        <div class="card-content white-text">
+                    <div class="card">
+                        <div class="card-content">
                             <span class="card-title">Rechte Hand konfigurieren</span>
                             <p>I am a very simple card. I am good at containing small bits of information.
                             I am convenient because I require little markup to use effectively.</p>
                         </div>
                         <div class="card-action">
-                            <a class="btn-floating btn waves-effect waves-light" (click)="addRight(device.id)"  ><i class="material-icons">add</i></a>
+                            <a class="waves-effect waves-light btn" (click)="addRight(device.id)"  ><i class="material-icons">add</i></a>
                         </div>
                     </div>
                 </div>

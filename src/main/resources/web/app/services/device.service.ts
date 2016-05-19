@@ -33,7 +33,7 @@ export class DevicesService {
     }
 
     enterLeftEditModeForDevice(id: string): any {
-        return this._http.get(this.apiBaseUrl + "/" + id + "left", {headers: headers()})
+        return this._http.get(this.apiBaseUrl + "/" + id + "/left", {headers: headers()})
             .map((res: Response) => res.json());
     }
 
