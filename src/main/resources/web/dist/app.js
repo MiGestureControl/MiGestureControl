@@ -60,7 +60,7 @@ webpackJsonp([0],{
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.enterLeftEditModeForDevice = function (id) {
-	        return this._http.get(this.apiBaseUrl + "/" + id + "left", { headers: comon_1.headers() })
+	        return this._http.get(this.apiBaseUrl + "/" + id + "/left", { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.deleteDevice = function (id) {
@@ -1508,13 +1508,6 @@ webpackJsonp([0],{
 	            console.log("fehler beim löschen aufgetretten");
 	        });
 	    };
-	    DevicesComponent.prototype.edit = function (id) {
-	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
-	            console.log("Einrichtung erfolgt");
-	        }, function (error) {
-	            console.log("fehler bei der Einrichtung aufgetretten");
-	        });
-	    };
 	    DevicesComponent = __decorate([
 	        core_1.Component({
 	            selector: 'Devices',
@@ -1622,8 +1615,15 @@ webpackJsonp([0],{
 	        this._devicesService.load();
 	        this.interval = setInterval(function () { return _this._devicesService.load(); }, 5000);
 	    }
-	    DeviceDetailComponent.prototype.add = function (id) {
-	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
+	    DeviceDetailComponent.prototype.addRight = function (id) {
+	        this._devicesService.enterRightEditModeForDevice(id).subscribe(function (res) {
+	            console.log("Einrichtung erfolgt");
+	        }, function (error) {
+	            console.log("fehler bei der Einrichtung aufgetretten");
+	        });
+	    };
+	    DeviceDetailComponent.prototype.addLeft = function (id) {
+	        this._devicesService.enterLeftEditModeForDevice(id).subscribe(function (res) {
 	            console.log("Einrichtung erfolgt");
 	        }, function (error) {
 	            console.log("fehler bei der Einrichtung aufgetretten");
@@ -1636,17 +1636,10 @@ webpackJsonp([0],{
 	            console.log("fehler beim löschen aufgetretten");
 	        });
 	    };
-	    DeviceDetailComponent.prototype.edit = function (id) {
-	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
-	            console.log("Einrichtung erfolgt");
-	        }, function (error) {
-	            console.log("fehler bei der Einrichtung aufgetretten");
-	        });
-	    };
 	    DeviceDetailComponent = __decorate([
 	        core_1.Component({
 	            selector: 'DeviceDetail',
-	            template: "\n        <div class=\"container\">\n            <h3>test</h3>\n        </div>\n\n    "
+	            template: "\n            <h3>test</h3>\n            <div class=\"row\">\n                <div class=\"col s6 m12\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DeviceDetailComponent);
