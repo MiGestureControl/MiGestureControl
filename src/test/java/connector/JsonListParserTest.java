@@ -25,10 +25,10 @@ public class JsonListParserTest {
         this.toPase =  new String(encoded, StandardCharsets.UTF_8);
     }
 
-    @Test
-    public void testParseList() throws Exception {
-        //System.out.println(toPase);
-        boolean bool = JsonListParser.parseList(this.toPase);
-        assertTrue(bool);
-    }
+//    @Test
+//    public void testParseList() throws Exception {
+//        //System.out.println(toPase);
+//        boolean bool = JsonListParser.parseList(this.toPase);
+//        assertTrue(bool);
+//    }
 }
