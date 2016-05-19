@@ -30,7 +30,7 @@ public class Kinector extends J4KSDK {
 
     @Override
     public void onDepthFrameEvent(short[] depthFrame, byte[] arg1, float[] arg2, float[] arg3) {
-        actor.tell(new DepthImageMessage(depthFrame),ActorRef.noSender());
+        //actor.tell(new DepthImageMessage(depthFrame),ActorRef.noSender());
     }
 
     @Override

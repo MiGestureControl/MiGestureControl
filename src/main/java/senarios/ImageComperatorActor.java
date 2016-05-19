@@ -27,6 +27,8 @@ public class ImageComperatorActor extends UntypedActor {
             }
         }
         System.out.println(distance);
+
+        return distance;
     }
 
 
@@ -34,22 +36,17 @@ public class ImageComperatorActor extends UntypedActor {
         int videoWidth = 0;
         int videoHeight = 0;
 
+
         float[][] sig = new float[5][5];
 
-
-        if (depthFrame.length == 320 * 240 * 4) {
-            videoWidth = 320;
-            videoHeight = 240;
-        } else if (depthFrame.length == 640 * 480 * 4) {
-            videoWidth = 640;
-            videoHeight = 480;
-        }
+        videoWidth = 512;
+        videoHeight = 424;
 
         short[][] depthImage = new short[videoWidth][videoHeight];
 
         for (int w = 0; w < videoWidth; w++){
-            for (int h = 0; h < videoWidth; h++){
-                depthImage[w][h] = depthFrame[w*videoWidth * w];
+            for (int h = 0; h < videoHeight; h++){
+                depthImage[w][h] = depthFrame[h*videoWidth + w];
             }
         }
 
@@ -71,6 +68,8 @@ public class ImageComperatorActor extends UntypedActor {
 
                 int chopWidth = videoWidth / 5;
                 int chopHeight = videoHeight / 5;
+
+
 
                 //Duchschnittbilden
                 for (int w = chopWidth*x; w < videoWidth || w < chopWidth*x+1; w++){
