@@ -5,10 +5,31 @@ import {Device, DevicesService} from "../services/device.service";
     selector: 'DeviceDetail',
 
     template: `
-        <div class="container">
             <h3>test</h3>
-        </div>
-
+            <div class="row">
+                <div class="col s6 m12">
+                    <div class="card blue-grey lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Linke Hand konfigurieren</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                          <a class="btn-floating btn waves-effect waves-light" (click)="addLeft(device.id)"  ><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                    <div class="card blue-grey lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Rechte Hand konfigurieren</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-floating btn waves-effect waves-light" (click)="addRight(device.id)"  ><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
     `
 })
 
@@ -28,8 +49,19 @@ export class DeviceDetailComponent {
         this.interval = setInterval(() => this._devicesService.load(), 5000 );
     }
 
-    add(id: string) {
-        this._devicesService.enterEditModeForDevice(id).subscribe(
+    addRight(id: string) {
+        this._devicesService.enterRightEditModeForDevice(id).subscribe(
+            res => {
+                console.log("Einrichtung erfolgt");
+            },
+            error => {
+                console.log("fehler bei der Einrichtung aufgetretten");
+            }
+        );
+    }
+
+    addLeft(id: string) {
+        this._devicesService.enterLeftEditModeForDevice(id).subscribe(
             res => {
                 console.log("Einrichtung erfolgt");
             },
@@ -46,17 +78,6 @@ export class DeviceDetailComponent {
             },
             error => {
                 console.log("fehler beim löschen aufgetretten");
-            }
-        );
-    }
-
-    edit(id: string) {
-        this._devicesService.enterEditModeForDevice(id).subscribe(
-            res => {
-                console.log("Einrichtung erfolgt");
-            },
-            error => {
-                console.log("fehler bei der Einrichtung aufgetretten");
             }
         );
     }

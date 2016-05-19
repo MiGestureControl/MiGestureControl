@@ -89,14 +89,4 @@ export class DevicesComponent {
         );
     }
 
-    edit(id: string) {
-        this._devicesService.enterEditModeForDevice(id).subscribe(
-            res => {
-                console.log("Einrichtung erfolgt");
-            },
-            error => {
-                console.log("fehler bei der Einrichtung aufgetretten");
-            }
-        );
-    }
 }

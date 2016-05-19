@@ -55,8 +55,12 @@ webpackJsonp([0],{
 	            console.log(error);
 	        });
 	    };
-	    DevicesService.prototype.enterEditModeForDevice = function (id) {
+	    DevicesService.prototype.enterRightEditModeForDevice = function (id) {
 	        return this._http.get(this.apiBaseUrl + "/" + id, { headers: comon_1.headers() })
+	            .map(function (res) { return res.json(); });
+	    };
+	    DevicesService.prototype.enterLeftEditModeForDevice = function (id) {
+	        return this._http.get(this.apiBaseUrl + "/" + id + "left", { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.deleteDevice = function (id) {
@@ -160,7 +164,7 @@ webpackJsonp([0],{
 	                name: 'Docs'
 	            },
 	            {
-	                path: '/devices:id',
+	                path: '/device/:id',
 	                component: deviceDetail_component_1.DeviceDetailComponent,
 	                name: 'DeviceDetail'
 	            }
@@ -1483,8 +1487,15 @@ webpackJsonp([0],{
 	        this._devicesService.load();
 	        this.interval = setInterval(function () { return _this._devicesService.load(); }, 5000);
 	    }
-	    DevicesComponent.prototype.add = function (id) {
-	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
+	    DevicesComponent.prototype.addRight = function (id) {
+	        this._devicesService.enterRightEditModeForDevice(id).subscribe(function (res) {
+	            console.log("Einrichtung erfolgt");
+	        }, function (error) {
+	            console.log("fehler bei der Einrichtung aufgetretten");
+	        });
+	    };
+	    DevicesComponent.prototype.addLeft = function (id) {
+	        this._devicesService.enterLeftEditModeForDevice(id).subscribe(function (res) {
 	            console.log("Einrichtung erfolgt");
 	        }, function (error) {
 	            console.log("fehler bei der Einrichtung aufgetretten");
@@ -1508,9 +1519,9 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: 'Devices',
 	            pipes: [
-	                searchFilterPipe_1.searchFilterPipe
+	                searchFilterPipe_1.SearchFilterPipe
 	            ],
-	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">{{device.id}}</span>\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n                <div class=\"secondary-content\">\n                <!--<div *ngIf=\"device.locationX >= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"add(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                <!--</div>-->\n                <!--<div *ngIf=\"device.locationX <= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\" ><i class=\"material-icons\">delete_forever</i></a>\n                <!--</div>-->\n\n                </div>\n            </li>\n        </ul>\n\n    "
+	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">\n                    {{device.id}}\n                </span>\n\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n\n                <div class=\"secondary-content\">\n                <!--<div *ngIf=\"device.locationX >= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"addLeft(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"addRight(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                <!--</div>-->\n                <!--<div *ngIf=\"device.locationX <= 1000.0\">-->\n                    <a href=\"#/device/{{device.id}}\" class=\"btn-floating btn waves-effect waves-light\"><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\"  ><i class=\"material-icons\">delete_forever</i></a>\n                <!--</div>-->\n\n                </div>\n            </li>\n        </ul>\n\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DevicesComponent);
@@ -1535,20 +1546,20 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(24);
-	var searchFilterPipe = (function () {
-	    function searchFilterPipe() {
+	var SearchFilterPipe = (function () {
+	    function SearchFilterPipe() {
 	    }
-	    searchFilterPipe.prototype.transform = function (all, args) {
+	    SearchFilterPipe.prototype.transform = function (all, args) {
 	        var toFilter = args[0].toLocaleLowerCase();
 	        return all.filter(function (device) { return device.id.toLocaleLowerCase().indexOf(toFilter) !== -1; });
 	    };
-	    searchFilterPipe = __decorate([
+	    SearchFilterPipe = __decorate([
 	        core_1.Pipe({ name: 'searchFilter' }), 
 	        __metadata('design:paramtypes', [])
-	    ], searchFilterPipe);
-	    return searchFilterPipe;
+	    ], SearchFilterPipe);
+	    return SearchFilterPipe;
 	}());
-	exports.searchFilterPipe = searchFilterPipe;
+	exports.SearchFilterPipe = SearchFilterPipe;
 
 
 /***/ },
@@ -1635,7 +1646,7 @@ webpackJsonp([0],{
 	    DeviceDetailComponent = __decorate([
 	        core_1.Component({
 	            selector: 'DeviceDetail',
-	            template: "\n        test\n\n    "
+	            template: "\n        <div class=\"container\">\n            <h3>test</h3>\n        </div>\n\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DeviceDetailComponent);
