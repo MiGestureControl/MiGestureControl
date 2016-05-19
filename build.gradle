@@ -42,3 +42,25 @@ task runMain(type: JavaExec) {
     main = 'main.Main'
     classpath = sourceSets.main.runtimeClasspath
 }
+
+jar {
+
+    archiveName = "yourjar.jar"
+
+    from {
+
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
