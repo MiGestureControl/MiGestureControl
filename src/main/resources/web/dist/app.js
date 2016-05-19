@@ -42,12 +42,12 @@ webpackJsonp([0],{
 	        this._http = _http;
 	        this.devicesSubject = new Subject_1.Subject();
 	        this.deviceEditSubject = new Subject_1.Subject();
-	        this.apiBaseUrl = 'api/v1/devices';
+	        this.apiBaseUrl = 'api/v1';
 	        this._devices = [];
 	    }
 	    DevicesService.prototype.load = function () {
 	        var _this = this;
-	        return this._http.get(this.apiBaseUrl, { headers: comon_1.headers() })
+	        return this._http.get(this.apiBaseUrl + "/devices", { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); })
 	            .subscribe(function (devices) {
 	            _this.setDevices(devices);
@@ -56,15 +56,15 @@ webpackJsonp([0],{
 	        });
 	    };
 	    DevicesService.prototype.enterRightEditModeForDevice = function (id) {
-	        return this._http.get(this.apiBaseUrl + "/" + id, { headers: comon_1.headers() })
+	        return this._http.get(this.apiBaseUrl + "/devices/" + id, { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.enterLeftEditModeForDevice = function (id) {
-	        return this._http.get(this.apiBaseUrl + "/" + id + "/left", { headers: comon_1.headers() })
+	        return this._http.get(this.apiBaseUrl + "/devicesleft/" + id, { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.deleteDevice = function (id) {
-	        return this._http.delete(this.apiBaseUrl + "/" + id, { headers: comon_1.headers() })
+	        return this._http.delete(this.apiBaseUrl + "/devices/" + id, { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
 	    DevicesService.prototype.setDevices = function (devices) {
@@ -1603,9 +1603,11 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(24);
 	var device_service_1 = __webpack_require__(244);
+	var router_1 = __webpack_require__(246);
 	var DeviceDetailComponent = (function () {
-	    function DeviceDetailComponent(_devicesService) {
+	    function DeviceDetailComponent(_routeParams, _devicesService) {
 	        var _this = this;
+	        this._routeParams = _routeParams;
 	        this._devicesService = _devicesService;
 	        this.devices = [];
 	        this._devicesService.devicesSubject
@@ -1641,7 +1643,7 @@ webpackJsonp([0],{
 	            selector: 'DeviceDetail',
 	            template: "\n            <h3>test</h3>\n            <div class=\"row\">\n                <div class=\"col s6 m12\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    "
 	        }), 
-	        __metadata('design:paramtypes', [device_service_1.DevicesService])
+	        __metadata('design:paramtypes', [router_1.RouteParams, device_service_1.DevicesService])
 	    ], DeviceDetailComponent);
 	    return DeviceDetailComponent;
 	}());

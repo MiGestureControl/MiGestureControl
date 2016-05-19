@@ -9,13 +9,13 @@ export class DevicesService {
     devicesSubject: Subject<Array<Device>> = new Subject<Array<Device>>();
     deviceEditSubject: Subject<Device> = new Subject<Device>();
 
-    private apiBaseUrl: string = 'api/v1/devices';
+    private apiBaseUrl: string = 'api/v1';
     private _devices: Array<Device> = [];
     
     constructor(private _http: Http) {}
     
     public load() {
-        return this._http.get(this.apiBaseUrl, {headers: headers()})
+        return this._http.get(this.apiBaseUrl + "/devices", {headers: headers()})
             .map((res: Response) => res.json())
             .subscribe(
                 (devices: Device[]) => {
@@ -28,17 +28,17 @@ export class DevicesService {
     }
 
     enterRightEditModeForDevice(id: string): any {
-        return this._http.get(this.apiBaseUrl + "/" + id, {headers: headers()})
+        return this._http.get(this.apiBaseUrl + "/devices/" + id, {headers: headers()})
             .map((res: Response) => res.json());
     }
 
     enterLeftEditModeForDevice(id: string): any {
-        return this._http.get(this.apiBaseUrl + "/" + id + "/left", {headers: headers()})
+        return this._http.get(this.apiBaseUrl + "/devicesleft/" + id , {headers: headers()})
             .map((res: Response) => res.json());
     }
 
     deleteDevice(id: string): any {
-        return this._http.delete(this.apiBaseUrl + "/" + id, {headers: headers()})
+        return this._http.delete(this.apiBaseUrl + "/devices/" + id, {headers: headers()})
             .map((res: Response) => res.json());
     }
 
