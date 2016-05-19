@@ -15,6 +15,7 @@ import kinector.GestureRecognizer;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
+import senarios.ImageComperatorActor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,13 +32,14 @@ public class DispatchActor extends UntypedActor {
     final ActorRef deviceManagementActor
             = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
 
-    final ActorRef howToUseDeviceManagementActor
-            = system.actorOf(Props.create(deviceManagement.HowToUseDeviceManagementActor.class),  "HowToUseDeviceManagementActor");
+    final ActorRef imageComperatorActor
+            = system.actorOf(Props.create(ImageComperatorActor.class), "imageComperatorActor");
 
     final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
     final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
-    final Kinector kinector = new Kinector(gestureRecognizer);
+
+    final Kinector kinector = new Kinector(getSelf());
 
     FS20State lastDebounceState;
     long lastDebounceStartTime;
@@ -100,25 +102,37 @@ public class DispatchActor extends UntypedActor {
                 lastDebounceState = ((SetAllDevicesMessage) message).state;
             }
 
-        }else if (message instanceof GetAllDevicesMessage) {
+        } else if (message instanceof GetAllDevicesMessage) {
 
             this.deviceManagementActor.forward(message, getContext());
 
-        }else if (message instanceof ConfigureDeviceWithIDMessage) {
+        } else if (message instanceof ConfigureDeviceWithIDMessage) {
 
             System.out.println(((ConfigureDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             this.gestureInterpreter.forward(message, getContext());
 
-        }/*else if (message instanceof ConfigureDeviceFinishedMessage) {
+        }
+        /*else if (message instanceof ConfigureDeviceFinishedMessage) {
             this.deviceManagementActor.forward(message, getContext());
             // Blablabla
 
-        }*/ else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+        }*/
+        else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
+
+        } else if (message instanceof DepthImageMessage) {
+
+            imageComperatorActor.tell(message, getSelf());
+
+        } else if (message instanceof SkeletonMessage) {
+
+            this.gestureRecognizer.tell(message, getSelf());
+
         }
 
         unhandled(message);
