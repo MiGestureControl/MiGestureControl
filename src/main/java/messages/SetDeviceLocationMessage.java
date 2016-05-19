@@ -15,6 +15,16 @@ public class SetDeviceLocationMessage implements Serializable {
     public final Double locationZ;
 
 
+    @Override
+    public String toString() {
+        return "SetDeviceLocationMessage{" +
+                "id='" + id + '\'' +
+                ", hand=" + hand +
+                ", locationX=" + locationX +
+                ", locationY=" + locationY +
+                ", locationZ=" + locationZ +
+                '}';
+    }
 
     public SetDeviceLocationMessage(String id, double[] point, Hand hand){
         this.id = id;

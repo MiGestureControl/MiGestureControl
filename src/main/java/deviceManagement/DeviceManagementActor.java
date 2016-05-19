@@ -115,15 +115,19 @@ public class DeviceManagementActor extends UntypedActor {
 
             SetDeviceLocationMessage setDeviceLocationMessage = (SetDeviceLocationMessage) message;
             Device device = devices.get(setDeviceLocationMessage.id);
+            System.out.println(setDeviceLocationMessage);
             if (device != null) {
                 if (setDeviceLocationMessage.hand == Hand.LEFT){
                     device.locationX_Left = setDeviceLocationMessage.locationX;
                     device.locationY_Left = setDeviceLocationMessage.locationY;
                     device.locationZ_Left = setDeviceLocationMessage.locationZ;
+                    System.out.println("left");
+
                 } else {
                     device.locationX_Right = setDeviceLocationMessage.locationX;
                     device.locationY_Right = setDeviceLocationMessage.locationY;
                     device.locationZ_Right = setDeviceLocationMessage.locationZ;
+                    System.out.println("right");
                 }
 
             }
