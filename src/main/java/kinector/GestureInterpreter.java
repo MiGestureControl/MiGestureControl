@@ -6,10 +6,7 @@ import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
 import edu.ufl.digitalworlds.j4k.Skeleton;
-import messages.ConfigureDeviceWithIDMessage;
-import messages.GestureMessage;
-import messages.SetAllDevicesMessage;
-import messages.SetDeviceLocationMessage;
+import messages.*;
 
 import java.util.Hashtable;
 
@@ -29,15 +26,20 @@ public class GestureInterpreter extends UntypedActor {
     /**
      * Boolean, der Kennzeichnet, ob sich der Interpreter im Konfigurationsmodus befindet.
      */
-    boolean configModeActive = false;
-    ActorRef tempConfigActor;
-
-    String currentConfigDevice;
+    boolean HandConfigModeActive_RightHand = false;
+    boolean HandConfigModeActive_LeftHand = false;
 
     /**
      * Zwischengespeicherte Line zum Bestimmen einer Geräte-Position.
      */
-    private Line savedConfigLine;
+    private Line savedConfigLine_Right;
+    private Line savedConfigLine_Left;
+
+    ActorRef tempConfigActor;
+
+    String currentConfigDevice;
+
+
 
     /**
      * Aktor-Methode zum Empfangen von Aktor-Nachrichten.
@@ -59,12 +61,19 @@ public class GestureInterpreter extends UntypedActor {
             // Empfangene Gesten-Daten
             GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
-            if (configModeActive &&
+            // Abrufen der Hand-Gesten
+            GestureRecognizer.Hand[] handGestures = GestureRecognizer.getHandPosition(skeleton);
+
+            if (HandConfigModeActive_RightHand &&
                     (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll ||
                     detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
-                getDevicePosition(skeleton);
+                getDevicePosition(skeleton, handGestures);
+            } else if(HandConfigModeActive_LeftHand &&
+                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll ||
+                            detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
+                getDevicePosition(skeleton, handGestures);
             } else {
-                interpretGesture(skeleton, detectedGesture);
+                interpretGesture(skeleton, detectedGesture, handGestures);
             }
         } else if(message instanceof DevicesMessage){
             if(dispatcher == null){
@@ -73,8 +82,15 @@ public class GestureInterpreter extends UntypedActor {
             devices = ((DevicesMessage) message).devices;
         } else if(message instanceof ConfigureDeviceWithIDMessage){
             this.currentConfigDevice = ((ConfigureDeviceWithIDMessage) message).id;
-            configModeActive = true;
             tempConfigActor = getSender();
+
+            if(((ConfigureDeviceWithIDMessage) message).hand == Hand.RIGHT){
+                HandConfigModeActive_RightHand = true;
+            }
+
+            else if(((ConfigureDeviceWithIDMessage) message).hand == Hand.LEFT){
+                HandConfigModeActive_LeftHand = true;
+            }
         }
     }
 
@@ -88,9 +104,9 @@ public class GestureInterpreter extends UntypedActor {
      * @param skeleton Empfangene Skelett-Daten
      * @param gesture  Empfangene Gesten-Daten
      */
-    private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture) {
+    private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, GestureRecognizer.Hand[] handGestures) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            Device device = getDevice(skeleton);
+            Device device = getDevice(skeleton, handGestures);
             if (device != null) {
                 switch (gesture) {
                     case LeftHand_PointingTowardsDevice_DefaultActivate:
@@ -128,9 +144,17 @@ public class GestureInterpreter extends UntypedActor {
      * @param skeleton Empfangene Skelett-Daten
      * @return Erkanntes Gerät
      */
-    public Device getDevice(Skeleton skeleton) {
+    public Device getDevice(Skeleton skeleton, GestureRecognizer.Hand[] handGestures) {
         Device detectedDevice = null;
-        Line line = getPointingLine(skeleton);
+        Line line = null;
+
+        // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
+        if (handGestures[0] == GestureRecognizer.Hand.RightHand_Pointer) {
+            line = getPointingLine(skeleton, GestureRecognizer.Hand.RightHand_Pointer);
+        }
+        else if (handGestures[1] == GestureRecognizer.Hand.LeftHand_Pointer) {
+            line = getPointingLine(skeleton, GestureRecognizer.Hand.LeftHand_Pointer);
+        }
         double maxAngle = 15;
 
         if(line != null) {
@@ -145,15 +169,16 @@ public class GestureInterpreter extends UntypedActor {
                     point[2] = device.locationZ;
                     double angleToPoint = Math.abs(line.angleToGivenPoint(point));
 
-                    System.out.println("Angle to Device: " + angleToPoint);
+                    //System.out.println("Angle to Device: " + angleToPoint);
 
                     if (angleToPoint <= maxAngle) {
-                        maxAngle = angleToPoint;
+
                         detectedDevice = device;
                     }
                 }
             }
             System.out.println("Detected device: " + detectedDevice);
+
             return detectedDevice;
         }
 
@@ -170,22 +195,48 @@ public class GestureInterpreter extends UntypedActor {
      * @param skeleton Empfangene Skelett-Daten
      * @return Erkanntes Gerät
      */
-    private void getDevicePosition(Skeleton skeleton) {
-        Line line = getPointingLine(skeleton);
-        if (savedConfigLine == null) {
-            savedConfigLine = line;
-            System.out.println("Erste Linie gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
-        } else {
-            double[] point = line.calcLineIntersection(savedConfigLine);
-            System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
-            savedConfigLine = null;
-            configModeActive = false;
+    private void getDevicePosition(Skeleton skeleton, GestureRecognizer.Hand[] handGestures) {
 
-            // deviceList.addDevice(new Device("demoDevice", point));
-            if(dispatcher != null){
-                dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point), getSelf());
+        // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
+        if (handGestures[0] == GestureRecognizer.Hand.RightHand_Pointer) {
+            Line line = getPointingLine(skeleton, GestureRecognizer.Hand.RightHand_Pointer);
+
+            if (savedConfigLine_Right == null) {
+                savedConfigLine_Right = line;
+                System.out.println("Erste Linie (rechte Hand) gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
+            } else {
+
+                double[] point = savedConfigLine_Right.calcLineIntersection(line);
+                System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
+                savedConfigLine_Right = null;
+                HandConfigModeActive_RightHand = false;
+
+                if(dispatcher != null){
+                    dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.RIGHT), getSelf());
+                }
+
             }
-
         }
+        else if (handGestures[1] == GestureRecognizer.Hand.LeftHand_Pointer) {
+            Line line = getPointingLine(skeleton, GestureRecognizer.Hand.LeftHand_Pointer);
+
+            if (savedConfigLine_Left == null) {
+                savedConfigLine_Left = line;
+                System.out.println("Erste Linie (linke Hand) gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
+            } else {
+
+                double[] point = savedConfigLine_Left.calcLineIntersection(line);
+                System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
+                savedConfigLine_Left = null;
+                HandConfigModeActive_LeftHand = false;
+
+                if(dispatcher != null){
+                    dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.LEFT), getSelf());
+                }
+
+            }
+        }
+
+
     }
 }

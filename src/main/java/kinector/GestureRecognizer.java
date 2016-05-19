@@ -93,16 +93,23 @@ public class GestureRecognizer extends UntypedActor {
      * @param skeleton Skelett-Daten zum Ermitteln einer Line
      * @return Neue Line, die anhand der Skelett-Daten ermittelt wurde
      */
-    public static Line getPointingLine(Skeleton skeleton)
+    public static Line getPointingLine(Skeleton skeleton, Hand handGesture)
     {
         // Bestimmen der Hand-Position anhand des Skelettes
-        Hand[] handGestures = getHandPosition(skeleton);
+        //Hand[] handGestures = getHandPosition(skeleton);
 
         // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
-        if (handGestures[0] == Hand.RightHand_Pointer) {
+        /*if (handGestures[0] == Hand.RightHand_Pointer) {
             return new Line(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
         }
         else if (handGestures[1] == Hand.LeftHand_Pointer) {
+            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
+        }*/
+
+        if (handGesture == Hand.RightHand_Pointer) {
+            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
+        }
+        else if (handGesture == Hand.LeftHand_Pointer) {
             return new Line(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
         }
 

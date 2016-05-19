@@ -37,7 +37,6 @@ public class Device implements Switcheble{
                 '}';
     }
 
-
     @Override
     public SetDeviceStateMessage turnOff() {
         return new SetDeviceStateMessage(this.id, "off");

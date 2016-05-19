@@ -8,14 +8,19 @@ import java.io.Serializable;
 public class SetDeviceLocationMessage implements Serializable {
     public final String id;
 
-    public Double locationX;
-    public Double locationY;
-    public Double locationZ;
+    public final Hand hand;
 
-    public SetDeviceLocationMessage(String id, double[] point){
+    public final Double locationX;
+    public final Double locationY;
+    public final Double locationZ;
+
+
+
+    public SetDeviceLocationMessage(String id, double[] point, Hand hand){
         this.id = id;
         this.locationX = point[0];
         this.locationY = point[1];
         this.locationZ = point[2];
+        this.hand = hand;
     }
 }
