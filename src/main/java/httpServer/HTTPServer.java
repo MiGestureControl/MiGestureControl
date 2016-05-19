@@ -68,13 +68,38 @@ public class HTTPServer extends HttpApp {
             }
         };
 
-        Handler configureLocationForDeviceWithIDHandler = new Handler() {
+        Handler configureRigthHandLocationForDeviceWithIDHandler = new Handler() {
             @Override
             public RouteResult apply(RequestContext ctx) {
                 try {
                     final String id = deviceId.get(ctx);
                     Future<Object> future
                             = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.RIGHT), timeout);
+
+                    Object result =  Await.result(future, timeout.duration());
+
+                    System.out.println(result);
+                    if (result instanceof ConfigureDeviceFinishedMessage){
+
+                        return ctx.complete(MediaTypes.APPLICATION_JSON.toContentType(), "{\"status\": \"ok\"} ");
+
+                    }
+                    return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
+                }
+            }
+        };
+
+        Handler configureLeftHandLocationForDeviceWithIDHandler = new Handler() {
+            @Override
+            public RouteResult apply(RequestContext ctx) {
+                try {
+                    final String id = deviceId.get(ctx);
+                    Future<Object> future
+                            = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.LEFT), timeout);
 
                     Object result =  Await.result(future, timeout.duration());
 
@@ -142,12 +167,12 @@ public class HTTPServer extends HttpApp {
                                 ),
                                 path("devices", deviceId).route(
                                         path("left").route(
-                                            get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
+                                            get(handleWith(configureRigthHandLocationForDeviceWithIDHandler, deviceId))
                                         ),
                                         path("right").route(
-                                                get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
+                                                get(handleWith(configureLeftHandLocationForDeviceWithIDHandler, deviceId))
                                         ),
-                                        get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
+                                        get(handleWith(configureRigthHandLocationForDeviceWithIDHandler, deviceId)),
                                         delete(handleWith(removeLocationForDeviceWithIDHandler, deviceId))
                                 )
                         )

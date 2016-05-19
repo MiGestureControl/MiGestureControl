@@ -15,21 +15,28 @@ public class Device implements Switcheble{
 
     public FS20State state;
 
-    public Double locationX = 0.0;
-    public Double locationY = 0.0;
-    public Double locationZ = 0.0;
+    public Double locationX_Left = Double.MAX_VALUE;
+    public Double locationY_Left = Double.MAX_VALUE;
+    public Double locationZ_Left = Double.MAX_VALUE;
 
+    public Double locationX_Right = Double.MAX_VALUE;
+    public Double locationY_Right = Double.MAX_VALUE;
+    public Double locationZ_Right = Double.MAX_VALUE;
 
     @Override
     public String toString() {
         return "Device{" +
                 "id='" + id + '\'' +
                 ", state=" + state +
-                ", locationX=" + locationX +
-                ", locationY=" + locationY +
-                ", locationZ=" + locationZ +
+                ", locationX_Left=" + locationX_Left +
+                ", locationY_Left=" + locationY_Left +
+                ", locationZ_Left=" + locationZ_Left +
+                ", locationX_Right=" + locationX_Right +
+                ", locationY_Right=" + locationY_Right +
+                ", locationZ_Right=" + locationZ_Right +
                 '}';
     }
+
 
     @Override
     public SetDeviceStateMessage turnOff() {

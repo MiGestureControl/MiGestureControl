@@ -7,6 +7,7 @@ import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
 import messages.GetAllDevicesMessage;
+import messages.Hand;
 import messages.SetAllDevicesMessage;
 import messages.SetDeviceLocationMessage;
 import org.boon.json.JsonFactory;
@@ -115,9 +116,16 @@ public class DeviceManagementActor extends UntypedActor {
             SetDeviceLocationMessage setDeviceLocationMessage = (SetDeviceLocationMessage) message;
             Device device = devices.get(setDeviceLocationMessage.id);
             if (device != null) {
-                device.locationX = setDeviceLocationMessage.locationX;
-                device.locationY = setDeviceLocationMessage.locationY;
-                device.locationZ = setDeviceLocationMessage.locationZ;
+                if (setDeviceLocationMessage.hand == Hand.LEFT){
+                    device.locationX_Left = setDeviceLocationMessage.locationX;
+                    device.locationY_Left = setDeviceLocationMessage.locationY;
+                    device.locationZ_Left = setDeviceLocationMessage.locationZ;
+                } else {
+                    device.locationX_Right = setDeviceLocationMessage.locationX;
+                    device.locationY_Right = setDeviceLocationMessage.locationY;
+                    device.locationZ_Right = setDeviceLocationMessage.locationZ;
+                }
+
             }
 
             this.saveConfig();

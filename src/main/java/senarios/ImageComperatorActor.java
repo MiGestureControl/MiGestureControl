@@ -27,6 +27,7 @@ public class ImageComperatorActor extends UntypedActor {
             }
         }
         System.out.println(distance);
+        return distance;
     }
 
 

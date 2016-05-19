@@ -19,6 +19,7 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {DevicesComponent} from "./components/devicelist.component.ts";
 import {RouterOutlet} from "angular2/router";
 import {DocsComponent} from "./components/docs.component";
+import {DeviceDetailComponent} from "./components/deviceDetail.component";
 
 declare var System: any;
 
@@ -66,6 +67,11 @@ declare var System: any;
         path: '/docs',
         component: DocsComponent,
         name: 'Docs'
+    }
+    {
+        path: '/devices:id',
+        component: DeviceDetailComponent,
+        name: 'DeviceDetail'
     }
 ])
 
