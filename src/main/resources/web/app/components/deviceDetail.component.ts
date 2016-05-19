@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {Device, DevicesService} from "../services/device.service";
+import {RouteParams} from 'angular2/router';
 
 @Component({
     selector: 'DeviceDetail',
@@ -38,7 +39,8 @@ export class DeviceDetailComponent {
     private devices: Array<Device> = [];
     private interval;
 
-    constructor(private _devicesService: DevicesService) {
+    constructor(private _routeParams: RouteParams,
+                private _devicesService: DevicesService) {
 
         this._devicesService.devicesSubject
             .subscribe( devices => {

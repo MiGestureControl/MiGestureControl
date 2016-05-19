@@ -73,6 +73,8 @@ public class HTTPServer extends HttpApp {
             public RouteResult apply(RequestContext ctx) {
                 try {
                     final String id = deviceId.get(ctx);
+                    System.out.println(id);
+
                     Future<Object> future
                             = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.RIGHT), timeout);
 
@@ -98,6 +100,8 @@ public class HTTPServer extends HttpApp {
             public RouteResult apply(RequestContext ctx) {
                 try {
                     final String id = deviceId.get(ctx);
+                    System.out.println(id);
+
                     Future<Object> future
                             = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.LEFT), timeout);
 
@@ -166,14 +170,11 @@ public class HTTPServer extends HttpApp {
                                         get(handleWith(getAllDevicesHandler))
                                 ),
                                 path("devices", deviceId).route(
-                                        path("left").route(
-                                            get(handleWith(configureRigthHandLocationForDeviceWithIDHandler, deviceId))
-                                        ),
-                                        path("right").route(
-                                                get(handleWith(configureLeftHandLocationForDeviceWithIDHandler, deviceId))
-                                        ),
                                         get(handleWith(configureRigthHandLocationForDeviceWithIDHandler, deviceId)),
                                         delete(handleWith(removeLocationForDeviceWithIDHandler, deviceId))
+                                ),
+                                path("devicesleft", deviceId).route(
+                                        get(handleWith(configureLeftHandLocationForDeviceWithIDHandler, deviceId)),
                                 )
                         )
 
