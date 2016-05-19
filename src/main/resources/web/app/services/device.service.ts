@@ -46,8 +46,10 @@ export class DevicesService {
 export class Device {
     id: string;
     state: string;
-    locationX:number:
-    locationY:number:
-    locationZ:number:
-
+    locationX_Left:number;
+    locationY_Left:number;
+    locationZ_Left:number;
+    locationX_Right:number;
+    locationY_Right:number;
+    locationZ_Right:number;
 }

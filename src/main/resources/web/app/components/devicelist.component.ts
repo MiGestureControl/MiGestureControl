@@ -19,13 +19,13 @@ import {searchFilterPipe} from "../pipes/searchFilterPipe";
                     Second Line
                 </p>
                 <div class="secondary-content">
-                <div *ngIf="device.locationX >= 1000.0">
+                <!--<div *ngIf="device.locationX >= 1000.0">-->
                     <a class="btn-floating btn waves-effect waves-light" (click)="add(device.id)"  ><i class="material-icons">add</i></a>
-                </div>
-                <div *ngIf="device.locationX <= 1000.0">
+                <!--</div>-->
+                <!--<div *ngIf="device.locationX <= 1000.0">-->
                     <a class="btn-floating btn waves-effect waves-light" (click)="edit(device.id)" ><i class="material-icons">mode_edit</i></a>
                     <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)" ><i class="material-icons">delete_forever</i></a>
-                </div>
+                <!--</div>-->
 
                 </div>
             </li>

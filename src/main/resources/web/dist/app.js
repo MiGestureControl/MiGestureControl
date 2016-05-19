@@ -134,6 +134,7 @@ webpackJsonp([0],{
 	var common_1 = __webpack_require__(118);
 	var devicelist_component_ts_1 = __webpack_require__(305);
 	var docs_component_1 = __webpack_require__(307);
+	var deviceDetail_component_1 = __webpack_require__(308);
 	var App = (function () {
 	    function App(_router) {
 	        this._router = _router;
@@ -157,6 +158,11 @@ webpackJsonp([0],{
 	                path: '/docs',
 	                component: docs_component_1.DocsComponent,
 	                name: 'Docs'
+	            },
+	            {
+	                path: '/devices:id',
+	                component: deviceDetail_component_1.DeviceDetailComponent,
+	                name: 'DeviceDetail'
 	            }
 	        ]), 
 	        __metadata('design:paramtypes', [router_1.Router])
@@ -1504,7 +1510,7 @@ webpackJsonp([0],{
 	            pipes: [
 	                searchFilterPipe_1.searchFilterPipe
 	            ],
-	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">{{device.id}}</span>\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n                <div class=\"secondary-content\">\n                <div *ngIf=\"device.locationX >= 1000.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"add(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                </div>\n                <div *ngIf=\"device.locationX <= 1000.0\">\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\" ><i class=\"material-icons\">delete_forever</i></a>\n                </div>\n\n                </div>\n            </li>\n        </ul>\n\n    "
+	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">{{device.id}}</span>\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n                <div class=\"secondary-content\">\n                <!--<div *ngIf=\"device.locationX >= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"add(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                <!--</div>-->\n                <!--<div *ngIf=\"device.locationX <= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"edit(device.id)\" ><i class=\"material-icons\">mode_edit</i></a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\" ><i class=\"material-icons\">delete_forever</i></a>\n                <!--</div>-->\n\n                </div>\n            </li>\n        </ul>\n\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DevicesComponent);
@@ -1534,7 +1540,7 @@ webpackJsonp([0],{
 	    }
 	    searchFilterPipe.prototype.transform = function (all, args) {
 	        var toFilter = args[0].toLocaleLowerCase();
-	        return all.filter(function (device) { return device.id.toLocaleLowerCase().indexOf(toFilter) != -1; });
+	        return all.filter(function (device) { return device.id.toLocaleLowerCase().indexOf(toFilter) !== -1; });
 	    };
 	    searchFilterPipe = __decorate([
 	        core_1.Pipe({ name: 'searchFilter' }), 
@@ -1574,6 +1580,68 @@ webpackJsonp([0],{
 	    return DocsComponent;
 	}());
 	exports.DocsComponent = DocsComponent;
+
+
+/***/ },
+
+/***/ 308:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(24);
+	var device_service_1 = __webpack_require__(244);
+	var DeviceDetailComponent = (function () {
+	    function DeviceDetailComponent(_devicesService) {
+	        var _this = this;
+	        this._devicesService = _devicesService;
+	        this.devices = [];
+	        this._devicesService.devicesSubject
+	            .subscribe(function (devices) {
+	            _this.devices = devices;
+	        });
+	        this._devicesService.load();
+	        this.interval = setInterval(function () { return _this._devicesService.load(); }, 5000);
+	    }
+	    DeviceDetailComponent.prototype.add = function (id) {
+	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
+	            console.log("Einrichtung erfolgt");
+	        }, function (error) {
+	            console.log("fehler bei der Einrichtung aufgetretten");
+	        });
+	    };
+	    DeviceDetailComponent.prototype.delete = function (id) {
+	        this._devicesService.deleteDevice(id).subscribe(function (res) {
+	            console.log("gelöscht");
+	        }, function (error) {
+	            console.log("fehler beim löschen aufgetretten");
+	        });
+	    };
+	    DeviceDetailComponent.prototype.edit = function (id) {
+	        this._devicesService.enterEditModeForDevice(id).subscribe(function (res) {
+	            console.log("Einrichtung erfolgt");
+	        }, function (error) {
+	            console.log("fehler bei der Einrichtung aufgetretten");
+	        });
+	    };
+	    DeviceDetailComponent = __decorate([
+	        core_1.Component({
+	            selector: 'DeviceDetail',
+	            template: "\n        test\n\n    "
+	        }), 
+	        __metadata('design:paramtypes', [device_service_1.DevicesService])
+	    ], DeviceDetailComponent);
+	    return DeviceDetailComponent;
+	}());
+	exports.DeviceDetailComponent = DeviceDetailComponent;
 
 
 /***/ }

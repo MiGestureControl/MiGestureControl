@@ -9,6 +9,6 @@ export class searchFilterPipe implements PipeTransform {
     transform(all:Device[], args: string[]) {
 
         let toFilter = args[0].toLocaleLowerCase();
-        return all.filter(device=> device.id.toLocaleLowerCase().indexOf(toFilter) != -1);
+        return all.filter(device=> device.id.toLocaleLowerCase().indexOf(toFilter) !== -1);
     }
 }
