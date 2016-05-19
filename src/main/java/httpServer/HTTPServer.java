@@ -10,10 +10,7 @@ import akka.http.javadsl.server.values.PathMatchers;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import deviceManagement.models.DevicesMessage;
-import messages.ConfigureDeviceFinishedMessage;
-import messages.ConfigureDeviceWithIDMessage;
-import messages.GetAllDevicesMessage;
-import messages.RemoveLocationForDeviceWithIDMessage;
+import messages.*;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import scala.concurrent.Await;
@@ -77,7 +74,7 @@ public class HTTPServer extends HttpApp {
                 try {
                     final String id = deviceId.get(ctx);
                     Future<Object> future
-                            = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id), timeout);
+                            = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.RIGHT), timeout);
 
                     Object result =  Await.result(future, timeout.duration());
 
@@ -144,6 +141,12 @@ public class HTTPServer extends HttpApp {
                                         get(handleWith(getAllDevicesHandler))
                                 ),
                                 path("devices", deviceId).route(
+                                        path("left").route(
+                                            get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
+                                        ),
+                                        path("right").route(
+                                                get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
+                                        ),
                                         get(handleWith(configureLocationForDeviceWithIDHandler, deviceId)),
                                         delete(handleWith(removeLocationForDeviceWithIDHandler, deviceId))
                                 )
