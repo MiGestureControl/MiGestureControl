@@ -279,6 +279,13 @@ public class GestureRecognizer extends UntypedActor {
                     }
                 }
             }
+
+            else if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.SHOULDER_RIGHT)) &&
+                    (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.ELBOW_RIGHT)) &&
+                    (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.WRIST_RIGHT))){
+
+                System.out.println("rechte Hand oben");
+            }
         }
 
         // Wenn sich die linke Hand oberhalb der Höhe des Nackens befindet
@@ -311,6 +318,13 @@ public class GestureRecognizer extends UntypedActor {
                         handGestures[1] = Hand.LeftHand_LowerThanHead;
                     }
                 }
+            }
+
+            else if((skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.SHOULDER_LEFT)) &&
+                    (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.ELBOW_LEFT)) &&
+                    (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.WRIST_LEFT))){
+
+                System.out.println("linke Hand oben");
             }
         }
 
