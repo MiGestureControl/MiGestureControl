@@ -8,6 +8,12 @@ import deviceManagement.models.FS20State;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 import messages.*;
 
+import javax.sound.sampled.*;
+import java.io.File;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Hashtable;
 
 import static kinector.GestureRecognizer.getPointingLine;
@@ -107,9 +113,11 @@ public class GestureInterpreter extends UntypedActor {
     private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, GestureRecognizer.Hand[] handGestures) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
             if (gesture == GestureRecognizer.Gesture.RightHand_StretchedUp) {
-                System.out.println("Right Hand Stretched Up");
+
+                dispatcher.tell(new FlashMessage(), getSelf());
+
             } else if (gesture == GestureRecognizer.Gesture.LeftHand_StretchedUp) {
-                System.out.println("Left Hand Stretched Up");
+                dispatcher.tell(new FlashMessage(), getSelf());
             } else {
                 Device device = getDevice(skeleton, handGestures);
                 if (device != null) {
