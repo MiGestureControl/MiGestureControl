@@ -117,6 +117,9 @@ public class DeviceManagementActor extends UntypedActor {
 
             SetDeviceLocationMessage setDeviceLocationMessage = (SetDeviceLocationMessage) message;
             Device device = devices.get(setDeviceLocationMessage.id);
+
+            System.out.println(setDeviceLocationMessage);
+
             if (device != null) {
                 if (setDeviceLocationMessage.hand == Hand.LEFT){
                     device.locationX_Left = setDeviceLocationMessage.locationX;
@@ -127,7 +130,6 @@ public class DeviceManagementActor extends UntypedActor {
                     device.locationY_Right = setDeviceLocationMessage.locationY;
                     device.locationZ_Right = setDeviceLocationMessage.locationZ;
                 }
-
             }
 
             this.saveConfig();
