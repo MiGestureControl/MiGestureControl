@@ -38,17 +38,24 @@ public class Kinector extends J4KSDK {
 
         ArrayList<Skeleton> skeletons = new ArrayList<Skeleton>(Arrays.asList(this.getSkeletons()));
 
+
+
         Iterator<Skeleton> skelIterator = skeletons.iterator();
         while (skelIterator.hasNext()) {
             Skeleton skeleton = skelIterator.next();
-
             if(!skeleton.isTracked()) {
+                skelIterator.remove();
+            }
+
+            else if(skeleton.get3DJointZ(Skeleton.HEAD) < 1.4){
                 skelIterator.remove();
             }
         }
 
         for(int i = 0; i < skeletons.size(); i++){
             skeletons.get(i).setPlayerID(i);
+
+            //System.out.println(skeletons.get(i).get3DJointZ(Skeleton.HEAD));
         }
             actor.tell(new SkeletonMessage(skeletons), ActorRef.noSender());
     }

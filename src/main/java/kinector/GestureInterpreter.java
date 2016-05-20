@@ -106,24 +106,30 @@ public class GestureInterpreter extends UntypedActor {
      */
     private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, GestureRecognizer.Hand[] handGestures) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            Device device = getDevice(skeleton, handGestures);
-            if (device != null) {
-                switch (gesture) {
-                    case LeftHand_PointingTowardsDevice_DefaultActivate:
-                    case RightHand_PointingTowardsDevice_DefaultActivate: {
+            if (gesture == GestureRecognizer.Gesture.RightHand_StretchedUp) {
+                System.out.println("Right Hand Stretched Up");
+            } else if (gesture == GestureRecognizer.Gesture.LeftHand_StretchedUp) {
+                System.out.println("Left Hand Stretched Up");
+            } else {
+                Device device = getDevice(skeleton, handGestures);
+                if (device != null) {
+                    switch (gesture) {
+                        case LeftHand_PointingTowardsDevice_DefaultActivate:
+                        case RightHand_PointingTowardsDevice_DefaultActivate: {
                             System.out.println("on");
                             dispatcher.tell(device.turnOn(), getSelf());
-                        break;
-                    }
-                    case LeftHand_PointingTowardsDevice_DefaultDeactivate:
-                    case RightHand_PointingTowardsDevice_DefaultDeactivate: {
-                        System.out.println("off");
-                        dispatcher.tell(device.turnOff(), getSelf());
-                        break;
-                    }
+                            break;
+                        }
+                        case LeftHand_PointingTowardsDevice_DefaultDeactivate:
+                        case RightHand_PointingTowardsDevice_DefaultDeactivate: {
+                            System.out.println("off");
+                            dispatcher.tell(device.turnOff(), getSelf());
+                            break;
+                        }
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
                 }
             }
         } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
