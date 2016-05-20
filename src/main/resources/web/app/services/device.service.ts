@@ -42,8 +42,7 @@ export class DevicesService {
             .map((res: Response) => res.json());
     }
 
-    save(id:string, activSets: ActivSets){
-
+    save(id: string, activSets: ActivSets) {
 
         let body = JSON.stringify(activSets);
 
@@ -54,7 +53,7 @@ export class DevicesService {
                 (res: Response) => res.json()
             )
             .subscribe((res: Response) => {
-                console.log(res)
+                console.log(res);
             });
     }
 
@@ -75,29 +74,28 @@ export class Device {
     locationZ_Right: number;
 
     possibleSets: PossibleSet[];
+
+    activSets: ActivSets;
 }
 
 export class PossibleSet {
-    name:string;
+    name: string;
     args: string[];
 }
 
 export class ActivSet {
-    name:string;
+    name: string;
     arg: string;
 
 
-    constructor(name:string, arg:string) {
+    constructor(name: string, arg: string) {
         this.name = name;
         this.arg = arg;
     }
-    constructor(){
-
-    }
 }
 
-export class ActivSets{
-    constructor(activSetTrunOffGesture:ActivSet, activSetTrunOnGesture:ActivSet) {
+export class ActivSets {
+    constructor(activSetTrunOffGesture: ActivSet, activSetTrunOnGesture: ActivSet) {
         this.activSetTrunOffGesture = activSetTrunOffGesture;
         this.activSetTrunOnGesture = activSetTrunOnGesture;
     }

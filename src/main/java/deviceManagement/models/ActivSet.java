@@ -8,4 +8,12 @@ import java.util.ArrayList;
 public class ActivSet {
     String name;
     String arg;
+
+    @Override
+    public String toString() {
+        return "ActivSet{" +
+                "name='" + name + '\'' +
+                ", arg='" + arg + '\'' +
+                '}';
+    }
 }

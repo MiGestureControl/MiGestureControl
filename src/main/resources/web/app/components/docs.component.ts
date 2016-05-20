@@ -36,7 +36,8 @@ import {Component} from 'angular2/core';
                     <img src="assets/img/handbuch_4.png"> <!-- random image -->
                     <div class="caption center-align">
                         <h5 class="light grey-text text-lighten-3">
-                            Bewegen Sie sich nun einen Meter nach rechts oder links. Die Position des Armes über der Schulter wird nicht verändert.
+                            Bewegen Sie sich nun einen Meter nach rechts oder links.
+                            Die Position des Armes über der Schulter wird nicht verändert.
                             ...
                         </h5>
                     </div>
@@ -53,7 +54,8 @@ import {Component} from 'angular2/core';
                     <img src="assets/img/handbuch_5.png"> <!-- random image -->
                     <div class="caption center-align">
                         <h5 class="light grey-text text-lighten-3">
-                            Nun wird der Arm, der sich über Schulterhöhe befindet, gesenkt. Der andere Arm zeigt weiterhin auf das Gerät.
+                            Nun wird der Arm, der sich über Schulterhöhe befindet, gesenkt.
+                            Der andere Arm zeigt weiterhin auf das Gerät.
                         </h5>
                     </div>
                 </li>
@@ -61,7 +63,8 @@ import {Component} from 'angular2/core';
                     <img src="assets/img/handbuch_6.png"> <!-- random image -->
                     <div class="caption center-align">
                         <h5 class="light grey-text text-lighten-3">
-                        Nun können Sie den anderen Arm wird über Schulterhöhe heben. Sollte Ihr gewünschtes Gerät nun eingeschaltet sein,
+                        Nun können Sie den anderen Arm wird über Schulterhöhe heben.
+                        Sollte Ihr gewünschtes Gerät nun eingeschaltet sein,
                         ...
                         </h5>
                     </div>
@@ -70,7 +73,8 @@ import {Component} from 'angular2/core';
                     <img src="assets/img/handbuch_6.png"> <!-- random image -->
                     <div class="caption center-align">
                         <h5 class="light grey-text text-lighten-3">
-                        ... haben Sie alles richtig gemacht. Sollte dies nicht der Fall sein, so sollten Sie die Konfiguration noch einmal wiederholen.
+                        ... haben Sie alles richtig gemacht. Sollte dies nicht der Fall sein,
+                        so sollten Sie die Konfiguration noch einmal wiederholen.
                         </h5>
                     </div>
                 </li>

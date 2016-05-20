@@ -1,4 +1,4 @@
-package messages;
+package messages.HelperEnums;
 
 /**
  * Created by hagen on 19/05/16.

@@ -2,9 +2,7 @@ package httpServer;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.http.impl.util.JavaMapping;
 import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.MediaTypes;
 import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.server.*;
@@ -15,6 +13,7 @@ import akka.util.Timeout;
 import deviceManagement.models.ActivSets;
 import messages.DevicesMessage;
 import messages.*;
+import messages.HelperEnums.Hand;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import scala.concurrent.Await;
@@ -22,10 +21,6 @@ import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
 import static akka.http.javadsl.marshallers.jackson.Jackson.jsonAs;
-import static akka.http.javadsl.model.HttpResponse.create;
-import static akka.http.javadsl.server.RequestVals.entityAs;
-import static akka.http.javadsl.server.values.PathMatchers.uuid;
-import static akka.http.scaladsl.model.StatusCodes.*;
 
 /**
  * Created by hagen on 10/04/16.
@@ -162,18 +157,28 @@ public class HTTPServer extends HttpApp {
                 try {
                     final String id = deviceId.get(ctx);
 
-                    HttpRequest request = ctx.request();
+                    HttpRequest request = ctx. request();
 
+                    String requestEntityString = request.entity().toString();
+
+                    int begin = requestEntityString.indexOf("{");
+                    int end   = requestEntityString.lastIndexOf("}");
+
+
+                    ObjectMapper mapper =  JsonFactory.create();
+                    ActivSets activSets = mapper.fromJson(requestEntityString.substring(begin, end), ActivSets.class);
+
+                    System.out.println(activSets);
 
                     Future<Object> future
-                            = Patterns.ask(dispatchActor, new ConfigureSetForDeviceWithIDMessage(id, new ActivSets()), timeout);
+                            = Patterns.ask(dispatchActor, new ConfigureSetForDeviceWithIDMessage(id, activSets), timeout);
 
                     Object result =  Await.result(future, timeout.duration());
 
                     System.out.println(result);
                     if (result instanceof ConfigureDeviceFinishedMessage){
 
-                        return ctx.complete(MediaTypes.APPLICATION_JSON.toContentType(), "{\"status\": \"removed\"} ");
+                        return ctx.complete(MediaTypes.APPLICATION_JSON.toContentType(), "{\"status\": \"ok\"} ");
 
                     }
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);

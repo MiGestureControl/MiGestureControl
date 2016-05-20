@@ -1,5 +1,7 @@
 package messages;
 
+import messages.HelperEnums.Hand;
+
 import java.io.Serializable;
 
 /**

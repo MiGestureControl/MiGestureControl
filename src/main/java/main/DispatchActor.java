@@ -8,7 +8,7 @@ import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
 import messages.DevicesMessage;
-import deviceManagement.models.FS20State;
+import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
 import kinector.GestureInterpreter;
 import kinector.GestureRecognizer;
@@ -41,7 +41,7 @@ public class DispatchActor extends UntypedActor {
 
     final Kinector kinector = new Kinector(getSelf());
 
-    FS20State lastDebounceState;
+    DeviceState lastDebounceState;
     long lastDebounceStartTime;
     final long debounceTime = 100000000;
 
@@ -65,7 +65,6 @@ public class DispatchActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof FhemJsonList) {
-
 
             this.deviceManagementActor.tell(message, getSelf());
 
@@ -132,6 +131,10 @@ public class DispatchActor extends UntypedActor {
         } else if (message instanceof SkeletonMessage) {
 
             this.gestureRecognizer.tell(message, getSelf());
+
+        } else if (message instanceof ConfigureSetForDeviceWithIDMessage){
+
+            this.deviceManagementActor.forward(message, getContext());
 
         }
 

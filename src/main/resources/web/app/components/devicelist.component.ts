@@ -25,12 +25,22 @@ import {SearchFilterPipe} from "../pipes/searchFilterPipe";
 
                 <div class="secondary-content">
                 <!--<div *ngIf="device.locationX >= 1000.0">-->
-                    <a class="btn-floating btn waves-effect waves-light" (click)="addLeft(device.id)"  ><i class="material-icons">add</i></a>
-                    <a class="btn-floating btn waves-effect waves-light" (click)="addRight(device.id)"  ><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn waves-effect waves-light"
+                        (click)="addLeft(device.id)"  >
+                            <i class="material-icons">add</i>
+                    </a>
+                    <a class="btn-floating btn waves-effect waves-light"
+                        (click)="addRight(device.id)"  >
+                            <i class="material-icons">add</i>
+                    </a>
                 <!--</div>-->
                 <!--<div *ngIf="device.locationX <= 1000.0">-->
-                    <a href="#/device/{{device.id}}" class="btn-floating btn waves-effect waves-light"><i class="material-icons">mode_edit</i></a>
-                    <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)"  ><i class="material-icons">delete_forever</i></a>
+                    <a href="#/device/{{device.id}}" class="btn-floating btn waves-effect waves-light">
+                        <i class="material-icons">mode_edit</i>
+                    </a>
+                    <a class="btn-floating btn waves-effect waves-light" (click)="delete(device.id)"  >
+                        <i class="material-icons">delete_forever</i>
+                    </a>
                 <!--</div>-->
 
                 </div>

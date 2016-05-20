@@ -4,9 +4,10 @@ import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import deviceManagement.models.Device;
 import messages.DevicesMessage;
-import deviceManagement.models.FS20State;
+import messages.HelperEnums.DeviceState;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 import messages.*;
+import messages.HelperEnums.Hand;
 
 import java.util.Hashtable;
 
@@ -133,9 +134,9 @@ public class GestureInterpreter extends UntypedActor {
                 }
             }
         } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
-                 dispatcher.tell(new SetAllDevicesMessage(FS20State.ON), getSelf());
+                 dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
         } else if (gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-                dispatcher.tell(new SetAllDevicesMessage(FS20State.OFF), getSelf());
+                dispatcher.tell(new SetAllDevicesMessage(DeviceState.OFF), getSelf());
         }
     }
     /**

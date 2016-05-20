@@ -7,8 +7,8 @@ import org.boon.Str;
  * Created by hagen on 20/05/16.
  */
 public class ConfigureSetForDeviceWithIDMessage {
-    String id;
-    ActivSets activSets;
+    public String id;
+    public ActivSets activSets;
 
     public ConfigureSetForDeviceWithIDMessage(String id, ActivSets activSets) {
         this.id = id;

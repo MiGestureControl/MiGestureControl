@@ -3,14 +3,12 @@ package deviceManagement;
 import akka.actor.UntypedActor;
 import connector.models.FhemDevice;
 import connector.models.FhemJsonList;
+import deviceManagement.models.ActivSets;
 import deviceManagement.models.Device;
-import messages.DevicesMessage;
-import deviceManagement.models.FS20State;
+import messages.*;
+import messages.HelperEnums.DeviceState;
 import deviceManagement.models.PossibleSet;
-import messages.GetAllDevicesMessage;
-import messages.Hand;
-import messages.SetAllDevicesMessage;
-import messages.SetDeviceLocationMessage;
+import messages.HelperEnums.Hand;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 
@@ -41,9 +39,6 @@ public class DeviceManagementActor extends UntypedActor {
 
         List<Device> devices = new ArrayList<Device>();
     }
-
-//    public DeviceManagementActor() {
-//    }
 
     public DeviceManagementActor(String configPath) {
         //Wenn der String leer ist dann laden wir keine Konfig
@@ -135,19 +130,31 @@ public class DeviceManagementActor extends UntypedActor {
             this.saveConfig();
 
         } else if(message instanceof SetAllDevicesMessage){
-            FS20State state = ((SetAllDevicesMessage)message).state;
+            DeviceState state = ((SetAllDevicesMessage)message).state;
 
             for (Device device : devices.values()) {
-                if(state.equals(FS20State.ON)){
+                if(state.equals(DeviceState.ON)){
                     getSender().tell(device.turnOn(), getSelf());
-                } else if(state.equals(FS20State.OFF)){
+                } else if(state.equals(DeviceState.OFF)){
                     getSender().tell(device.turnOff(), getSelf());
                 }
             }
-        }else if (message instanceof GetAllDevicesMessage) {
+        } else if (message instanceof GetAllDevicesMessage) {
 
             getSender().tell(new DevicesMessage(devices),getSelf());
 
+        } else if (message instanceof ConfigureSetForDeviceWithIDMessage) {
+            Device device = devices.get(((ConfigureSetForDeviceWithIDMessage) message).id);
+
+            if (device != null){
+                ActivSets activSets= ((ConfigureSetForDeviceWithIDMessage) message).activSets;
+                System.out.println(activSets);
+                device.activSets = activSets;
+            }
+
+            this.saveConfig();
+
+            getSender().tell(new ConfigureDeviceFinishedMessage(), getSelf());
         }
     }
 
@@ -174,7 +181,7 @@ public class DeviceManagementActor extends UntypedActor {
                 String[] b = a.split(":");
 
                 if (b.length == 1) {
-                    device.possibleSets.add(new PossibleSet(b[0],null));
+                    device.possibleSets.add(new PossibleSet(b[0]));
                 } else if (b.length == 2) {
                     String[] c = b[1].split(",");
                     PossibleSet possibleSet = new PossibleSet(b[0], Arrays.asList(c));
