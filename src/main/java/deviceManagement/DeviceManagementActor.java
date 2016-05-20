@@ -6,6 +6,7 @@ import connector.models.FhemJsonList;
 import deviceManagement.models.Device;
 import deviceManagement.models.DevicesMessage;
 import deviceManagement.models.FS20State;
+import deviceManagement.models.PossibleSet;
 import messages.GetAllDevicesMessage;
 import messages.Hand;
 import messages.SetAllDevicesMessage;
@@ -18,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -172,6 +174,17 @@ public class DeviceManagementActor extends UntypedActor {
 
             device.id = fhemDevice.getName();
 
+            for (String a : fhemDevice.getPossibleSets().split(" ")){
+                String[] b = a.split(":");
+
+                if (b.length == 1) {
+                    device.possibleSets.add(new PossibleSet(b[0],null));
+                } else if (b.length == 2) {
+                    String[] c = b[1].split(",");
+                    PossibleSet possibleSet = new PossibleSet(b[0], Arrays.asList(c));
+                    device.possibleSets.add(possibleSet);
+                }
+            }
 
             if (fhemDevice.getInternals().getSTATE().equals("on")){
                 device.state = FS20State.ON;
@@ -179,7 +192,8 @@ public class DeviceManagementActor extends UntypedActor {
                 device.state = FS20State.OFF;
             }
 
-            //System.out.println(device);
+
+//            System.out.println(device);
             //System.out.println(device.id);
 
             devices.put(device.id, device);
