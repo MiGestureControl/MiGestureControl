@@ -18,6 +18,8 @@ dependencies {
     compile group: 'com.typesafe.akka', name: 'akka-testkit_2.11', version: '2.4.3'
 
     compile group: 'com.typesafe.akka', name: 'akka-http-experimental_2.11', version: '2.4.3'
+    compile group: 'com.typesafe.akka', name: 'akka-http-jackson-experimental_2.11', version: '2.4.3'
+
 
     compile group: 'io.fastjson', name: 'boon', version: '0.33'
     testCompile group: 'junit', name: 'junit', version: '4.+'
@@ -41,4 +43,26 @@ jacocoTestReport {
 task runMain(type: JavaExec) {
     main = 'main.Main'
     classpath = sourceSets.main.runtimeClasspath
+}
+
+jar {
+
+    archiveName = "yourjar.jar"
+
+    from {
+
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }

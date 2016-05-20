@@ -4,17 +4,19 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
+import connector.AudioActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
-import deviceManagement.models.DevicesMessage;
-import deviceManagement.models.FS20State;
+import messages.DevicesMessage;
+import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
 import kinector.GestureInterpreter;
 import kinector.GestureRecognizer;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
+import senarios.ImageComperatorActor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,18 +30,21 @@ public class DispatchActor extends UntypedActor {
     final ActorRef fhemConector
             = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
 
-    final ActorRef deviceManagementActor
-            = system.actorOf(Props.create(DeviceManagementActor.class), "deviceManagementActor");
+    final ActorRef audioActor = system.actorOf(Props.create(AudioActor.class), "AudioActor");
 
-    final ActorRef howToUseDeviceManagementActor
-            = system.actorOf(Props.create(deviceManagement.HowToUseDeviceManagementActor.class),  "HowToUseDeviceManagementActor");
+    final ActorRef deviceManagementActor
+            = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
+
+    final ActorRef imageComperatorActor
+            = system.actorOf(Props.create(ImageComperatorActor.class), "imageComperatorActor");
 
     final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
     final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
-    final Kinector kinector = new Kinector(gestureRecognizer);
 
-    FS20State lastDebounceState;
+    final Kinector kinector = new Kinector(getSelf());
+
+    DeviceState lastDebounceState;
     long lastDebounceStartTime;
     final long debounceTime = 100000000;
 
@@ -63,26 +68,32 @@ public class DispatchActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof FhemJsonList) {
-            System.out.println("FhemJsonList");
 
             this.deviceManagementActor.tell(message, getSelf());
 
         }else if(message instanceof DevicesMessage){
-            System.out.println("DevicesMessage");
+            //System.out.println("DevicesMessage");
 
             this.gestureInterpreter.tell(message, getSelf());
 
         }else if(message instanceof SetDeviceStateMessage){
+
             System.out.println("SetDeviceStateMessage");
             System.out.println(((SetDeviceStateMessage) message).deviceID);
             this.fhemConector.tell(message, getSelf());
+
         } else if(message instanceof SetDeviceLocationMessage){
+
             System.out.println("SetDeviceLocationMessage");
             this.deviceManagementActor.tell(message, getSelf());
+
         } else if(message instanceof ConfigureDeviceWithIDMessage) {
+
             System.out.println("ConfigureDeviceWithIDMessage");
             this.gestureInterpreter.tell(message, getSelf());
+
         } else if(message instanceof SetAllDevicesMessage){
+
             if(((SetAllDevicesMessage) message).state != lastDebounceState){
                 if(System.nanoTime() + debounceTime > lastDebounceStartTime ){
                     lastDebounceStartTime = System.nanoTime();
@@ -93,20 +104,38 @@ public class DispatchActor extends UntypedActor {
                 lastDebounceState = ((SetAllDevicesMessage) message).state;
             }
 
-        }else if (message instanceof GetAllDevicesMessage) {
+        } else if (message instanceof GetAllDevicesMessage) {
+
             this.deviceManagementActor.forward(message, getContext());
-        }else if (message instanceof ConfigureDeviceWithIDMessage) {
+
+        } else if (message instanceof ConfigureDeviceWithIDMessage) {
+
             System.out.println(((ConfigureDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
-            //this.deviceManagementActor.forward(message, getContext());
-            getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
-        }else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+            this.gestureInterpreter.forward(message, getContext());
+
+        }
+        /*else if (message instanceof ConfigureDeviceFinishedMessage) {
+            this.deviceManagementActor.forward(message, getContext());
+            // Blablabla
+
+        }*/
+        else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
+
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
-        }
 
+        } else if (message instanceof DepthImageMessage) {
+
+            imageComperatorActor.tell(message, getSelf());
+
+        } else if (message instanceof SkeletonMessage) {
+
+            this.gestureRecognizer.tell(message, getSelf());
+
+        }
 
         unhandled(message);
     }

@@ -31,7 +31,7 @@ public class FhemConectorActor extends UntypedActor {
             this.fhemJSONListURL = new URL(baseURL + "/fhem?cmd=jsonlist2&XHR=1");
             this.fhemSendURL = new URL(baseURL + "/fhem");
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+                e.printStackTrace();
         }
     }
 

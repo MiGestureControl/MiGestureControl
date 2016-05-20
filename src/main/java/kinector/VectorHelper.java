@@ -1,5 +1,8 @@
 package kinector;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by johan on 16.03.2016.
  */

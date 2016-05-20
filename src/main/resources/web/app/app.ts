@@ -19,6 +19,7 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {DevicesComponent} from "./components/devicelist.component.ts";
 import {RouterOutlet} from "angular2/router";
 import {DocsComponent} from "./components/docs.component";
+import {DeviceDetailComponent} from "./components/deviceDetail.component";
 
 declare var System: any;
 
@@ -38,12 +39,12 @@ declare var System: any;
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Devices']" >Geräte</a></li>
                 <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
-                <li><a [routerLink]="['/Devices']" >Stream</a></li>
+                <li><a [routerLink]="['/Devices']" >Geräte</a></li>
                 <li><a [routerLink]="['/Docs']" >Handbuch</a></li>
             </ul>
 
@@ -66,6 +67,11 @@ declare var System: any;
         path: '/docs',
         component: DocsComponent,
         name: 'Docs'
+    },
+    {
+        path: '/device/:id',
+        component: DeviceDetailComponent,
+        name: 'DeviceDetail'
     }
 ])
 

@@ -1,5 +1,7 @@
 package messages;
 
+import messages.HelperEnums.Hand;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,30 @@ import java.io.Serializable;
  */
 public class SetDeviceLocationMessage implements Serializable {
     public final String id;
-    public final double[] point;
 
-    public SetDeviceLocationMessage(String id, double[] point){
+    public final Hand hand;
+
+    public final Double locationX;
+    public final Double locationY;
+    public final Double locationZ;
+
+
+    @Override
+    public String toString() {
+        return "SetDeviceLocationMessage{" +
+                "id='" + id + '\'' +
+                ", hand=" + hand +
+                ", locationX=" + locationX +
+                ", locationY=" + locationY +
+                ", locationZ=" + locationZ +
+                '}';
+    }
+
+    public SetDeviceLocationMessage(String id, double[] point, Hand hand){
         this.id = id;
-        this.point = point;
+        this.locationX = point[0];
+        this.locationY = point[1];
+        this.locationZ = point[2];
+        this.hand = hand;
     }
 }
