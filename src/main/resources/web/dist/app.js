@@ -67,6 +67,15 @@ webpackJsonp([0],{
 	        return this._http.delete(this.apiBaseUrl + "/devices/" + id, { headers: comon_1.headers() })
 	            .map(function (res) { return res.json(); });
 	    };
+	    DevicesService.prototype.save = function (id, activSets) {
+	        var body = JSON.stringify(activSets);
+	        console.log("save: " + body);
+	        return this._http.post(this.apiBaseUrl + "/devices/" + id, body, { headers: comon_1.headers() })
+	            .map(function (res) { return res.json(); })
+	            .subscribe(function (res) {
+	            console.log(res);
+	        });
+	    };
 	    DevicesService.prototype.setDevices = function (devices) {
 	        this._devices = devices;
 	        this.devicesSubject.next(this._devices);
@@ -90,6 +99,22 @@ webpackJsonp([0],{
 	    return PossibleSet;
 	}());
 	exports.PossibleSet = PossibleSet;
+	var ActivSet = (function () {
+	    function ActivSet(name, arg) {
+	        this.name = name;
+	        this.arg = arg;
+	    }
+	    return ActivSet;
+	}());
+	exports.ActivSet = ActivSet;
+	var ActivSets = (function () {
+	    function ActivSets(activSetTrunOffGesture, activSetTrunOnGesture) {
+	        this.activSetTrunOffGesture = activSetTrunOffGesture;
+	        this.activSetTrunOnGesture = activSetTrunOnGesture;
+	    }
+	    return ActivSets;
+	}());
+	exports.ActivSets = ActivSets;
 
 
 /***/ },
@@ -1611,11 +1636,17 @@ webpackJsonp([0],{
 	var device_service_1 = __webpack_require__(244);
 	var router_1 = __webpack_require__(246);
 	var comon_1 = __webpack_require__(245);
+	var device_service_2 = __webpack_require__(244);
+	var device_service_3 = __webpack_require__(244);
 	var DeviceDetailComponent = (function () {
 	    function DeviceDetailComponent(_routeParams, _devicesService) {
 	        var _this = this;
 	        this._routeParams = _routeParams;
 	        this._devicesService = _devicesService;
+	        this.device = new device_service_1.Device;
+	        this.possibleSets = [];
+	        this.activSetTrunOffGesture = new device_service_2.ActivSet();
+	        this.activSetTrunOnGesture = new device_service_2.ActivSet();
 	        this.id = this._routeParams.get('id');
 	        this._devicesService.devicesSubject
 	            .subscribe(function (devices) {
@@ -1650,10 +1681,37 @@ webpackJsonp([0],{
 	            console.log("fehler beim löschen aufgetretten");
 	        });
 	    };
+	    DeviceDetailComponent.prototype.activateSetTrunOffGesture = function (possibleSet, arg) {
+	        console.log(name + " " + arg);
+	        console.log(possibleSet);
+	        if (arg === null) {
+	            if (possibleSet.args.length === 0) {
+	                this.activSetTrunOffGesture = new device_service_2.ActivSet(possibleSet.name, null);
+	            }
+	        }
+	        else if (possibleSet.args.length !== 0) {
+	            this.activSetTrunOffGesture = new device_service_2.ActivSet(possibleSet.name, arg);
+	        }
+	    };
+	    DeviceDetailComponent.prototype.activateSetTrunONGesture = function (possibleSet, arg) {
+	        console.log(name + " " + arg);
+	        console.log(possibleSet);
+	        if (arg === null) {
+	            if (possibleSet.args.length === 0) {
+	                this.activSetTrunOnGesture = new device_service_2.ActivSet(possibleSet.name, null);
+	            }
+	        }
+	        else if (possibleSet.args.length !== 0) {
+	            this.activSetTrunOnGesture = new device_service_2.ActivSet(possibleSet.name, arg);
+	        }
+	    };
+	    DeviceDetailComponent.prototype.save = function () {
+	        this._devicesService.save(this.id, new device_service_3.ActivSets(this.activSetTrunOffGesture, this.activSetTrunOnGesture));
+	    };
 	    DeviceDetailComponent = __decorate([
 	        core_1.Component({
 	            selector: 'DeviceDetail',
-	            template: "\n            <h3>{{id}}</h3>\n            <div class=\"row\">\n                <div class=\"col s6 m12\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                        <div class=\"card\">\n                           <div class=\"card-content\">\n                               <span class=\"card-title\">Sets</span>\n                                <ul class=\"collection\">\n                                    <li *ngFor=\"#possibleSet of possibleSets\" class=\"collection-item avatar\">\n                                        {{possibleSet.name}}\n                                         <ul class=\"collection\">\n                                            <li *ngFor=\"#arg of possibleSet.args\" class=\"collection-item avatar\">\n                                                {{arg}}\n                                            </li>\n                                         </ul>\n                                    </li>\n                                </ul>\n                           </div>\n                           <div class=\"card-action\">\n                               <a class=\"waves-effect waves-light btn\" (click)=\"addRight(id)\"  ><i class=\"material-icons\">add</i></a>\n                           </div>\n                    </div>\n                </div>\n            </div>\n    "
+	            template: "\n            <h3>{{id}}</h3>\n            <div class=\"row\">\n                <div class=\"col s12 m6\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col s12 m6\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col s12 m12\">\n                    <div class=\"card-content\">\n                        <div class=\"card row\">\n\n                            <div class=\"col s12 m6\">\n\n                                <span class=\"card-title\">TurnOff Geste</span>\n                                    <ul class=\"collection\">\n                                        <li *ngFor=\"#possibleSet of possibleSets\" class=\"collection-item\"\n                                            (click)=\"activateSetTrunOffGesture(possibleSet, null)\"\n                                            [ngClass]=\"{active: activSetTrunOffGesture.arg === null && activSetTrunOffGesture.name === possibleSet.name }\">\n                                                {{possibleSet.name}}\n                                        <ul class=\"collection\">\n                                            <li  *ngFor=\"#arg of possibleSet.args\" class=\"collection-item\"\n                                                (click)=\"activateSetTrunOffGesture(possibleSet, arg)\"\n                                                [ngClass]=\"{active: activSetTrunOffGesture.arg === arg && activSetTrunOffGesture.name === possibleSet.name }\">\n                                                    {{arg}}\n                                            </li>\n                                        </ul>\n                                     </li>\n                                 </ul>\n                            </div>\n\n\n                        <div class=\"col s12 m6\">\n\n                                <span class=\"card-title\">TurnOn Geste</span>\n                                    <ul class=\"collection\">\n                                        <li *ngFor=\"#possibleSet of possibleSets\" class=\"collection-item\"\n                                            (click)=\"activateSetTrunONGesture(possibleSet, null)\"\n                                            [ngClass]=\"{active: activSetTrunOnGesture.arg === null && activSetTrunOnGesture.name === possibleSet.name }\">\n                                                {{possibleSet.name}}\n                                        <ul class=\"collection\">\n                                            <li  *ngFor=\"#arg of possibleSet.args\" class=\"collection-item\"\n                                                (click)=\"activateSetTrunONGesture(possibleSet, arg)\"\n                                                [ngClass]=\"{active: activSetTrunOnGesture.arg === arg && activSetTrunOnGesture.name === possibleSet.name }\">\n                                                    {{arg}}\n                                            </li>\n                                        </ul>\n                                     </li>\n                                 </ul>\n\n                            <div class=\"card-action\">\n                                <a  class=\"waves-effect waves-light btn\"\n                                    (click)=\"save()\">\n                                    speichern\n                                </a>\n                            </div>\n                        </div>\n\n                    </div>\n                    </div>\n\n                </div>\n    "
 	        }), 
 	        __metadata('design:paramtypes', [router_1.RouteParams, device_service_1.DevicesService])
 	    ], DeviceDetailComponent);

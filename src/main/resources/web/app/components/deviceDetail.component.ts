@@ -3,6 +3,8 @@ import {Device, DevicesService} from "../services/device.service";
 import {RouteParams} from 'angular2/router';
 import {indexOfId} from "../services/comon";
 import {PossibleSet} from "../services/device.service";
+import {ActivSet} from "../services/device.service";
+import {ActivSets} from "../services/device.service";
 
 @Component({
     selector: 'DeviceDetail',
@@ -10,7 +12,7 @@ import {PossibleSet} from "../services/device.service";
     template: `
             <h3>{{id}}</h3>
             <div class="row">
-                <div class="col s6 m12">
+                <div class="col s12 m6">
                     <div class="card">
                         <div class="card-content">
                             <span class="card-title">Linke Hand konfigurieren</span>
@@ -21,6 +23,8 @@ import {PossibleSet} from "../services/device.service";
                           <a class="waves-effect waves-light btn" (click)="addLeft(id)"  ><i class="material-icons">add</i></a>
                         </div>
                     </div>
+                </div>
+                <div class="col s12 m6">
                     <div class="card">
                         <div class="card-content">
                             <span class="card-title">Rechte Hand konfigurieren</span>
@@ -31,26 +35,61 @@ import {PossibleSet} from "../services/device.service";
                             <a class="waves-effect waves-light btn" (click)="addRight(id)"  ><i class="material-icons">add</i></a>
                         </div>
                     </div>
-                        <div class="card">
-                           <div class="card-content">
-                               <span class="card-title">Sets</span>
-                                <ul class="collection">
-                                    <li *ngFor="#possibleSet of possibleSets" class="collection-item avatar">
-                                        {{possibleSet.name}}
-                                         <ul class="collection">
-                                            <li *ngFor="#arg of possibleSet.args" class="collection-item avatar">
-                                                {{arg}}
-                                            </li>
-                                         </ul>
-                                    </li>
-                                </ul>
-                           </div>
-                           <div class="card-action">
-                               <a class="waves-effect waves-light btn" (click)="addRight(id)"  ><i class="material-icons">add</i></a>
-                           </div>
-                    </div>
                 </div>
-            </div>
+                <div class="col s12 m12">
+                    <div class="card-content">
+                        <div class="card row">
+
+                            <div class="col s12 m6">
+
+                                <span class="card-title">TurnOff Geste</span>
+                                    <ul class="collection">
+                                        <li *ngFor="#possibleSet of possibleSets" class="collection-item"
+                                            (click)="activateSetTrunOffGesture(possibleSet, null)"
+                                            [ngClass]="{active: activSetTrunOffGesture.arg === null && activSetTrunOffGesture.name === possibleSet.name }">
+                                                {{possibleSet.name}}
+                                        <ul class="collection">
+                                            <li  *ngFor="#arg of possibleSet.args" class="collection-item"
+                                                (click)="activateSetTrunOffGesture(possibleSet, arg)"
+                                                [ngClass]="{active: activSetTrunOffGesture.arg === arg && activSetTrunOffGesture.name === possibleSet.name }">
+                                                    {{arg}}
+                                            </li>
+                                        </ul>
+                                     </li>
+                                 </ul>
+                            </div>
+
+
+                        <div class="col s12 m6">
+
+                                <span class="card-title">TurnOn Geste</span>
+                                    <ul class="collection">
+                                        <li *ngFor="#possibleSet of possibleSets" class="collection-item"
+                                            (click)="activateSetTrunONGesture(possibleSet, null)"
+                                            [ngClass]="{active: activSetTrunOnGesture.arg === null && activSetTrunOnGesture.name === possibleSet.name }">
+                                                {{possibleSet.name}}
+                                        <ul class="collection">
+                                            <li  *ngFor="#arg of possibleSet.args" class="collection-item"
+                                                (click)="activateSetTrunONGesture(possibleSet, arg)"
+                                                [ngClass]="{active: activSetTrunOnGesture.arg === arg && activSetTrunOnGesture.name === possibleSet.name }">
+                                                    {{arg}}
+                                            </li>
+                                        </ul>
+                                     </li>
+                                 </ul>
+
+                            <div class="card-action">
+                                <a  class="waves-effect waves-light btn"
+                                    (click)="save()">
+                                    speichern
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+
+                </div>
     `
 })
 
@@ -58,17 +97,23 @@ export class DeviceDetailComponent {
 
     private interval;
     private id:string;
-    private device:Device;
-    private possibleSets:PossibleSet[];
+    private device:Device = new Device;
+    private possibleSets:PossibleSet[] = [];
+
+    private activSetTrunOffGesture: ActivSet;
+    private activSetTrunOnGesture: ActivSet;
 
     constructor(private _routeParams: RouteParams,
                 private _devicesService: DevicesService) {
+
+        this.activSetTrunOffGesture = new ActivSet();
+        this.activSetTrunOnGesture = new ActivSet();
 
         this.id = this._routeParams.get('id');
 
         this._devicesService.devicesSubject
             .subscribe( devices => {
-                var index indexOfId(devices, this.id);
+                var index = indexOfId(devices, this.id);
                 this.device = devices[index];
                 if (this.device !== null){
                     if (this.device.possibleSets !== null){
@@ -113,5 +158,37 @@ export class DeviceDetailComponent {
                 console.log("fehler beim löschen aufgetretten");
             }
         );
+    }
+
+    activateSetTrunOffGesture(possibleSet:PossibleSet, arg:string){
+        console.log(name + " " + arg);
+
+        console.log(possibleSet);
+
+        if (arg === null) {
+            if (possibleSet.args.length === 0) {
+                this.activSetTrunOffGesture = new ActivSet(possibleSet.name, null);
+            }
+        } else  if (possibleSet.args.length !== 0) {
+            this.activSetTrunOffGesture = new ActivSet(possibleSet.name, arg);
+        }
+    }
+
+    activateSetTrunONGesture(possibleSet:PossibleSet, arg:string){
+        console.log(name + " " + arg);
+
+        console.log(possibleSet);
+
+        if (arg === null) {
+            if (possibleSet.args.length === 0) {
+                this.activSetTrunOnGesture = new ActivSet(possibleSet.name, null);
+            }
+        } else  if (possibleSet.args.length !== 0) {
+            this.activSetTrunOnGesture = new ActivSet(possibleSet.name, arg);
+        }
+    }
+
+    save() {
+        this._devicesService.save(this.id, new ActivSets(this.activSetTrunOffGesture, this.activSetTrunOnGesture))
     }
 }

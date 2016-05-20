@@ -8,7 +8,7 @@ import connector.AudioActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
-import deviceManagement.models.DevicesMessage;
+import messages.DevicesMessage;
 import deviceManagement.models.FS20State;
 import httpServer.HTTPServer;
 import kinector.GestureInterpreter;

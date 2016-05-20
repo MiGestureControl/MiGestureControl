@@ -4,7 +4,7 @@ import akka.actor.UntypedActor;
 import connector.models.FhemDevice;
 import connector.models.FhemJsonList;
 import deviceManagement.models.Device;
-import deviceManagement.models.DevicesMessage;
+import messages.DevicesMessage;
 import deviceManagement.models.FS20State;
 import deviceManagement.models.PossibleSet;
 import messages.GetAllDevicesMessage;
@@ -157,11 +157,7 @@ public class DeviceManagementActor extends UntypedActor {
 //            System.out.println(fhemDevice.getName());
             Device device = devices.get(fhemDevice.getName());
 
-            if (fhemDevice.getInternals().getSTATE().equals("on")){
-                device.state = FS20State.ON;
-            } else {
-                device.state = FS20State.OFF;
-            }
+            device.state = fhemDevice.getInternals().getSTATE();
 
             devices.put(device.id, device);
 //        }
@@ -186,12 +182,7 @@ public class DeviceManagementActor extends UntypedActor {
                 }
             }
 
-            if (fhemDevice.getInternals().getSTATE().equals("on")){
-                device.state = FS20State.ON;
-            } else {
-                device.state = FS20State.OFF;
-            }
-
+            device.state = fhemDevice.getInternals().getSTATE();
 
 //            System.out.println(device);
             //System.out.println(device.id);

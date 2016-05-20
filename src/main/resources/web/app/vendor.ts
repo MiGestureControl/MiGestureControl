@@ -13,6 +13,6 @@ import 'angular2/http';
 // RxJS
 import 'rxjs';
 
-require("materialize.scss");
+import 'materialize.scss';
 
 
