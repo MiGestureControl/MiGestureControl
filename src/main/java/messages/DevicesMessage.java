@@ -1,4 +1,6 @@
-package deviceManagement.models;
+package messages;
+
+import deviceManagement.models.Device;
 
 import java.io.Serializable;
 import java.util.Hashtable;

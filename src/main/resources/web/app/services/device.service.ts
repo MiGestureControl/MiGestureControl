@@ -42,6 +42,22 @@ export class DevicesService {
             .map((res: Response) => res.json());
     }
 
+    save(id:string, activSets: ActivSets){
+
+
+        let body = JSON.stringify(activSets);
+
+        console.log("save: " + body);
+
+        return this._http.post(this.apiBaseUrl + "/devices/" + id, body, {headers: headers()})
+            .map(
+                (res: Response) => res.json()
+            )
+            .subscribe((res: Response) => {
+                console.log(res)
+            });
+    }
+
     private setDevices(devices: Device[]) {
         this._devices = devices;
         this.devicesSubject.next(this._devices);
@@ -64,4 +80,27 @@ export class Device {
 export class PossibleSet {
     name:string;
     args: string[];
+}
+
+export class ActivSet {
+    name:string;
+    arg: string;
+
+
+    constructor(name:string, arg:string) {
+        this.name = name;
+        this.arg = arg;
+    }
+    constructor(){
+
+    }
+}
+
+export class ActivSets{
+    constructor(activSetTrunOffGesture:ActivSet, activSetTrunOnGesture:ActivSet) {
+        this.activSetTrunOffGesture = activSetTrunOffGesture;
+        this.activSetTrunOnGesture = activSetTrunOnGesture;
+    }
+    activSetTrunOffGesture: ActivSet;
+    activSetTrunOnGesture: ActivSet;
 }

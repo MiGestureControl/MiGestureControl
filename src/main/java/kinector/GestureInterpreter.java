@@ -3,7 +3,7 @@ package kinector;
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import deviceManagement.models.Device;
-import deviceManagement.models.DevicesMessage;
+import messages.DevicesMessage;
 import deviceManagement.models.FS20State;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 import messages.*;
