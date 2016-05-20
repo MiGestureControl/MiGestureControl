@@ -84,6 +84,12 @@ webpackJsonp([0],{
 	    return Device;
 	}());
 	exports.Device = Device;
+	var PossibleSet = (function () {
+	    function PossibleSet() {
+	    }
+	    return PossibleSet;
+	}());
+	exports.PossibleSet = PossibleSet;
 
 
 /***/ },
@@ -1604,18 +1610,24 @@ webpackJsonp([0],{
 	var core_1 = __webpack_require__(24);
 	var device_service_1 = __webpack_require__(244);
 	var router_1 = __webpack_require__(246);
+	var comon_1 = __webpack_require__(245);
 	var DeviceDetailComponent = (function () {
 	    function DeviceDetailComponent(_routeParams, _devicesService) {
 	        var _this = this;
 	        this._routeParams = _routeParams;
 	        this._devicesService = _devicesService;
-	        this.devices = [];
+	        this.id = this._routeParams.get('id');
 	        this._devicesService.devicesSubject
 	            .subscribe(function (devices) {
-	            _this.devices = devices;
+	            var index = comon_1.indexOfId(devices, _this.id);
+	            _this.device = devices[index];
+	            if (_this.device !== null) {
+	                if (_this.device.possibleSets !== null) {
+	                    _this.possibleSets = _this.device.possibleSets;
+	                }
+	            }
 	        });
 	        this._devicesService.load();
-	        this.interval = setInterval(function () { return _this._devicesService.load(); }, 5000);
 	    }
 	    DeviceDetailComponent.prototype.addRight = function (id) {
 	        this._devicesService.enterRightEditModeForDevice(id).subscribe(function (res) {
@@ -1641,7 +1653,7 @@ webpackJsonp([0],{
 	    DeviceDetailComponent = __decorate([
 	        core_1.Component({
 	            selector: 'DeviceDetail',
-	            template: "\n            <h3>test</h3>\n            <div class=\"row\">\n                <div class=\"col s6 m12\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(device.id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    "
+	            template: "\n            <h3>{{id}}</h3>\n            <div class=\"row\">\n                <div class=\"col s6 m12\">\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Linke Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                          <a class=\"waves-effect waves-light btn\" (click)=\"addLeft(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                    <div class=\"card\">\n                        <div class=\"card-content\">\n                            <span class=\"card-title\">Rechte Hand konfigurieren</span>\n                            <p>I am a very simple card. I am good at containing small bits of information.\n                            I am convenient because I require little markup to use effectively.</p>\n                        </div>\n                        <div class=\"card-action\">\n                            <a class=\"waves-effect waves-light btn\" (click)=\"addRight(id)\"  ><i class=\"material-icons\">add</i></a>\n                        </div>\n                    </div>\n                        <div class=\"card\">\n                           <div class=\"card-content\">\n                               <span class=\"card-title\">Sets</span>\n                                <ul class=\"collection\">\n                                    <li *ngFor=\"#possibleSet of possibleSets\" class=\"collection-item avatar\">\n                                        {{possibleSet.name}}\n                                         <ul class=\"collection\">\n                                            <li *ngFor=\"#arg of possibleSet.args\" class=\"collection-item avatar\">\n                                                {{arg}}\n                                            </li>\n                                         </ul>\n                                    </li>\n                                </ul>\n                           </div>\n                           <div class=\"card-action\">\n                               <a class=\"waves-effect waves-light btn\" (click)=\"addRight(id)\"  ><i class=\"material-icons\">add</i></a>\n                           </div>\n                    </div>\n                </div>\n            </div>\n    "
 	        }), 
 	        __metadata('design:paramtypes', [router_1.RouteParams, device_service_1.DevicesService])
 	    ], DeviceDetailComponent);

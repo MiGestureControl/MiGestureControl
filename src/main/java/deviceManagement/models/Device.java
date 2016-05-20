@@ -1,9 +1,11 @@
 package deviceManagement.models;
 
 import messages.SetDeviceStateMessage;
+import org.boon.Str;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hagen on 28/03/16.
@@ -11,7 +13,7 @@ import java.util.Arrays;
 public class Device implements Switcheble{
     public String id;
 
-//    public double[] point;
+    public List<PossibleSet> possibleSets = new ArrayList<>();
 
     public FS20State state;
 
@@ -23,10 +25,12 @@ public class Device implements Switcheble{
     public Double locationY_Right = Double.MAX_VALUE;
     public Double locationZ_Right = Double.MAX_VALUE;
 
+
     @Override
     public String toString() {
         return "Device{" +
                 "id='" + id + '\'' +
+                ", possibleSets=" + possibleSets +
                 ", state=" + state +
                 ", locationX_Left=" + locationX_Left +
                 ", locationY_Left=" + locationY_Left +

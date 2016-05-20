@@ -57,4 +57,11 @@ export class Device {
     locationX_Right: number;
     locationY_Right: number;
     locationZ_Right: number;
+
+    possibleSets: PossibleSet[];
+}
+
+export class PossibleSet {
+    name:string;
+    args: string[];
 }
