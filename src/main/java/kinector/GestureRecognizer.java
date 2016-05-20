@@ -21,17 +21,19 @@ public class GestureRecognizer extends UntypedActor {
     /** Enums, welche die möglichen erkannten Gesten beschreiben. ("None", wenn keine Geste erkannt wurde.) */
     public enum Gesture { RightHand_PointingTowardsDevice_DefaultActivate, LeftHand_PointingTowardsDevice_DefaultActivate,
         RightHand_PointingTowardsDevice_DefaultDeactivate, LeftHand_PointingTowardsDevice_DefaultDeactivate,
-        BothHands_ActivateAll, BothHands_DeactivateAll, None }
+        BothHands_ActivateAll, BothHands_DeactivateAll, RightHand_StretchedUp, LeftHand_StretchedUp, None }
 
     /** Enums, welche die möglichen erkannten Handzustände beschreiben. */
     public enum Hand{
+        Unknown_State,
         RightHand_HigherThanHead, LeftHand_HigherThanHead,
         RightHand_LowerThanHead, LeftHand_LowerThanHead,
         RightHand_HigherThanHead_Upward, LeftHand_HigherThanHead_Upward,
         RightHand_LowerThanHead_Downward, LeftHand_LowerThanHead_Downward,
         RightHand_Pointer, LeftHand_Pointer,
         RightHand_Idle, LeftHand_Idle,
-        BothHands_HigherThanHead_Crossed, BothHands_HigherThanHead_SidewardOutside, BothHands_HigherThanHead_Outside
+        BothHands_HigherThanHead_Crossed, BothHands_HigherThanHead_SidewardOutside, BothHands_HigherThanHead_Outside,
+        RightHand_StretchedUp, LeftHand_StretchedUp,
     }
 
     /** Zweidimensionaler Hand[]-Array, in welchem die jeweils zuvor erkannten Hand-Zustände von
@@ -43,6 +45,11 @@ public class GestureRecognizer extends UntypedActor {
             {Hand.RightHand_Idle, Hand.LeftHand_Idle},
             {Hand.RightHand_Idle, Hand.LeftHand_Idle},
             {Hand.RightHand_Idle, Hand.LeftHand_Idle}
+    };
+
+    private static Gesture[] previousDetectedGesture = new Gesture[] {
+            Gesture.None, Gesture.None, Gesture.None, Gesture.None,
+            Gesture.None, Gesture.None, Gesture.None
     };
 
     /** Konstruktor der Klasse GestureRecognizer
@@ -77,9 +84,11 @@ public class GestureRecognizer extends UntypedActor {
                 Gesture detectedGesture = detectGesture(skeleton);
 
                 // Wenn eine Geste erkannt wurde, wird die GestureMessage an den GestureInterpreter versendet.
-                if(detectedGesture != Gesture.None){
+                if(detectedGesture != Gesture.None && detectedGesture != previousDetectedGesture[skeleton.getPlayerID()]){
                     gestureInterpreterActor.tell(new GestureMessage(detectedGesture, skeleton), ActorRef.noSender());
                 }
+
+                previousDetectedGesture[skeleton.getPlayerID()] = detectedGesture;
             }
         }
     }
@@ -182,6 +191,14 @@ public class GestureRecognizer extends UntypedActor {
             gesture = Gesture.BothHands_DeactivateAll;
         }
 
+        else if(handGestures[0] == Hand.RightHand_StretchedUp && handGestures[1] == Hand.LeftHand_Idle){
+            gesture = Gesture.RightHand_StretchedUp;
+        }
+
+        else if(handGestures[1] == Hand.LeftHand_StretchedUp && handGestures[0] == Hand.RightHand_Idle){
+            gesture = Gesture.LeftHand_StretchedUp;
+        }
+
         /*if (gesture != Gesture.None)
         {
             previousHandGestures[skeletonID][0] = Hand.RightHand_Idle;
@@ -207,22 +224,24 @@ public class GestureRecognizer extends UntypedActor {
         Hand[] handGestures = new Hand[2];
 
         // Hand-Positionen werden grundsätzlich zuerst als Idle gekennzeichnet
-        handGestures[0] = Hand.RightHand_Idle;
-        handGestures[1] = Hand.LeftHand_Idle;
+        handGestures[0] = Hand.Unknown_State;
+        handGestures[1] = Hand.Unknown_State;
 
 
         // Wenn sich beiden Hände unterhalb der Wirbelsäulen-Mitte befinden, bleiben die Handpositionen auf Idle
-        if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) <= skeleton.get3DJointY(Skeleton.SPINE_MID)) &&
-                (skeleton.get3DJointY(Skeleton.HAND_LEFT) <= skeleton.get3DJointY(Skeleton.SPINE_MID))){
+        if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) <= skeleton.get3DJointY(Skeleton.SPINE_MID))){
             handGestures[0] = Hand.RightHand_Idle;
+        }
+
+        if(skeleton.get3DJointY(Skeleton.HAND_LEFT) <= skeleton.get3DJointY(Skeleton.SPINE_MID)){
             handGestures[1] = Hand.LeftHand_Idle;
         }
 
         // Wenn sich beide Hände oberhalb des Kopfes befinden
-        else if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) >= skeleton.get3DJointY(Skeleton.HEAD)) &&
+        if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) >= skeleton.get3DJointY(Skeleton.HEAD)) &&
                 (skeleton.get3DJointY(Skeleton.HAND_LEFT) >= skeleton.get3DJointY(Skeleton.HEAD))){
 
-            // Wenn sich beide Hände kreuzen (Hände stehen weiterhin auf Idle, wenn dieser Fall nicht eintritt)
+            // Wenn sich beide Hände kreuzen (Hände stehen weiterhin auf Unknown, wenn dieser Fall nicht eintritt)
             if((skeleton.get3DJointX(Skeleton.HAND_RIGHT) <= skeleton.get3DJointX(Skeleton.HAND_LEFT)) &&
                     (skeleton.get3DJointX(Skeleton.HAND_LEFT) >= skeleton.get3DJointX(Skeleton.HAND_RIGHT))){
 
@@ -235,8 +254,8 @@ public class GestureRecognizer extends UntypedActor {
                     (skeleton.get3DJointX(Skeleton.ELBOW_LEFT) < skeleton.get3DJointX(Skeleton.SHOULDER_LEFT) - 0.1)){
 
                 // Wenn die Hände zuvor als Idle gekennzeichnet waren
-                if((previousHandGestures[skeletonID][0] == Hand.RightHand_Idle) &&
-                        previousHandGestures[skeletonID][1] == Hand.LeftHand_Idle){
+                if((previousHandGestures[skeletonID][0] == Hand.BothHands_HigherThanHead_Crossed) &&
+                        previousHandGestures[skeletonID][1] == Hand.BothHands_HigherThanHead_Crossed){
                     handGestures[0] = Hand.BothHands_HigherThanHead_SidewardOutside;
                     handGestures[1] = Hand.BothHands_HigherThanHead_SidewardOutside;
                 }
@@ -251,14 +270,13 @@ public class GestureRecognizer extends UntypedActor {
 
         // Wenn sich die rechte Hand oberhalb der Höhe des Nackens befindet
         else if(skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.NECK)) {
-
             // Wenn die linke Hand weiter vom Körper entfernt ist als die rechte Hand,
             // wird die linke Hand als zeigende Hand angesehen
-            if (skeleton.get3DJointZ(Skeleton.HAND_LEFT) < skeleton.get3DJointZ(Skeleton.HAND_RIGHT)) {
-                handGestures[1] = Hand.LeftHand_Pointer;
+            if (skeleton.get3DJointZ(Skeleton.HAND_LEFT) < skeleton.get3DJointZ(Skeleton.HAND_RIGHT) && handGestures[1] != Hand.LeftHand_Idle) {
 
                 // Wenn die rechte Hand sich oberhalb der Höhe des Kopfes befindet
                 if (skeleton.get3DJointY(Skeleton.HAND_RIGHT) >= skeleton.get3DJointY(Skeleton.HEAD)) {
+                    handGestures[1] = Hand.LeftHand_Pointer;
 
                     // Wenn die rechte Hand zuvor unterhalb des Kopfes war
                     if (previousHandGestures[skeletonID][0] == Hand.RightHand_LowerThanHead) {
@@ -270,6 +288,7 @@ public class GestureRecognizer extends UntypedActor {
 
                 // Wenn die rechte Hand sich unterhalb der Höhe des Kopfes befindet
                 else if (skeleton.get3DJointY(Skeleton.HAND_RIGHT) < skeleton.get3DJointY(Skeleton.HEAD)) {
+                    handGestures[1] = Hand.LeftHand_Pointer;
 
                     // Wenn die Hand zuvor oberhalb des Kopfes war
                     if (previousHandGestures[skeletonID][0] == Hand.RightHand_HigherThanHead) {
@@ -282,9 +301,10 @@ public class GestureRecognizer extends UntypedActor {
 
             else if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.SHOULDER_RIGHT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.ELBOW_RIGHT)) &&
-                    (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.WRIST_RIGHT))){
+                    (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.HEAD)) &&
+                    handGestures[1] ==  Hand.LeftHand_Idle){
 
-                System.out.println("rechte Hand oben");
+                handGestures[0] = Hand.RightHand_StretchedUp;
             }
         }
 
@@ -293,12 +313,11 @@ public class GestureRecognizer extends UntypedActor {
 
             // Wenn die rechte Hand weiter vom Körper entfernt ist als die linke Hand,
             // wird die rechte Hand als zeigende Hand angesehen
-            if (skeleton.get3DJointZ(Skeleton.HAND_RIGHT) < skeleton.get3DJointZ(Skeleton.HAND_LEFT)) {
-
-                handGestures[0] = Hand.RightHand_Pointer;
+            if (skeleton.get3DJointZ(Skeleton.HAND_RIGHT) < skeleton.get3DJointZ(Skeleton.HAND_LEFT) && handGestures[0] != Hand.RightHand_Idle) {
 
                 // Wenn die linke Hand sich oberhalb der Höhe des Kopfes befindet
                 if (skeleton.get3DJointY(Skeleton.HAND_LEFT) >= skeleton.get3DJointY(Skeleton.HEAD)) {
+                    handGestures[0] = Hand.RightHand_Pointer;
 
                     // Wenn die linke Hand zuvor unterhalb des Kopfes war
                     if (previousHandGestures[skeletonID][1] == Hand.LeftHand_LowerThanHead) {
@@ -310,6 +329,7 @@ public class GestureRecognizer extends UntypedActor {
 
                 // Wenn die linke Hand sich unterhalb der Höhe des Kopfes befindet
                 else if (skeleton.get3DJointY(Skeleton.HAND_LEFT) < skeleton.get3DJointY(Skeleton.HEAD)) {
+                    handGestures[0] = Hand.RightHand_Pointer;
 
                     // Wenn die linke Hand zuvor oberhalb des Kopfes war
                     if (previousHandGestures[skeletonID][1] == Hand.LeftHand_HigherThanHead) {
@@ -322,17 +342,20 @@ public class GestureRecognizer extends UntypedActor {
 
             else if((skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.SHOULDER_LEFT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.ELBOW_LEFT)) &&
-                    (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.WRIST_LEFT))){
+                    (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.HEAD)) &&
+                    handGestures[0] ==  Hand.RightHand_Idle){
 
-                System.out.println("linke Hand oben");
+                handGestures[1] = Hand.LeftHand_StretchedUp;
+
             }
         }
+        if(handGestures[0] != Hand.Unknown_State){
+            previousHandGestures[skeletonID][0] = handGestures[0];
+        }
 
-        previousHandGestures[skeletonID][0] = handGestures[0];
-        previousHandGestures[skeletonID][1] = handGestures[1];
-
-        //System.out.println(handGestures[0]);
-        //System.out.println(handGestures[1]);
+        if(handGestures[1] != Hand.Unknown_State){
+            previousHandGestures[skeletonID][1] = handGestures[1];
+        }
 
         return handGestures;
     }
