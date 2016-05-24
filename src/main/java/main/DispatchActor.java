@@ -135,6 +135,13 @@ public class DispatchActor extends UntypedActor {
 
             this.gestureRecognizer.tell(message, getSelf());
 
+        }else if (message instanceof ConfigureSetForDeviceWithIDMessage){
+
+            this.deviceManagementActor.tell(message, getSender());
+
+        } else if (message instanceof ConfigureDeviceWithIdFailedMessage){
+
+            this.gestureInterpreter.tell(message, getSelf());
         }
 
         unhandled(message);

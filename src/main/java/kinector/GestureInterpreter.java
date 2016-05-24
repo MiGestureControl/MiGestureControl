@@ -98,7 +98,12 @@ public class GestureInterpreter extends UntypedActor {
             else if(((ConfigureDeviceWithIDMessage) message).hand == Hand.LEFT){
                 HandConfigModeActive_LeftHand = true;
             }
+        }else if (message instanceof ConfigureDeviceWithIdFailedMessage){
+            System.out.println(message);
+
         }
+
+        unhandled(message);
     }
 
     /**

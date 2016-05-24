@@ -136,7 +136,7 @@ export class DeviceDetailComponent {
                 var index = indexOfId(devices, this.id);
                 this.device = devices[index];
                 if (this.device !== null) {
-                    if (this.device.possibleSets !== null) {
+                    if (this.device.possibleSets === null) {
                         this.possibleSets = this.device.possibleSets;
 
                         this.activSetTrunOffGesture = this.device.activSets.activSetTrunOffGesture;
