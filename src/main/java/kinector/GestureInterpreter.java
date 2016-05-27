@@ -100,7 +100,12 @@ public class GestureInterpreter extends UntypedActor {
                 HandConfigModeActive_LeftHand = true;
                 System.out.println("Linke Hand Konfiguration");
             }
+        }else if (message instanceof ConfigureDeviceWithIdFailedMessage){
+            System.out.println(message);
+
         }
+
+        unhandled(message);
     }
 
     /**

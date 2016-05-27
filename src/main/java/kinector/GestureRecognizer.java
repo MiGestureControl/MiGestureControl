@@ -91,6 +91,7 @@ public class GestureRecognizer extends UntypedActor {
                 previousDetectedGesture[skeleton.getPlayerID()] = detectedGesture;
             }
         }
+        unhandled(message);
     }
 
     /** Methode zum Ermitteln einer neuen Line.
