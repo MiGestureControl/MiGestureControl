@@ -21,23 +21,24 @@ import java.net.URL;
 public class AudioActor extends UntypedActor {
 
     Clip flashClip;
+    URL flashUrl;
     AudioInputStream flashAudioIn;
 
     public AudioActor() {
         try {
             File file = new File("flash.wav");
-            URL url = file.toURI().toURL();
-            flashAudioIn = AudioSystem.getAudioInputStream(url);
+            flashUrl = file.toURI().toURL();
 
+            flashAudioIn = AudioSystem.getAudioInputStream(flashUrl);
             flashClip = AudioSystem.getClip();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (LineUnavailableException e) {
+        } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
     }
@@ -49,17 +50,23 @@ public class AudioActor extends UntypedActor {
      */
     public void onReceive(Object message) {
         if (message instanceof FlashMessage) {
-            if(!flashClip.isRunning() ){
-                try {
-                    flashClip.open(flashAudioIn);
-                    flashClip.start();
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                if(!flashClip.isRunning() ){
+                    try {
+                        flashAudioIn = AudioSystem.getAudioInputStream(flashUrl);
+                        flashClip = AudioSystem.getClip();
 
-            }
+                        flashClip.open(flashAudioIn);
+                        flashClip.start();
+
+                        System.out.println("flash");
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    }
+                }
         }
         unhandled(message);
     }

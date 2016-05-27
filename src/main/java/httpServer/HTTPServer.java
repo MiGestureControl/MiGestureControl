@@ -20,8 +20,6 @@ import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
-import static akka.http.javadsl.marshallers.jackson.Jackson.jsonAs;
-
 /**
  * Created by hagen on 10/04/16.
  */
@@ -53,7 +51,7 @@ public class HTTPServer extends HttpApp {
 
                     Object result =  Await.result(future, timeout.duration());
 
-                    System.out.println(result);
+                    //System.out.println(result);
 
                     if (result instanceof DevicesMessage){
                         DevicesMessage devicesMessage = (DevicesMessage) result;
