@@ -11,7 +11,7 @@ import java.util.List;
 public class Device{
     public String id;
 
-    public List<PossibleSet> possibleSets = new ArrayList<>();
+    public List<PossibleSet> possibleSets = new ArrayList<PossibleSet>();
 
     public String state;
 

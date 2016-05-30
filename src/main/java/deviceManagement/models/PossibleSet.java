@@ -8,11 +8,11 @@ import java.util.Collection;
  */
 public class PossibleSet {
     String name = "";
-    ArrayList<String> args = new ArrayList<>();
+    ArrayList<String> args = new ArrayList<String>();
 
     public PossibleSet(String name, Collection<String> args) {
         this.name = name;
-        this.args = new ArrayList<>(args);
+        this.args = new ArrayList<String>(args);
     }
 
     public PossibleSet(String name) {

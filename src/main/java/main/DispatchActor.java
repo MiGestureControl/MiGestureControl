@@ -134,8 +134,10 @@ public class DispatchActor extends UntypedActor {
         } else if (message instanceof SkeletonMessage) {
 
             this.gestureRecognizer.tell(message, getSelf());
+        } else if (message instanceof FlashMessage) {
 
-        }else if (message instanceof ConfigureSetForDeviceWithIDMessage){
+            this.audioActor.tell(message, getSelf());
+        } else if (message instanceof ConfigureSetForDeviceWithIDMessage){
 
             this.deviceManagementActor.tell(message, getSender());
 
