@@ -90,7 +90,12 @@ export class ActivSet {
 
     constructor(name: string, arg: string) {
         this.name = name;
-        this.arg = arg;
+        if (arg === undefined){
+            this.arg = null;
+        }else {
+            this.arg = arg;
+        }
+
     }
 }
 

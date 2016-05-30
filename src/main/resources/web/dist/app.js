@@ -1545,7 +1545,7 @@ webpackJsonp([0],{
 	            pipes: [
 	                searchFilterPipe_1.SearchFilterPipe
 	            ],
-	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">\n                    {{device.id}}\n                </span>\n\n                <p>{{device.state}}<br>\n                    Second Line\n                </p>\n\n                <div class=\"secondary-content\">\n                <!--<div *ngIf=\"device.locationX >= 1000.0\">-->\n                    <a class=\"btn-floating btn waves-effect waves-light\"\n                        (click)=\"addLeft(device.id)\"  >\n                            <i class=\"material-icons\">add</i>\n                    </a>\n                    <a class=\"btn-floating btn waves-effect waves-light\"\n                        (click)=\"addRight(device.id)\"  >\n                            <i class=\"material-icons\">add</i>\n                    </a>\n                <!--</div>-->\n                <!--<div *ngIf=\"device.locationX <= 1000.0\">-->\n                    <a href=\"#/device/{{device.id}}\" class=\"btn-floating btn waves-effect waves-light\">\n                        <i class=\"material-icons\">mode_edit</i>\n                    </a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\"  >\n                        <i class=\"material-icons\">delete_forever</i>\n                    </a>\n                <!--</div>-->\n\n                </div>\n            </li>\n        </ul>\n\n    "
+	            template: "\n        <div class=\"input-field col s6\">\n          <input #listFilter (keyup)=\"0\" placeholder=\"Suche\" id=\"first_name\" type=\"text\" class=\"validate\">\n        </div>\n        <ul class=\"collection\">\n            <li *ngFor=\"#device of devices | searchFilter:listFilter.value\" class=\"collection-item avatar\">\n\n                <i class=\"material-icons circle\"><i class=\"material-icons\">local_florist</i></i>\n                <span class=\"title\">\n                    {{device.id}}\n                </span>\n\n                <p>\n                    {{device.state}}<br>\n                    <!--Second Line-->\n                </p>\n\n                <div class=\"secondary-content\">\n                <!--<div *ngIf=\"device.locationX >= 1000.0\">-->\n                <!--<a class=\"btn-floating btn waves-effect waves-light\"-->\n                    <!--(click)=\"addLeft(device.id)\"  >-->\n                        <!--<i class=\"material-icons\">add</i>-->\n                <!--</a>-->\n                <!--<a class=\"btn-floating btn waves-effect waves-light\"-->\n                    <!--(click)=\"addRight(device.id)\"  >-->\n                        <!--<i class=\"material-icons\">add</i>-->\n                <!--</a>-->\n                <!--</div>-->\n                <!--<div *ngIf=\"device.locationX <= 1000.0\">-->\n                    <a href=\"#/device/{{device.id}}\" class=\"btn-floating btn waves-effect waves-light\">\n                        <i class=\"material-icons\">mode_edit</i>\n                    </a>\n                    <a class=\"btn-floating btn waves-effect waves-light\" (click)=\"delete(device.id)\"  >\n                        <i class=\"material-icons\">delete</i>\n                    </a>\n                <!--</div>-->\n\n                </div>\n            </li>\n        </ul>\n\n    "
 	        }), 
 	        __metadata('design:paramtypes', [device_service_1.DevicesService])
 	    ], DevicesComponent);
@@ -1652,12 +1652,10 @@ webpackJsonp([0],{
 	            .subscribe(function (devices) {
 	            var index = comon_1.indexOfId(devices, _this.id);
 	            _this.device = devices[index];
-	            if (_this.device !== null) {
-	                if (_this.device.possibleSets !== null) {
-	                    _this.possibleSets = _this.device.possibleSets;
-	                    _this.activSetTrunOffGesture = _this.device.activSets.activSetTrunOffGesture;
-	                    _this.activSetTrunOnGesture = _this.device.activSets.activSetTrunOnGesture;
-	                }
+	            if (_this.device.possibleSets !== null) {
+	                _this.possibleSets = _this.device.possibleSets;
+	                _this.activSetTrunOffGesture = _this.device.activSets.activSetTrunOffGesture;
+	                _this.activSetTrunOnGesture = _this.device.activSets.activSetTrunOnGesture;
 	            }
 	        });
 	        this._devicesService.load();

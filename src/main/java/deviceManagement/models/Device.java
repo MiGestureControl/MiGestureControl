@@ -42,18 +42,18 @@ public class Device{
     }
 
     public SetDeviceStateMessage SetForTrunOffGesture() {
-        return new SetDeviceStateMessage(this.id, activSets.activSetTrunOffGesture.name);
+        return new SetDeviceStateMessage(this.id, activSets.activSetTrunOffGesture.name, activSets.activSetTrunOffGesture.arg);
     }
 
     public SetDeviceStateMessage SetForTrunOnGesture() {
-        return new SetDeviceStateMessage(this.id, activSets.activSetTrunOnGesture.name);
+        return new SetDeviceStateMessage(this.id, activSets.activSetTrunOnGesture.name, activSets.activSetTrunOnGesture.arg);
     }
 
     public SetDeviceStateMessage turnOff() {
-        return new SetDeviceStateMessage(this.id, "off");
+        return new SetDeviceStateMessage(this.id, "off", null);
     }
 
     public SetDeviceStateMessage turnOn() {
-        return new SetDeviceStateMessage(this.id, "on");
+        return new SetDeviceStateMessage(this.id, "on", null);
     }
 }

@@ -135,18 +135,29 @@ export class DeviceDetailComponent {
             .subscribe( devices => {
                 var index = indexOfId(devices, this.id);
                 this.device = devices[index];
+
                 if (this.device !== null) {
-                    if (this.device.possibleSets === null) {
+
+                    if (this.device.possibleSets !== null) {
+
                         this.possibleSets = this.device.possibleSets;
 
-                        this.activSetTrunOffGesture = this.device.activSets.activSetTrunOffGesture;
-                        this.activSetTrunOnGesture = this.device.activSets.activSetTrunOnGesture;
+                        this.activSetTrunOffGesture = new ActivSet(this.device.activSets.activSetTrunOffGesture.name, this.device.activSets.activSetTrunOffGesture.arg);
+
+                        this.activSetTrunOnGesture = new ActivSet(this.device.activSets.activSetTrunOnGesture.name, this.device.activSets.activSetTrunOnGesture.arg);
+
+                        console.log(this.activSetTrunOnGesture);
+
+                        //this.activSetTrunOffGesture = this.device.activSets.activSetTrunOffGesture;
+                        //this.activSetTrunOnGesture = this.device.activSets.activSetTrunOnGesture;
+
+
+
 
                     }
                 }
+            });
 
-                }
-            );
         this._devicesService.load();
         //this.interval = setInterval(() => this._devicesService.load(), 5000 );
     }
@@ -189,6 +200,8 @@ export class DeviceDetailComponent {
         //console.log("possibleSet: " + possibleSet.name + " arg: " + arg);
 
         this.activSetTrunOffGesture = new ActivSet(possibleSet.name, arg);
+
+        console.log(this.activSetTrunOffGesture);
 
     }
 
