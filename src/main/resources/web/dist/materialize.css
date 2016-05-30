@@ -3157,32 +3157,32 @@ nav {
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Thin), url(dist/fonts/Roboto-Thin.eot);
-  src: url(dist/fonts/Roboto-Thin.eot?#iefix) format("embedded-opentype"), url(dist/fonts/Roboto-Thin.woff2) format("woff2"), url(dist/fonts/Roboto-Thin.woff) format("woff"), url(dist/fonts/Roboto-Thin.ttf) format("truetype");
+  src: local(Roboto Thin), url("/assets/fonts/roboto/Roboto-Thin.eot");
+  src: url("/assets/fonts/roboto/Roboto-Thin.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto/Roboto-Thin.woff2") format("woff2"), url("/assets/fonts/roboto/Roboto-Thin.woff") format("woff"), url("/assets/fonts/roboto/Roboto-Thin.ttf") format("truetype");
   font-weight: 200; }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Light), url(dist/fonts/Roboto-Light.eot);
-  src: url(dist/fonts/Roboto-Light.eot?#iefix) format("embedded-opentype"), url(dist/fonts/Roboto-Light.woff2) format("woff2"), url(dist/fonts/Roboto-Light.woff) format("woff"), url(dist/fonts/Roboto-Light.ttf) format("truetype");
+  src: local(Roboto Light), url("/assets/fonts/roboto/Roboto-Light.eot");
+  src: url("/assets/fonts/roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto/Roboto-Light.woff2") format("woff2"), url("/assets/fonts/roboto/Roboto-Light.woff") format("woff"), url("/assets/fonts/roboto/Roboto-Light.ttf") format("truetype");
   font-weight: 300; }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Regular), url(dist/fonts/Roboto-Regular.eot);
-  src: url(dist/fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"), url(dist/fonts/Roboto-Regular.woff2) format("woff2"), url(dist/fonts/Roboto-Regular.woff) format("woff"), url(dist/fonts/Roboto-Regular.ttf) format("truetype");
+  src: local(Roboto Regular), url("/assets/fonts/roboto/Roboto-Regular.eot");
+  src: url("/assets/fonts/roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("/assets/fonts/roboto/Roboto-Regular.woff") format("woff"), url("/assets/fonts/roboto/Roboto-Regular.ttf") format("truetype");
   font-weight: 400; }
 
 @font-face {
   font-family: "Roboto";
-  src: url(dist/fonts/Roboto-Medium.eot);
-  src: url(dist/fonts/Roboto-Medium.eot?#iefix) format("embedded-opentype"), url(dist/fonts/Roboto-Medium.woff2) format("woff2"), url(dist/fonts/Roboto-Medium.woff) format("woff"), url(dist/fonts/Roboto-Medium.ttf) format("truetype");
+  src: url("/assets/fonts/roboto/Roboto-Medium.eot");
+  src: url("/assets/fonts/roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto/Roboto-Medium.woff2") format("woff2"), url("/assets/fonts/roboto/Roboto-Medium.woff") format("woff"), url("/assets/fonts/roboto/Roboto-Medium.ttf") format("truetype");
   font-weight: 500; }
 
 @font-face {
   font-family: "Roboto";
-  src: url(dist/fonts/Roboto-Bold.eot);
-  src: url(dist/fonts/Roboto-Bold.eot?#iefix) format("embedded-opentype"), url(dist/fonts/Roboto-Bold.woff2) format("woff2"), url(dist/fonts/Roboto-Bold.woff) format("woff"), url(dist/fonts/Roboto-Bold.ttf) format("truetype");
+  src: url("/assets/fonts/roboto/Roboto-Bold.eot");
+  src: url("/assets/fonts/roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto/Roboto-Bold.woff2") format("woff2"), url("/assets/fonts/roboto/Roboto-Bold.woff") format("woff"), url("/assets/fonts/roboto/Roboto-Bold.ttf") format("truetype");
   font-weight: 700; }
 
 a {

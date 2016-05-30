@@ -50,9 +50,15 @@ public class FhemConectorActor extends UntypedActor {
             }
         } else if (message instanceof SetDeviceStateMessage){
             SetDeviceStateMessage deviceStateMessage = (SetDeviceStateMessage) message;
-            String id = deviceStateMessage.deviceID;
+            String id    = deviceStateMessage.deviceID;
             String state = deviceStateMessage.state;
-            sendCommand("?cmd=set%20" + id + "%20" + state + "&XHR=1");
+            String arg   = deviceStateMessage.arg;
+
+            if(arg != null){
+                sendCommand("?cmd=set%20" + id + "%20" + state + "%20" + arg + "&XHR=1");
+            } else {
+                sendCommand("?cmd=set%20" + id + "%20" + state  + "&XHR=1");
+            }
         }
         unhandled(message);
     }

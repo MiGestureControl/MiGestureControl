@@ -20,6 +20,8 @@ import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
+import java.util.concurrent.TimeoutException;
+
 import static akka.http.javadsl.marshallers.jackson.Jackson.jsonAs;
 
 /**
@@ -66,7 +68,7 @@ public class HTTPServer extends HttpApp {
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
                 }
             }
@@ -82,7 +84,13 @@ public class HTTPServer extends HttpApp {
                     Future<Object> future
                             = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.RIGHT), timeout);
 
-                    Object result =  Await.result(future, timeout.duration());
+                    Object result = new Object();
+
+                    try {
+                        result =  Await.result(future, timeout.duration());
+                    } catch (TimeoutException exception){
+                        dispatchActor.tell(new ConfigureDeviceWithIdFailedMessage(id), ActorRef.noSender());
+                    }
 
                     System.out.println(result);
                     if (result instanceof ConfigureDeviceFinishedMessage){
@@ -93,7 +101,7 @@ public class HTTPServer extends HttpApp {
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
                 }
             }
@@ -109,18 +117,23 @@ public class HTTPServer extends HttpApp {
                     Future<Object> future
                             = Patterns.ask(dispatchActor, new ConfigureDeviceWithIDMessage(id, Hand.LEFT), timeout);
 
-                    Object result =  Await.result(future, timeout.duration());
+                    Object result = new Object();
 
-                    System.out.println(result);
-                    if (result instanceof ConfigureDeviceFinishedMessage){
-
-                        return ctx.complete(MediaTypes.APPLICATION_JSON.toContentType(), "{\"status\": \"ok\"} ");
-
+                    try{
+                        result =  Await.result(future, timeout.duration());
+                        System.out.println(result);
+                    }catch (TimeoutException exception){
+                        dispatchActor.tell(new ConfigureDeviceWithIdFailedMessage(id), ActorRef.noSender());
                     }
+
+                    if (result instanceof ConfigureDeviceFinishedMessage){
+                        return ctx.complete(MediaTypes.APPLICATION_JSON.toContentType(), "{\"status\": \"ok\"} ");
+                    }
+
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
                 }
             }
@@ -145,7 +158,7 @@ public class HTTPServer extends HttpApp {
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
                 }
             }
@@ -184,7 +197,7 @@ public class HTTPServer extends HttpApp {
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     return ctx.completeWithStatus(StatusCodes.INTERNAL_SERVER_ERROR);
                 }
             }
