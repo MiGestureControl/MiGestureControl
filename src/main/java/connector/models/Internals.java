@@ -31,6 +31,8 @@ public class Internals {
         return TYPE;
     }
 
+    public void setSTATE(String state) { STATE = state; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -26,6 +26,9 @@ public class FhemDevice {
         return Internals;
     }
 
+    public void setState(String state) {
+        Internals.setSTATE(state);
+    }
 
     @Override
     public String toString() {

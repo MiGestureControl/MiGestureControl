@@ -6,6 +6,7 @@ import akka.actor.Props;
 import akka.actor.UntypedActor;
 import connector.AudioActor;
 import connector.FhemConectorActor;
+import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
 import messages.DevicesMessage;
@@ -28,7 +29,8 @@ public class DispatchActor extends UntypedActor {
     final ActorSystem system = this.getContext().system();
 
     final ActorRef fhemConector
-            = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
+            //= system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
+            = system.actorOf(Props.create(MockupConnectorActor.class), "FhemConector");
 
     final ActorRef audioActor = system.actorOf(Props.create(AudioActor.class), "AudioActor");
 
@@ -47,7 +49,7 @@ public class DispatchActor extends UntypedActor {
     DeviceState lastDebounceState;
     long lastDebounceStartTime;
     final long debounceTime = 100000000;
-
+    final int timeBetweenGetDeviceMessages = 30;
 
 
 
@@ -57,12 +59,23 @@ public class DispatchActor extends UntypedActor {
 
         system.scheduler().schedule(
                 Duration.Zero(),
-                Duration.create(5, TimeUnit.SECONDS),
+                Duration.create(timeBetweenGetDeviceMessages, TimeUnit.SECONDS),
                 fhemConector,
                 new GetDevicesMessage(),
                 system.dispatcher(),
                 getSelf()
         );
+
+        // mockup code for schedule a fake "turn device on" message to actor system
+        /*
+        system.scheduler().scheduleOnce(
+                Duration.create(10, TimeUnit.SECONDS),
+                deviceManagementActor,
+                new SetAllDevicesMessage(DeviceState.ON),
+                system.dispatcher(),
+                getSelf()
+        );
+        */
     }
 
     @Override

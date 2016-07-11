@@ -1,5 +1,8 @@
 package connector.models;
 
+import org.boon.json.JsonFactory;
+import org.boon.json.ObjectMapper;
+
 import java.util.List;
 
 /**
@@ -31,5 +34,21 @@ public class FhemJsonList {
                 ", Results=" + Results +
                 ", totalResultsReturned=" + totalResultsReturned +
                 '}';
+    }
+
+    public static FhemJsonList parseList(String s) {
+        ObjectMapper mapper = JsonFactory.create();
+
+        FhemJsonList device = mapper.readValue(s, FhemJsonList.class);
+
+        return device;
+    }
+
+    public void updateDevice(String id, String state) {
+        for(FhemDevice device : Results) {
+            if(device.getName().equals(id)) {
+                device.setState(state);
+            }
+        }
     }
 }
