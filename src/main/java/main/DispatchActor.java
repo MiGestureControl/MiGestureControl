@@ -9,6 +9,7 @@ import connector.FhemConectorActor;
 import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
+import kinector.fsm.GestureRecognizerFSMActivateAll;
 import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
@@ -18,6 +19,7 @@ import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
 import senarios.ImageComperatorActor;
+import tcpServer.TCPServer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +44,9 @@ public class DispatchActor extends UntypedActor {
 
     final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
-    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+    final ActorRef gestureRecognizer
+            //= system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+            = system.actorOf(Props.create(GestureRecognizerFSMActivateAll.class), "GestureRecognizer");
 
     final Kinector kinector = new Kinector(getSelf());
 
@@ -54,8 +58,8 @@ public class DispatchActor extends UntypedActor {
 
 
     public DispatchActor() {
-        new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
-
+        //new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
+        ActorRef tcpServer = system.actorOf(TCPServer.props(this.getSelf()), "TcpServer");
 
         system.scheduler().schedule(
                 Duration.Zero(),
