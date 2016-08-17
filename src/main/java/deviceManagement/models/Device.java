@@ -41,11 +41,11 @@ public class Device{
                 '}';
     }
 
-    public SetDeviceStateMessage SetForTrunOffGesture() {
+    public SetDeviceStateMessage setForTrunOffGesture() {
         return new SetDeviceStateMessage(this.id, activSets.activSetTrunOffGesture.name, activSets.activSetTrunOffGesture.arg);
     }
 
-    public SetDeviceStateMessage SetForTrunOnGesture() {
+    public SetDeviceStateMessage setForTrunOnGesture() {
         return new SetDeviceStateMessage(this.id, activSets.activSetTrunOnGesture.name, activSets.activSetTrunOnGesture.arg);
     }
 

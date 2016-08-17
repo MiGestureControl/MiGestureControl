@@ -121,10 +121,10 @@ public class GestureInterpreter extends UntypedActor {
     private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, GestureRecognizer.Hand[] handGestures) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
             if (gesture == GestureRecognizer.Gesture.RightHand_StretchedUp) {
-                dispatcher.tell(new FlashMessage(), getSelf());
+                dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
 
             } else if (gesture == GestureRecognizer.Gesture.LeftHand_StretchedUp) {
-                dispatcher.tell(new FlashMessage(), getSelf());
+                dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
             } else {
                 Device device = getDevice(skeleton, handGestures);
                 if (device != null) {
@@ -133,6 +133,7 @@ public class GestureInterpreter extends UntypedActor {
                         case RightHand_PointingTowardsDevice_DefaultActivate: {
                             System.out.println("on");
                             dispatcher.tell(device.turnOn(), getSelf());
+
                             break;
                         }
                         case LeftHand_PointingTowardsDevice_DefaultDeactivate:
@@ -172,7 +173,7 @@ public class GestureInterpreter extends UntypedActor {
         // Bestimmen der neuen Line, abhängig davon welcher Hand als zeigende Hand erkannt wurde.
         if (handGestures[0] == GestureRecognizer.Hand.RightHand_Pointer) {
 
-            double maxAngle = 10;
+            double maxAngle = 20f;
             line = getPointingLine(skeleton, GestureRecognizer.Hand.RightHand_Pointer);
 
             if(line != null) {
@@ -199,7 +200,7 @@ public class GestureInterpreter extends UntypedActor {
             }
         } else if (handGestures[1] == GestureRecognizer.Hand.LeftHand_Pointer) {
 
-            double maxAngle = 10;
+            double maxAngle = 20;
             line = getPointingLine(skeleton, GestureRecognizer.Hand.LeftHand_Pointer);
 
             if(line != null) {

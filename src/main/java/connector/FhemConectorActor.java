@@ -50,6 +50,7 @@ public class FhemConectorActor extends UntypedActor {
             }
         } else if (message instanceof SetDeviceStateMessage){
             SetDeviceStateMessage deviceStateMessage = (SetDeviceStateMessage) message;
+            System.out.println(deviceStateMessage);
             String id    = deviceStateMessage.deviceID;
             String state = deviceStateMessage.state;
             String arg   = deviceStateMessage.arg;

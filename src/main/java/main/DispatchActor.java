@@ -4,7 +4,6 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import connector.AudioActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
@@ -29,8 +28,6 @@ public class DispatchActor extends UntypedActor {
 
     final ActorRef fhemConector
             = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
-
-    final ActorRef audioActor = system.actorOf(Props.create(AudioActor.class), "AudioActor");
 
     final ActorRef deviceManagementActor
             = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
@@ -134,9 +131,6 @@ public class DispatchActor extends UntypedActor {
         } else if (message instanceof SkeletonMessage) {
 
             this.gestureRecognizer.tell(message, getSelf());
-        } else if (message instanceof FlashMessage) {
-
-            this.audioActor.tell(message, getSelf());
         } else if (message instanceof ConfigureSetForDeviceWithIDMessage){
 
             this.deviceManagementActor.tell(message, getSender());
