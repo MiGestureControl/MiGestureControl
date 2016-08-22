@@ -251,12 +251,15 @@ public class GestureInterpreter extends UntypedActor {
 
                 double[] point = savedConfigLine_Right.calcLineIntersection(line);
                 System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
-                savedConfigLine_Right = null;
-                HandConfigModeActive_RightHand = false;
 
                 if(dispatcher != null){
                     dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.RIGHT), getSelf());
+                    tempConfigActor.tell(new ConfigureDeviceFinishedMessage(), getSelf());
                 }
+
+                savedConfigLine_Right = null;
+                HandConfigModeActive_RightHand = false;
+                tempConfigActor = null;
 
             }
         }
@@ -270,13 +273,15 @@ public class GestureInterpreter extends UntypedActor {
 
                 double[] point = savedConfigLine_Left.calcLineIntersection(line);
                 System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
-                savedConfigLine_Left = null;
-                HandConfigModeActive_LeftHand = false;
 
                 if(dispatcher != null){
                     dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.LEFT), getSelf());
                     tempConfigActor.tell(new ConfigureDeviceFinishedMessage(), getSelf());
                 }
+
+                savedConfigLine_Left = null;
+                HandConfigModeActive_LeftHand = false;
+                tempConfigActor = null;
             }
         }
     }
