@@ -275,7 +275,7 @@ public class GestureInterpreter extends UntypedActor {
 
                 if(dispatcher != null){
                     dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.LEFT), getSelf());
-                    dispatcher.tell(new ConfigureDeviceFinishedMessage(), getSelf());
+                    tempConfigActor.tell(new ConfigureDeviceFinishedMessage(), getSelf());
                 }
             }
         }
