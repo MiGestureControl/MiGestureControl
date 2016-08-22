@@ -62,18 +62,16 @@ public class GestureInterpreter extends UntypedActor {
             GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
             // Abrufen der HandPosition-Gesten
-            GestureRecognizer.HandPosition[] handPositionGestures = GestureRecognizer.getHandPosition(skeleton);
+            GestureRecognizer.HandPosition[] handPosition = GestureRecognizer.getHandPosition(skeleton);
 
-            if (HandConfigModeActive_RightHand &&
-                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll &&
-                    detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
-                getDevicePosition(skeleton, handPositionGestures);
-            } else if(HandConfigModeActive_LeftHand &&
-                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll &&
-                            detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
-                getDevicePosition(skeleton, handPositionGestures);
+            if ((HandConfigModeActive_LeftHand || HandConfigModeActive_RightHand)  &&
+                    (detectedGesture == GestureRecognizer.Gesture.RightHand_PointingTowardsDevice_DefaultActivate ||
+                    detectedGesture == GestureRecognizer.Gesture.RightHand_PointingTowardsDevice_DefaultDeactivate ||
+                    detectedGesture == GestureRecognizer.Gesture.LeftHand_PointingTowardsDevice_DefaultActivate ||
+                    detectedGesture == GestureRecognizer.Gesture.LeftHand_PointingTowardsDevice_DefaultDeactivate)) {
+                getDevicePosition(skeleton, handPosition);
             } else {
-                interpretGesture(skeleton, detectedGesture, handPositionGestures);
+                interpretGesture(skeleton, detectedGesture, handPosition);
             }
         } else if(message instanceof DevicesMessage){
             if(dispatcher == null){
