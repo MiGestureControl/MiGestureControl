@@ -18,32 +18,6 @@ public class Line {
         this.vector[2] = secondPoint[2] - firstPoint[2];
     }
 
-    /*public double distanceToGivenPoint(double[] givenPoint)
-    {
-        double distanceToGivenPoint;
-
-        double[] tempVector = new double[] {
-                this.point[0] - givenPoint[0],
-                this.point[1] - givenPoint[1],
-                this.point[2] - givenPoint[2]
-        };
-
-        boolean vectorPointingOppositeDirection = (VectorHelper.calcScalarProduct(this.vector, tempVector) >= 0);
-
-        if (vectorPointingOppositeDirection)
-        {
-            distanceToGivenPoint = Double.MAX_VALUE;
-        }
-
-        else
-        {
-            double[] crossProduct = VectorHelper.calcCrossProduct(this.vector, tempVector);
-            distanceToGivenPoint = VectorHelper.calcLength(crossProduct) / VectorHelper.calcLength(this.vector);
-        }
-
-        return distanceToGivenPoint;
-    }*/
-
     public double angleToGivenPoint(double[] givenPoint)
     {
         double[] tempVector = new double[] {
@@ -52,11 +26,8 @@ public class Line {
                 givenPoint[2] - this.point[2]
         };
 
-        double cosineOfAngle = VectorHelper.calcScalarProduct(tempVector, this.vector) /
-                (VectorHelper.calcLength(this.vector) * VectorHelper.calcLength(tempVector));
-
-        //double inDegrees = Math.acos(cosineOfAngle) * 180 / Math.PI;
-        //return inDegrees;
+        double cosineOfAngle = Vector3.calcScalarProduct(tempVector, this.vector) /
+                (Vector3.calcLength(this.vector) * Vector3.calcLength(tempVector));
 
         return Math.toDegrees(Math.acos(cosineOfAngle));
 
@@ -65,8 +36,8 @@ public class Line {
 
     public double[] calcLineIntersection(Line givenLine)
     {
-        double[] crossProduct_givenLine = VectorHelper.calcCrossProduct(this.vector, givenLine.vector);
-        double[] perpendicularVectorToGivenLine = VectorHelper.calcCrossProduct(givenLine.vector, crossProduct_givenLine);
+        double[] crossProduct_givenLine = Vector3.calcCrossProduct(this.vector, givenLine.vector);
+        double[] perpendicularVectorToGivenLine = Vector3.calcCrossProduct(givenLine.vector, crossProduct_givenLine);
 
         if (Arrays.equals(perpendicularVectorToGivenLine, new double[]{0.0,0.0,0.0})) {
             return new double[]{Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE};
@@ -76,16 +47,16 @@ public class Line {
                 givenLine.point[1] - this.point[1],
                 givenLine.point[2] - this.point[2]};
 
-        double firstScalarProduct = VectorHelper.calcScalarProduct(perpendicularVectorToGivenLine, qpVector) /
-                VectorHelper.calcScalarProduct(perpendicularVectorToGivenLine, this.vector);
+        double firstScalarProduct = Vector3.calcScalarProduct(perpendicularVectorToGivenLine, qpVector) /
+                Vector3.calcScalarProduct(perpendicularVectorToGivenLine, this.vector);
 
-        double[] tempVector = VectorHelper.multiplyWithScalar(this.vector, firstScalarProduct);
+        double[] tempVector = Vector3.multiplyWithScalar(this.vector, firstScalarProduct);
 
         double[] firstPoint = {this.point[0] + tempVector[0],
                 this.point[1] + tempVector[1],
                 this.point[2] + tempVector[2]};
 
-        double[] perpendicularVectorFromGivenLine = VectorHelper.calcCrossProduct(this.vector, crossProduct_givenLine);
+        double[] perpendicularVectorFromGivenLine = Vector3.calcCrossProduct(this.vector, crossProduct_givenLine);
 
         if (Arrays.equals(perpendicularVectorFromGivenLine, new double[]{0.0,0.0,0.0})) {
             return new double[]{Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE};
@@ -95,10 +66,10 @@ public class Line {
                 this.point[1] - givenLine.point[1],
                 this.point[2] - givenLine.point[2]};
 
-        double secondScalarProduct = VectorHelper.calcScalarProduct(perpendicularVectorFromGivenLine, pqVector) /
-                VectorHelper.calcScalarProduct(perpendicularVectorFromGivenLine, givenLine.vector);
+        double secondScalarProduct = Vector3.calcScalarProduct(perpendicularVectorFromGivenLine, pqVector) /
+                Vector3.calcScalarProduct(perpendicularVectorFromGivenLine, givenLine.vector);
 
-        tempVector = VectorHelper.multiplyWithScalar(givenLine.vector, secondScalarProduct);
+        tempVector = Vector3.multiplyWithScalar(givenLine.vector, secondScalarProduct);
 
         double[] secondPoint = {givenLine.point[0] + tempVector[0],
                 givenLine.point[1] + tempVector[1],
