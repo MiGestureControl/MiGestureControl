@@ -148,9 +148,11 @@ public class GestureInterpreter extends UntypedActor {
                 }
             }
         } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
-                 dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
+            System.out.println("ALL on");
+            dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
         } else if (gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-                dispatcher.tell(new SetAllDevicesMessage(DeviceState.OFF), getSelf());
+            System.out.println("ALL off");
+            dispatcher.tell(new SetAllDevicesMessage(DeviceState.OFF), getSelf());
         }
     }
     /**

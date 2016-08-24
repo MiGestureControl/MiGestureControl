@@ -9,6 +9,7 @@ import connector.FhemConectorActor;
 import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
+import kinector.fsm.GestureRecognizerFSM;
 import kinector.fsm.GestureRecognizerFSMActivateAll;
 import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
@@ -46,7 +47,8 @@ public class DispatchActor extends UntypedActor {
 
     final ActorRef gestureRecognizer
             //= system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
-            = system.actorOf(Props.create(GestureRecognizerFSMActivateAll.class), "GestureRecognizer");
+            //= system.actorOf(Props.create(GestureRecognizerFSMActivateAll.class, gestureInterpreter), "GestureRecognizer");
+            = system.actorOf(Props.create(GestureRecognizerFSM.class, gestureInterpreter), "GestureRecognizer");
 
     final Kinector kinector = new Kinector(getSelf());
 

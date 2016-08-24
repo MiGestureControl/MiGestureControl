@@ -13,73 +13,50 @@ import java.util.List;
 /**
  * Created by Marc on 13.08.2016.
  */
-public class GestureRecognizerFSMActivateAll extends UntypedActor {
+public class GestureRecognizerFSMActivateAll extends AbstractGestureRecognizerFSM {
 
-    protected enum State
+    private enum State
     {
-        IDLE, ABOVE_HEAD, SIDEWARD_OUTSIDE, CROSSED;
+        IDLE, ABOVE_HEAD, SIDEWARD_OUTSIDE, CROSSED
     }
 
-    private State state = State.IDLE;
     private ActorRef target;
-    private List<Object> queue;
+    private State state = State.IDLE;
     private Skeleton currentSkeleton;
 
-    protected void init(ActorRef target)
+    public GestureRecognizerFSMActivateAll(ActorRef target)
     {
         this.target = target;
-        queue = new ArrayList<Object>();
     }
 
     protected void setState(State state) {
-        if(this.state != state)
-        {
-            transition(this.state, state);
-            this.state = state;
+        if(this.state != state) {
+            this.state = transition(this.state, state);
         }
-    }
-
-    protected void enqueue(Object o)
-    {
-        if(queue != null)
-            queue.add(o);
-    }
-
-    protected List<Object> drainQueue()
-    {
-        final List<Object> q = queue;
-        if(q == null)
-            throw new IllegalStateException("drainQueue(): not yet initialized");
-        queue = new ArrayList<Object>();
-        return q;
-    }
-
-    protected boolean isInitialized()
-    {
-        return target != null;
     }
 
     protected State getState() {
         return state;
     }
 
-    protected ActorRef getTarget() {
-        if(target == null)
-            throw new IllegalStateException("getTarget(): not yet initialized");
-        return target;
-    }
-
-    protected void transition(State old, State next)
+    protected State transition(State old, State next)
     {
         if(old == State.CROSSED && next == State.SIDEWARD_OUTSIDE)
         {
+            // reset state machine
+            next = State.IDLE;
             // Von gekreuzten Armen in die Auswärtsbewegung
             target.tell(
-                    new GestureMessage(GestureRecognizer.Gesture.BothHands_ActivateAll, currentSkeleton),
+                    new GestureMessage(GetRecognizableGesture(), currentSkeleton),
                     ActorRef.noSender());
-            // reset state machine
-            setState(State.IDLE);
         }
+
+        return next;
+    }
+
+    @Override
+    public GestureRecognizer.Gesture GetRecognizableGesture() {
+        return GestureRecognizer.Gesture.BothHands_ActivateAll;
     }
 
     @Override
