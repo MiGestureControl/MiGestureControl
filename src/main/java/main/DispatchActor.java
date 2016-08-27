@@ -56,7 +56,7 @@ public class DispatchActor extends UntypedActor {
                 Duration.Zero(),
                 Duration.create(5, TimeUnit.SECONDS),
                 fhemConector,
-                new GetDevicesMessage(),
+                new GetFhemDevicesMessage(),
                 system.dispatcher(),
                 getSelf()
         );
@@ -68,7 +68,7 @@ public class DispatchActor extends UntypedActor {
 
             this.deviceManagementActor.tell(message, getSelf());
 
-        }else if(message instanceof DevicesMessage){
+        }else if(message instanceof ConfigureDeviceWithIDMessage){
             //System.out.println("DevicesMessage");
 
             this.gestureInterpreter.tell(message, getSelf());
@@ -112,11 +112,6 @@ public class DispatchActor extends UntypedActor {
             this.gestureInterpreter.forward(message, getContext());
 
         }
-        /*else if (message instanceof ConfigureDeviceFinishedMessage) {
-            this.deviceManagementActor.forward(message, getContext());
-            // Blablabla
-
-        }*/
         else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
 
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);

@@ -2,7 +2,7 @@ package connector;
 
 import akka.actor.UntypedActor;
 import connector.models.FhemJsonList;
-import messages.GetDevicesMessage;
+import messages.GetFhemDevicesMessage;
 import messages.SetDeviceStateMessage;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
@@ -41,7 +41,7 @@ public class FhemConectorActor extends UntypedActor {
      * @param message
      */
     public void onReceive(Object message) {
-        if (message instanceof GetDevicesMessage) {
+        if (message instanceof GetFhemDevicesMessage) {
             //System.out.println(((GetDevices) message).message);
             String content = this.getContentStringFromURL(this.fhemJSONListURL);
 

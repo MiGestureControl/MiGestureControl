@@ -42,6 +42,7 @@ public class DeviceManagementActor extends UntypedActor {
 
     public DeviceManagementActor(String configPath) {
         //Wenn der String leer ist dann laden wir keine Konfig
+
         if (configPath.length() > 0) {
             this.configPath= configPath;
 
