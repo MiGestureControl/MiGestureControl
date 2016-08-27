@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Marc on 13.08.2016.
  */
-public class GestureRecognizerFSMActivateAll extends AbstractGestureRecognizerFSM {
+public class GestureRecognizerFSMActivateAll extends UntypedActor { // extends AbstractGestureRecognizerFSM {
 
     private enum State
     {
@@ -54,7 +54,7 @@ public class GestureRecognizerFSMActivateAll extends AbstractGestureRecognizerFS
         return next;
     }
 
-    @Override
+    //@Override
     public GestureRecognizer.Gesture GetRecognizableGesture() {
         return GestureRecognizer.Gesture.BothHands_ActivateAll;
     }

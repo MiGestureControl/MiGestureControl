@@ -21,7 +21,14 @@ public class GestureRecognizer extends UntypedActor {
     /** Enums, welche die möglichen erkannten Gesten beschreiben. ("None", wenn keine Geste erkannt wurde.) */
     public enum Gesture { RightHand_PointingTowardsDevice_DefaultActivate, LeftHand_PointingTowardsDevice_DefaultActivate,
         RightHand_PointingTowardsDevice_DefaultDeactivate, LeftHand_PointingTowardsDevice_DefaultDeactivate,
-        BothHands_ActivateAll, BothHands_DeactivateAll, RightHand_StretchedUp, LeftHand_StretchedUp, None }
+        BothHands_ActivateAll, BothHands_DeactivateAll, RightHand_StretchedUp, LeftHand_StretchedUp, None,
+
+        // neu
+        Pointing_NoAction,
+        Pointing_ActivateDevice,
+        Pointing_DeactiveDevice,
+        Crossing, MovingSidewardOutside, StrechtingUp, RaisingUp, RaisingDown,
+    }
 
     /** Enums, welche die möglichen erkannten Handzustände beschreiben. */
     public enum Hand{
