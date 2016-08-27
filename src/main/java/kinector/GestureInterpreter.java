@@ -32,14 +32,14 @@ public class GestureInterpreter extends UntypedActor {
     /**
      * Zwischengespeicherte Line zum Bestimmen einer Geräte-Position.
      */
-    private Line savedConfigLine_Right;
-    private Line savedConfigLine_Left;
+    private StraightLine savedConfigLine_Right;
+    private StraightLine savedConfigLine_Left;
 
+    // Zwischengespeicherter Aktor, an den eine Bestätigungsnachricht bei erfolgreicher Konfiguration geschickt wird.
     ActorRef tempConfigActor;
 
+    // Bezeichnung des im Konfigurationsmodus einzurichtenden Gerätes
     String currentConfigDevice;
-
-
 
     /**
      * Aktor-Methode zum Empfangen von Aktor-Nachrichten.
@@ -155,7 +155,7 @@ public class GestureInterpreter extends UntypedActor {
      * Methode zum Ermitteln eines Gerätes.
      * <p/>
      * Diese Methode erhält Skelett-Daten und bestimmt anhand dieser mittels eines Aufrufs
-     * der statischen Methode getPointingLine(...) eine neue Line ausgehend von der zeigenden HandPosition.
+     * der statischen Methode getPointingStraightLine(...) eine neue Line ausgehend von der zeigenden HandPosition.
      * Darauffolgend wird überprüft, ob in Richtung der Line ein Geräte vorhanden ist. Hierfür wird
      * der Winkel zwischen der Line und den Geräte-Positionen berechnet. Das Gerät mit dem geringsten Winkel zur
      * Line wird als erkanntes Gerät zurückgegeben.
@@ -165,13 +165,13 @@ public class GestureInterpreter extends UntypedActor {
      */
     public Device getDevice(Skeleton skeleton, GestureRecognizer.HandPosition[] handPosition) {
         Device detectedDevice = null;
-        Line line = null;
+        StraightLine line = null;
 
         // Bestimmen der neuen Line, abhängig davon welcher HandPosition als zeigende HandPosition erkannt wurde.
         if (handPosition[0] == GestureRecognizer.HandPosition.RightHand_Pointer) {
 
             double maxAngle = 20f;
-            line = getPointingLine(skeleton, GestureRecognizer.HandPosition.RightHand_Pointer);
+            line = getPointingStraightLine(skeleton, GestureRecognizer.HandPosition.RightHand_Pointer);
 
             if(line != null) {
                 for (Device device : devices.values()) {
@@ -183,7 +183,7 @@ public class GestureInterpreter extends UntypedActor {
                         point[0] = device.locationX_Right;
                         point[1] = device.locationY_Right;
                         point[2] = device.locationZ_Right;
-                        double angleToPoint = Math.abs(line.angleToGivenPoint(point));
+                        double angleToPoint = Math.abs(StraightLine.angleToGivenPoint(line, point));
 
                         if (angleToPoint <= maxAngle) {
 
@@ -198,7 +198,7 @@ public class GestureInterpreter extends UntypedActor {
         } else if (handPosition[1] == GestureRecognizer.HandPosition.LeftHand_Pointer) {
 
             double maxAngle = 20;
-            line = getPointingLine(skeleton, GestureRecognizer.HandPosition.LeftHand_Pointer);
+            line = getPointingStraightLine(skeleton, GestureRecognizer.HandPosition.LeftHand_Pointer);
 
             if(line != null) {
                 for (Device device : devices.values()) {
@@ -210,7 +210,7 @@ public class GestureInterpreter extends UntypedActor {
                         point[0] = device.locationX_Left;
                         point[1] = device.locationY_Left;
                         point[2] = device.locationZ_Left;
-                        double angleToPoint = Math.abs(line.angleToGivenPoint(point));
+                        double angleToPoint = Math.abs(StraightLine.angleToGivenPoint(line, point));
 
                         if (angleToPoint <= maxAngle) {
 
@@ -240,15 +240,14 @@ public class GestureInterpreter extends UntypedActor {
 
         // Bestimmen der neuen Line, abhängig davon welcher HandPosition als zeigende HandPosition erkannt wurde.
         if (handPosition[0] == GestureRecognizer.HandPosition.RightHand_Pointer) {
-            Line line = getPointingLine(skeleton, GestureRecognizer.HandPosition.RightHand_Pointer);
+            StraightLine line = getPointingStraightLine(skeleton, GestureRecognizer.HandPosition.RightHand_Pointer);
 
             if (savedConfigLine_Right == null) {
                 savedConfigLine_Right = line;
                 System.out.println("Erste Linie (rechte HandPosition) gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
             } else {
 
-                double[] point = savedConfigLine_Right.calcLineIntersection(line);
-                System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
+                double[] point = StraightLine.calcStraightLineIntersection(savedConfigLine_Right, line);
 
                 if(dispatcher != null){
                     dispatcher.tell(new SetDeviceLocationMessage(currentConfigDevice, point, Hand.RIGHT), getSelf());
@@ -262,14 +261,14 @@ public class GestureInterpreter extends UntypedActor {
             }
         }
         else if (handPosition[1] == GestureRecognizer.HandPosition.LeftHand_Pointer) {
-            Line line = getPointingLine(skeleton, GestureRecognizer.HandPosition.LeftHand_Pointer);
+            StraightLine line = getPointingStraightLine(skeleton, GestureRecognizer.HandPosition.LeftHand_Pointer);
 
             if (savedConfigLine_Left == null) {
                 savedConfigLine_Left = line;
                 System.out.println("Erste Linie (linke HandPosition) gespeichert. Wechseln Sie die Position und zeigen Sie erneut auf das Objekt.");
             } else {
 
-                double[] point = savedConfigLine_Left.calcLineIntersection(line);
+                double[] point = StraightLine.calcStraightLineIntersection(savedConfigLine_Left, line);
                 System.out.println("x: " + point[0] + "y: " + point[1] + "z: " + point[2]);
 
                 if(dispatcher != null){
@@ -284,24 +283,24 @@ public class GestureInterpreter extends UntypedActor {
         }
     }
 
-    /** Methode zum Ermitteln einer neuen Line.
+    /** Methode zum Ermitteln einer neuen Geraden.
      *
-     * Diese Methode ermittelt eine neue Line der jeweils zeigenden HandPosition.
+     * Diese Methode ermittelt eine neue Gerade auf Basis der jeweils zeigenden HandPosition.
      * Hierfür werden entweder linker oder rechter Ellbogen- und HandPosition-Knochen der Skelett-Daten verwendet,
      * abhängig davon welche HandPosition als zeigende HandPosition erkannt wurde.
      *
      * @param skeleton Skelett-Daten zum Ermitteln einer Line
-     * @return Neue Line, die anhand der Skelett-Daten ermittelt wurde
+     * @return Neue Gerade, die anhand der Skelett-Daten ermittelt wurde
      */
-    public static Line getPointingLine(Skeleton skeleton, HandPosition handPosition)
+    public static StraightLine getPointingStraightLine(Skeleton skeleton, HandPosition handPosition)
     {
 
-        // Bestimmen der neuen Line, abhängig davon welcher HandPosition als zeigende HandPosition erkannt wurde.
+        // Bestimmen der neuen Geraden, abhängig davon welcher HandPosition als zeigende HandPosition erkannt wurde.
         if (handPosition == HandPosition.RightHand_Pointer) {
-            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
+            return new StraightLine(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
         }
         else if (handPosition == HandPosition.LeftHand_Pointer) {
-            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
+            return new StraightLine(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
         }
 
         return null;

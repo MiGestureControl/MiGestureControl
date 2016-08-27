@@ -47,6 +47,7 @@ public class GestureRecognizer extends UntypedActor {
             {HandPosition.RightHand_Idle, HandPosition.LeftHand_Idle}
     };
 
+    /** Array, welcher die zuvor erkannten Gesten der jeweiligen Skelette darstellt. */
     private static Gesture[] previousDetectedGesture = new Gesture[] {
             Gesture.None, Gesture.None, Gesture.None, Gesture.None,
             Gesture.None, Gesture.None, Gesture.None
@@ -88,6 +89,7 @@ public class GestureRecognizer extends UntypedActor {
                     gestureInterpreterActor.tell(new GestureMessage(detectedGesture, skeleton), ActorRef.noSender());
                 }
 
+                // Zuvor erkannte Geste festlegen
                 previousDetectedGesture[skeleton.getPlayerID()] = detectedGesture;
             }
         }
@@ -158,10 +160,12 @@ public class GestureRecognizer extends UntypedActor {
             gesture = Gesture.BothHands_DeactivateAll;
         }
 
+        // Wenn die rechte Hand nach oben zeigend ausgestreckt wird und die linke Hand sich unterhalb der Wirbelsäulenmitte befindet
         else if(handPosition[0] == HandPosition.RightHand_StretchedUp && handPosition[1] == HandPosition.LeftHand_Idle){
             gesture = Gesture.RightHand_StretchedUp;
         }
 
+        // Wenn die rechte Hand nach oben zeigend ausgestreckt wird und die linke Hand sich unterhalb der Wirbelsäulenmitte befindet
         else if(handPosition[1] == HandPosition.LeftHand_StretchedUp && handPosition[0] == HandPosition.RightHand_Idle){
             gesture = Gesture.LeftHand_StretchedUp;
         }
@@ -184,16 +188,17 @@ public class GestureRecognizer extends UntypedActor {
 
         HandPosition[] handPosition = new HandPosition[2];
 
-        // HandPosition-Positionen werden grundsätzlich zuerst als Idle gekennzeichnet
+        // HandPosition-Positionen werden grundsätzlich zuerst als Unknown gekennzeichnet
         handPosition[0] = HandPosition.Unknown_State;
         handPosition[1] = HandPosition.Unknown_State;
 
 
-        // Wenn sich beiden Hände unterhalb der Wirbelsäulen-Mitte befinden, bleiben die Handpositionen auf Idle
+        // Wenn sich die rechte Hand unterhalb der Wirbelsäulen-Mitte befindet, wird die Handposition als Idle gekennzeichnet
         if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) <= skeleton.get3DJointY(Skeleton.SPINE_MID))){
             handPosition[0] = HandPosition.RightHand_Idle;
         }
 
+        // Wenn sich die link Hand unterhalb der Wirbelsäulen-Mitte befindet, wird die Handposition als Idle gekennzeichnet
         if(skeleton.get3DJointY(Skeleton.HAND_LEFT) <= skeleton.get3DJointY(Skeleton.SPINE_MID)){
             handPosition[1] = HandPosition.LeftHand_Idle;
         }
@@ -260,24 +265,27 @@ public class GestureRecognizer extends UntypedActor {
                 }
             }
 
+            // Wenn die rechte Hand sich oberhalb von rechter Schulter, rechtem Ellbogen sowie Kopf befindet
             else if((skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.SHOULDER_RIGHT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.ELBOW_RIGHT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_RIGHT) > skeleton.get3DJointY(Skeleton.HEAD)) &&
                     handPosition[1] ==  HandPosition.LeftHand_Idle){
 
 
-
+                // Wenn rechte Hand und rechter Ellbogen sich auf x-Achse unter Berücksichtigung eines
+                // Toleranzwertes in der Nähe der rechten Schulter befinden
                 if(((skeleton.get3DJointX(Skeleton.HAND_RIGHT)) > skeleton.get3DJointX(Skeleton.SHOULDER_RIGHT) - 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.HAND_RIGHT)) < skeleton.get3DJointX(Skeleton.SHOULDER_RIGHT) + 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.ELBOW_RIGHT)) > skeleton.get3DJointX(Skeleton.SHOULDER_RIGHT) - 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.ELBOW_RIGHT)) < skeleton.get3DJointX(Skeleton.SHOULDER_RIGHT) + 0.1)){
 
-                    //System.out.println(skeleton.get3DJointZ(Skeleton.HAND_RIGHT));
+                    // Wenn rechte Hand und rechter Ellbogen sich auf z-Achse unter Berücksichtigung eines
+                    // Toleranzwertes in der Nähe der rechten Schulter befindet, wird Handposition als ausgestreckt nach oben betrachtet
                     if(((skeleton.get3DJointZ(Skeleton.HAND_RIGHT)) < skeleton.get3DJointZ(Skeleton.SHOULDER_RIGHT) + 0.1) &&
                             ((skeleton.get3DJointZ(Skeleton.HAND_RIGHT)) > skeleton.get3DJointZ(Skeleton.SHOULDER_RIGHT) - 0.1) &&
                             ((skeleton.get3DJointZ(Skeleton.ELBOW_RIGHT)) < skeleton.get3DJointZ(Skeleton.SHOULDER_RIGHT) + 0.1) &&
                             ((skeleton.get3DJointZ(Skeleton.ELBOW_RIGHT)) > skeleton.get3DJointZ(Skeleton.SHOULDER_RIGHT) - 0.1)){
-                        //System.out.println("Rechte HandPosition ausgestreckt im Toleranzbereich");
+
                         handPosition[0] = HandPosition.RightHand_StretchedUp;
                     }
                 }
@@ -317,17 +325,21 @@ public class GestureRecognizer extends UntypedActor {
                 }
             }
 
+            // Wenn die linke Hand sich oberhalb von linker Schulter, linkem Ellbogen sowie Kopf befindet
             else if((skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.SHOULDER_LEFT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.ELBOW_LEFT)) &&
                     (skeleton.get3DJointY(Skeleton.HAND_LEFT) > skeleton.get3DJointY(Skeleton.HEAD)) &&
                     handPosition[0] ==  HandPosition.RightHand_Idle){
 
+                // Wenn linke Hand und linker Ellbogen sich auf x-Achse unter Berücksichtigung eines
+                // Toleranzwertes in der Nähe der linken Schulter befinden
                 if(((skeleton.get3DJointX(Skeleton.HAND_LEFT)) > skeleton.get3DJointX(Skeleton.SHOULDER_LEFT) - 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.HAND_LEFT)) < skeleton.get3DJointX(Skeleton.SHOULDER_LEFT) + 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.ELBOW_LEFT)) > skeleton.get3DJointX(Skeleton.SHOULDER_LEFT) - 0.1) &&
                         ((skeleton.get3DJointX(Skeleton.ELBOW_LEFT)) < skeleton.get3DJointX(Skeleton.SHOULDER_LEFT) + 0.1)){
 
-                    //System.out.println(skeleton.get3DJointZ(Skeleton.HAND_RIGHT));
+                    // Wenn linke Hand und linker Ellbogen sich auf z-Achse unter Berücksichtigung eines
+                    // Toleranzwertes in der Nähe der linken Schulter befindet, wird Handposition als ausgestreckt nach oben betrachtet
                     if(((skeleton.get3DJointZ(Skeleton.HAND_LEFT)) < skeleton.get3DJointZ(Skeleton.SHOULDER_LEFT) + 0.1) &&
                             ((skeleton.get3DJointZ(Skeleton.HAND_LEFT)) > skeleton.get3DJointZ(Skeleton.SHOULDER_LEFT) - 0.1) &&
                             ((skeleton.get3DJointZ(Skeleton.ELBOW_LEFT)) < skeleton.get3DJointZ(Skeleton.SHOULDER_LEFT) + 0.1) &&
@@ -339,6 +351,7 @@ public class GestureRecognizer extends UntypedActor {
                 }
             }
         }
+        
         if(handPosition[0] != HandPosition.Unknown_State){
             previousHandPosition[skeletonID][0] = handPosition[0];
         }
