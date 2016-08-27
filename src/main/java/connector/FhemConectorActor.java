@@ -26,6 +26,9 @@ public class FhemConectorActor extends UntypedActor {
     URL fhemSendURL;
 
 
+    /**
+     *
+     */
     public FhemConectorActor() {
         try {
             this.fhemJSONListURL = new URL(baseURL + "/fhem?cmd=jsonlist2&XHR=1");
@@ -41,16 +44,21 @@ public class FhemConectorActor extends UntypedActor {
      * @param message
      */
     public void onReceive(Object message) {
+
         if (message instanceof GetFhemDevicesMessage) {
-            //System.out.println(((GetDevices) message).message);
+            //Diese Nachricht veranlasst den FhemConectorActor die Geräteliste vom FHEM-Server zu laden.
             String content = this.getContentStringFromURL(this.fhemJSONListURL);
 
+            //Wenn der Inhalt nicht null ist wird dem Sender geantwortet
             if(content!=null){
                 getSender().tell(parseList(content), getSelf());
             }
         } else if (message instanceof SetDeviceStateMessage){
+            //Diese Nachricht veranlasst den FhemConectorActor den Zustand eines Gerätes zu ändern und diesen an den Fhem-server zu sendne
             SetDeviceStateMessage deviceStateMessage = (SetDeviceStateMessage) message;
             System.out.println(deviceStateMessage);
+
+            //zusammenbauen der Nachricht
             String id    = deviceStateMessage.deviceID;
             String state = deviceStateMessage.state;
             String arg   = deviceStateMessage.arg;

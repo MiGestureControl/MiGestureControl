@@ -49,7 +49,7 @@ public class DispatchActor extends UntypedActor {
 
 
     public DispatchActor() {
-        new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
+        new HTTPServer(this.getSelf()).bindRoute("127.0.0.1", 8080, system);
 
 
         system.scheduler().schedule(
