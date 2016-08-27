@@ -1,5 +1,7 @@
 package kinector;
 
+import java.util.Vector;
+
 /**
  * Created by johan on 20.03.2016.
  */
@@ -38,32 +40,42 @@ public class Vector3 {
         this.z = z;
     }
 
-    public static double calcScalarProduct(double[] firstVector, double[] secondVector){
-        return firstVector[0]*secondVector[0]
-                + firstVector[1]*secondVector[1]
-                + firstVector[2]*secondVector[2];
+    public static double calcScalarProduct(Vector3 firstVector, Vector3 secondVector){
+        return firstVector.getX()*secondVector.getX()
+                + firstVector.getY()*secondVector.getY()
+                + firstVector.getZ()*secondVector.getZ();
     }
 
-    public static double[] calcCrossProduct(double[] firstVector, double[] secondVector){
+    public static Vector3 calcCrossProduct(Vector3 firstVector, Vector3 secondVector){
 
+        double crossProductX = (firstVector.getY() * secondVector.getZ() - secondVector.getY() * firstVector.getZ());
+        double crossProductY = (firstVector.getZ() * secondVector.getX() - secondVector.getZ() * firstVector.getX());
+        double crossProductZ = (firstVector.getX() * secondVector.getY() - secondVector.getX() * firstVector.getY());
+
+
+        return new Vector3(crossProductX, crossProductY, crossProductZ);
+    }
+
+    public static double calcLength(Vector3 vector){
+        return (float) Math.sqrt(vector.getX()*vector.getX()
+                + vector.getY()*vector.getY()
+                + vector.getZ()*vector.getZ());
+    }
+
+    public static double[] multiplyWithScalar(Vector3 vector, double scalar){
         return new double[]{
-                (firstVector[1] * secondVector[2] - secondVector[1] * firstVector[2]),
-                (firstVector[2] * secondVector[0] - secondVector[2] * firstVector[0]),
-                (firstVector[0] * secondVector[1] - secondVector[0] * firstVector[1])
+                (vector.getX() * scalar),
+                (vector.getY() * scalar),
+                (vector.getZ() * scalar)
         };
     }
 
-    public static double calcLength(double[] vector){
-        return (float) Math.sqrt(vector[0]*vector[0]
-                + vector[1]*vector[1]
-                + vector[2]*vector[2]);
-    }
+    public static Vector3 defineVectorFromPointToPoint(double[] fromPoint, double[] toPoint){
+        double fromPointToPointVectorX = toPoint[0] - fromPoint[0];
+        double fromPointToPointVectorY = toPoint[1] - fromPoint[1];
+        double fromPointToPointVectorZ = toPoint[2] - fromPoint[2];
 
-    public static double[] multiplyWithScalar(double[] vector, double scalar){
-        return new double[]{
-                (vector[0] * scalar),
-                (vector[1] * scalar),
-                (vector[2] * scalar)
-        };
+        return new Vector3(fromPointToPointVectorX, fromPointToPointVectorY, fromPointToPointVectorZ);
+
     }
 }
