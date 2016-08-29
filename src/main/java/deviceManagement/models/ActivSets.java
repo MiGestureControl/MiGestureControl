@@ -5,12 +5,12 @@ package deviceManagement.models;
  */
 public class ActivSets {
 
-    public ActivSet activSetTrunOffGesture = new ActivSet();
-    public ActivSet activSetTrunOnGesture = new ActivSet();
+    public ActivSet activSetTurnOffGesture = new ActivSet();
+    public ActivSet activSetTurnOnGesture = new ActivSet();
 
-    public ActivSets(ActivSet trunOffGestureSet, ActivSet trunOnGestureSet) {
-        this.activSetTrunOffGesture = trunOffGestureSet;
-        this.activSetTrunOnGesture = trunOnGestureSet;
+    public ActivSets(ActivSet turnOffGestureSet, ActivSet turnOnGestureSet) {
+        this.activSetTurnOffGesture = turnOffGestureSet;
+        this.activSetTurnOnGesture = turnOnGestureSet;
     }
 
     public ActivSets() {
@@ -19,8 +19,8 @@ public class ActivSets {
     @Override
     public String toString() {
         return "ActivSets{" +
-                "activSetTrunOffGesture=" + activSetTrunOffGesture +
-                ", activSetTrunOnGesture=" + activSetTrunOnGesture +
+                "activSetTurnOffGesture=" + activSetTurnOffGesture +
+                ", activSetTurnOnGesture=" + activSetTurnOnGesture +
                 '}';
     }
 }

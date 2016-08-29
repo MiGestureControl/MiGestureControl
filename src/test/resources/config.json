@@ -1,0 +1,2603 @@
+{
+  "devices": [
+    {
+      "id": "FHEMWEB:127.0.0.1:50661",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {
+          "name": "",
+          "arg": ""
+        },
+        "activSetTrunOnGesture": {
+          "name": "",
+          "arg": ""
+        }
+      }
+    },
+    {
+      "id": "global",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "<no definition>",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Log.Dewpoint",
+      "possibleSets": [
+        {
+          "name": "absorb",
+          "args": [
+            "Log.Cellar",
+            "Log.Garden",
+            "Logfile"
+          ]
+        },
+        {
+          "name": "addRegexpPart"
+        },
+        {
+          "name": "removeRegexpPart"
+        },
+        {
+          "name": "reopen"
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "AllLights",
+      "possibleSets": [
+        {
+          "name": "blink"
+        },
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "off-till"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        }
+      ],
+      "state": "undefined",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50212",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "SVG_03_Dewpoint",
+      "possibleSets": [
+        {
+          "name": "copyGplotFile",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50592",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "anyViews",
+      "possibleSets": [
+        {
+          "name": "lock",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "unlock",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Projector",
+      "possibleSets": [
+        {
+          "name": "on",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "off",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "off",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Log.Cellar",
+      "possibleSets": [
+        {
+          "name": "absorb",
+          "args": [
+            "Log.Dewpoint",
+            "Log.Garden",
+            "Logfile"
+          ]
+        },
+        {
+          "name": "addRegexpPart"
+        },
+        {
+          "name": "removeRegexpPart"
+        },
+        {
+          "name": "reopen"
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Garden",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "defined",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Livingroom",
+      "possibleSets": [
+        {
+          "name": "dim0%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "blink"
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "off-till"
+        }
+      ],
+      "state": "dim18%",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {
+          "name": "dim100%"
+        },
+        "activSetTrunOnGesture": {
+          "name": "dim0%"
+        }
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:51573",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "dew_all",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Office",
+      "possibleSets": [
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "off-till"
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "blink"
+        }
+      ],
+      "state": "on",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rg_Guest2",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "none"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "-",
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "none",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rg_Guest1",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "none"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "-",
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "none",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "CUL_0",
+      "possibleSets": [
+        {
+          "name": "bWidth"
+        },
+        {
+          "name": "freq"
+        },
+        {
+          "name": "hmPairForSec"
+        },
+        {
+          "name": "hmPairSerial"
+        },
+        {
+          "name": "led"
+        },
+        {
+          "name": "patable"
+        },
+        {
+          "name": "rAmpl"
+        },
+        {
+          "name": "raw"
+        },
+        {
+          "name": "reopen"
+        },
+        {
+          "name": "sens"
+        }
+      ],
+      "state": "???",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "WEBphone",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "wlCinema",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:51603",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "AllResidentsAway",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:59838",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rgr_Guests",
+      "possibleSets": [
+        {
+          "name": "addRoommate"
+        },
+        {
+          "name": "addGuest"
+        },
+        {
+          "name": "state",
+          "args": [
+            "none",
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "removeGuest",
+          "args": [
+            "rg_Guest1",
+            "rg_Guest2"
+          ]
+        }
+      ],
+      "state": "none",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "lcCinema",
+      "possibleSets": [
+        {
+          "name": "remove",
+          "args": [
+            "AllOff",
+            "Break",
+            "Cinema",
+            "WatchTV"
+          ]
+        },
+        {
+          "name": "save"
+        },
+        {
+          "name": "set"
+        },
+        {
+          "name": "setcmd"
+        },
+        {
+          "name": "scene",
+          "args": [
+            "AllOff",
+            "Break",
+            "Cinema",
+            "WatchTV"
+          ]
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50266",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rgr_Children",
+      "possibleSets": [
+        {
+          "name": "addRoommate"
+        },
+        {
+          "name": "addGuest"
+        },
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "removeRoommate",
+          "args": [
+            "rr_Daughter",
+            "rr_Son",
+            "rr_Baby"
+          ]
+        }
+      ],
+      "state": "home",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50201",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {
+          "name": "clearSvgCache",
+          "arg": "noArg"
+        },
+        "activSetTrunOnGesture": {
+          "name": "rereadicons",
+          "arg": "noArg"
+        }
+      }
+    },
+    {
+      "id": "Log.Garden",
+      "possibleSets": [
+        {
+          "name": "absorb",
+          "args": [
+            "Log.Cellar",
+            "Log.Dewpoint",
+            "Logfile"
+          ]
+        },
+        {
+          "name": "addRegexpPart"
+        },
+        {
+          "name": "removeRegexpPart"
+        },
+        {
+          "name": "reopen"
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "ResidentsComeHome",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rr_Mother",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "home",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "WEBtablet",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "sunRise",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "Next: 04:37:57",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rgr_Residents",
+      "possibleSets": [
+        {
+          "name": "addRoommate"
+        },
+        {
+          "name": "addGuest"
+        },
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "removeRoommate",
+          "args": [
+            "rr_Father",
+            "rr_Mother",
+            "rr_Daughter",
+            "rr_Son",
+            "rr_Baby"
+          ]
+        },
+        {
+          "name": "removeGuest",
+          "args": [
+            "rg_Guest1",
+            "rg_Guest2"
+          ]
+        }
+      ],
+      "state": "home",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:59446",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50710",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:51437",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "autocreate",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "outdoorNotifier",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "anyViews_weblink",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:59471",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Outdoor",
+      "possibleSets": [
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "blink"
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "off-till"
+        }
+      ],
+      "state": "off",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rr_Son",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "-",
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "gone",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50032",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Logfile",
+      "possibleSets": [
+        {
+          "name": "absorb",
+          "args": [
+            "Log.Cellar",
+            "Log.Dewpoint",
+            "Log.Garden"
+          ]
+        },
+        {
+          "name": "addRegexpPart"
+        },
+        {
+          "name": "removeRegexpPart"
+        },
+        {
+          "name": "reopen"
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "TV",
+      "possibleSets": [
+        {
+          "name": "on",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "off",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "off",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "sunSet",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "Next: 22:07:58",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rr_Father",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "-",
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "gone",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "WEB",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50258",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rr_Baby",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "home",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Screen",
+      "possibleSets": [
+        {
+          "name": "up",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "down",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "up",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50255",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "SVG_02_Cellar",
+      "possibleSets": [
+        {
+          "name": "copyGplotFile",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "telnetPort",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "Initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rr_Daughter",
+      "possibleSets": [
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "mood",
+          "args": [
+            "-",
+            "calm",
+            "relaxed",
+            "happy",
+            "excited",
+            "lonely",
+            "sad",
+            "bored",
+            "stressed",
+            "uncomfortable",
+            "sleepy",
+            "angry",
+            "toggle"
+          ]
+        },
+        {
+          "name": "location"
+        }
+      ],
+      "state": "gone",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "et",
+      "possibleSets": [
+        {
+          "name": "clear",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "flush",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "active",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Cellar",
+      "possibleSets": [
+        {
+          "name": ""
+        }
+      ],
+      "state": "T: 21.1  H: 54.6",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "rgr_Parents",
+      "possibleSets": [
+        {
+          "name": "addRoommate"
+        },
+        {
+          "name": "addGuest"
+        },
+        {
+          "name": "state",
+          "args": [
+            "home",
+            "gotosleep",
+            "absent",
+            "gone"
+          ]
+        },
+        {
+          "name": "removeRoommate",
+          "args": [
+            "rr_Father",
+            "rr_Mother"
+          ]
+        }
+      ],
+      "state": "home",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "ReadingLight",
+      "possibleSets": [
+        {
+          "name": "dim0%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "blink"
+        },
+        {
+          "name": "off-till"
+        }
+      ],
+      "state": "dim06%",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "CeilingLight",
+      "possibleSets": [
+        {
+          "name": "dim0%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "blink"
+        },
+        {
+          "name": "intervals"
+        },
+        {
+          "name": "off-till"
+        }
+      ],
+      "state": "dim43%",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "Alarm",
+      "possibleSets": [
+        {
+          "name": "dim06%"
+        },
+        {
+          "name": "dim100%"
+        },
+        {
+          "name": "dim12%"
+        },
+        {
+          "name": "dim18%"
+        },
+        {
+          "name": "dim25%"
+        },
+        {
+          "name": "dim31%"
+        },
+        {
+          "name": "dim37%"
+        },
+        {
+          "name": "dim43%"
+        },
+        {
+          "name": "dim50%"
+        },
+        {
+          "name": "dim56%"
+        },
+        {
+          "name": "dim62%"
+        },
+        {
+          "name": "dim68%"
+        },
+        {
+          "name": "dim75%"
+        },
+        {
+          "name": "dim81%"
+        },
+        {
+          "name": "dim87%"
+        },
+        {
+          "name": "dim93%"
+        },
+        {
+          "name": "dimdown"
+        },
+        {
+          "name": "dimup"
+        },
+        {
+          "name": "dimupdown"
+        },
+        {
+          "name": "off"
+        },
+        {
+          "name": "off-for-timer"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "on-100-for-timer-prev"
+        },
+        {
+          "name": "on-for-timer"
+        },
+        {
+          "name": "on-old-for-timer"
+        },
+        {
+          "name": "on-old-for-timer-prev"
+        },
+        {
+          "name": "on-till"
+        },
+        {
+          "name": "ramp-off-time"
+        },
+        {
+          "name": "ramp-on-time"
+        },
+        {
+          "name": "reset"
+        },
+        {
+          "name": "sendstate"
+        },
+        {
+          "name": "timer"
+        },
+        {
+          "name": "toggle"
+        },
+        {
+          "name": "dim",
+          "args": [
+            "slider",
+            "0",
+            "6.25",
+            "100"
+          ]
+        },
+        {
+          "name": "off-till"
+        },
+        {
+          "name": "blink"
+        },
+        {
+          "name": "intervals"
+        }
+      ],
+      "state": "off",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "SVG_01_Garden",
+      "possibleSets": [
+        {
+          "name": "copyGplotFile",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "initialized",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50696",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    },
+    {
+      "id": "FHEMWEB:127.0.0.1:50662",
+      "possibleSets": [
+        {
+          "name": "clearSvgCache",
+          "args": [
+            "noArg"
+          ]
+        },
+        {
+          "name": "rereadicons",
+          "args": [
+            "noArg"
+          ]
+        }
+      ],
+      "state": "Connected",
+      "locationX_Left": 1.7976931348623157E+308,
+      "locationY_Left": 1.7976931348623157E+308,
+      "locationZ_Left": 1.7976931348623157E+308,
+      "locationX_Right": 1.7976931348623157E+308,
+      "locationY_Right": 1.7976931348623157E+308,
+      "locationZ_Right": 1.7976931348623157E+308,
+      "activSets": {
+        "activSetTrunOffGesture": {},
+        "activSetTrunOnGesture": {}
+      }
+    }
+  ]
+}

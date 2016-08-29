@@ -4,19 +4,16 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import connector.AudioActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
-import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
-import kinector.GestureInterpreter;
-import kinector.GestureRecognizer;
+import kinector.GestureInterpreterActor;
+import kinector.GestureRecognizerActor;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
-import senarios.ImageComperatorActor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,17 +27,12 @@ public class DispatchActor extends UntypedActor {
     final ActorRef fhemConector
             = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
 
-    final ActorRef audioActor = system.actorOf(Props.create(AudioActor.class), "AudioActor");
-
     final ActorRef deviceManagementActor
             = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
 
-    final ActorRef imageComperatorActor
-            = system.actorOf(Props.create(ImageComperatorActor.class), "imageComperatorActor");
+     ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
-    final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
-
-    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizerActor.class, gestureInterpreter), "GestureRegognizer");
 
     final Kinector kinector = new Kinector(getSelf());
 
@@ -52,14 +44,14 @@ public class DispatchActor extends UntypedActor {
 
 
     public DispatchActor() {
-        new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
+        new HTTPServer(this.getSelf()).bindRoute("127.0.0.1", 8080, system);
 
 
         system.scheduler().schedule(
                 Duration.Zero(),
                 Duration.create(5, TimeUnit.SECONDS),
                 fhemConector,
-                new GetDevicesMessage(),
+                new GetFhemDevicesMessage(),
                 system.dispatcher(),
                 getSelf()
         );
@@ -71,7 +63,7 @@ public class DispatchActor extends UntypedActor {
 
             this.deviceManagementActor.tell(message, getSelf());
 
-        }else if(message instanceof DevicesMessage){
+        }else if(message instanceof ConfigureDeviceWithIDMessage){
             //System.out.println("DevicesMessage");
 
             this.gestureInterpreter.tell(message, getSelf());
@@ -115,11 +107,6 @@ public class DispatchActor extends UntypedActor {
             this.gestureInterpreter.forward(message, getContext());
 
         }
-        /*else if (message instanceof ConfigureDeviceFinishedMessage) {
-            this.deviceManagementActor.forward(message, getContext());
-            // Blablabla
-
-        }*/
         else if (message instanceof RemoveLocationForDeviceWithIDMessage) {
 
             System.out.println(((RemoveLocationForDeviceWithIDMessage) message).id);
@@ -134,9 +121,6 @@ public class DispatchActor extends UntypedActor {
         } else if (message instanceof SkeletonMessage) {
 
             this.gestureRecognizer.tell(message, getSelf());
-        } else if (message instanceof FlashMessage) {
-
-            this.audioActor.tell(message, getSelf());
         } else if (message instanceof ConfigureSetForDeviceWithIDMessage){
 
             this.deviceManagementActor.tell(message, getSender());

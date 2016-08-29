@@ -27,8 +27,12 @@ import java.util.List;
 public class DeviceManagementActor extends UntypedActor {
 
     Hashtable<String, Device> devices = new Hashtable();
-    String configPath;
+    String configPath = "config.json";
 
+    /**
+     * Klassen deklaration für die Konfiguration
+     * wird nirgendwo anders genutzt daher die Deklaration in der klasse
+     */
     class MIGCConfig {
         @Override
         public String toString() {
@@ -37,14 +41,25 @@ public class DeviceManagementActor extends UntypedActor {
                     '}';
         }
 
+        //Beinhaltet im wesenlich die Gerätelist
         List<Device> devices = new ArrayList<Device>();
     }
 
+    /**
+     * Konstuktor ohne Konfig
+     */
+    public DeviceManagementActor() {}
+    /**
+     * Konstruktor bekommt den Pfad der Konfig übergeben
+     * @param configPath
+     */
     public DeviceManagementActor(String configPath) {
         //Wenn der String leer ist dann laden wir keine Konfig
+
         if (configPath.length() > 0) {
             this.configPath= configPath;
 
+            //versuch des ladens
             try {
                 File f = new File(configPath);
                 if(f.exists() && !f.isDirectory()) {
@@ -56,10 +71,12 @@ public class DeviceManagementActor extends UntypedActor {
                         System.out.println(configPath);
                         //System.out.println(configString);
 
+                        //Mittels ObjectMapper wird die Konfig geparst
                         ObjectMapper mapper =  JsonFactory.create();
                         MIGCConfig config = mapper.fromJson(configString, MIGCConfig.class);
                         System.out.println(config);
 
+                        //die Geräte der Konfig werden der Geräteloste des DeviceManagementActor hinzugefügt
                         for (Device dev :config.devices) {
                             this.devices.put(dev.id, dev);
                         }
@@ -74,11 +91,16 @@ public class DeviceManagementActor extends UntypedActor {
         }
     }
 
+    /**
+     * Speichern der aktuellen Geräteliste in die Konfigurationsdatei
+     */
     private void saveConfig(){
+        //Erzeugen der Konfig
         ObjectMapper mapper =  JsonFactory.create();
         MIGCConfig migcConfig = new MIGCConfig();
         migcConfig.devices = new ArrayList<Device>(this.devices.values());
 
+        //Schreiben der Konfig
         try {
             FileOutputStream fos =  new FileOutputStream(new File(configPath));
             mapper.writeValue(fos, migcConfig);
@@ -92,29 +114,37 @@ public class DeviceManagementActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         //Liste von Geräten vom Connector
+
         if (message instanceof FhemJsonList) {
+
             FhemJsonList fhemJsonList = (FhemJsonList) message;
 
+            //liste wird durchlaufen
             for (FhemDevice device : fhemJsonList.getDevices()) {
                 String id = device.getName();
 
+
                 if (devices.containsKey(id)) {
+                    //Wenn das Gerät vorhanden ist wird es akutalisiert
                     this.updateFhemDevice(device);
                 }else {
+                    //Wenn nicht  neu hinzugefügt
                     this.addFhemDevice(device);
                 }
             }
 
+            //die neue Liste wird dem Sender zurück geschickt
             getSender().tell(new DevicesMessage(devices), getSelf());
 
-            //setzen des neuen Orts für ein Gerät
         } else if(message instanceof SetDeviceLocationMessage){
+            //setzen des neuen Orts für ein Gerät
 
             SetDeviceLocationMessage setDeviceLocationMessage = (SetDeviceLocationMessage) message;
             Device device = devices.get(setDeviceLocationMessage.id);
 
             System.out.println(setDeviceLocationMessage);
 
+            //Setzen der Kordinaten des Gerätes
             if (device != null) {
                 if (setDeviceLocationMessage.hand == Hand.LEFT){
                     device.locationX_Left = setDeviceLocationMessage.locationX;
@@ -127,9 +157,11 @@ public class DeviceManagementActor extends UntypedActor {
                 }
             }
 
+            //wenn das Gerät aktualiset wurde wird die Konfig gesichert
             this.saveConfig();
 
         } else if(message instanceof SetAllDevicesMessage){
+            //setzen des Zustandes aller Geräte
             DeviceState state = ((SetAllDevicesMessage)message).state;
 
             for (Device device : devices.values()) {
@@ -141,9 +173,12 @@ public class DeviceManagementActor extends UntypedActor {
             }
         } else if (message instanceof GetAllDevicesMessage) {
 
+            //liefert dem Sender eine Liste aller Geräte
             getSender().tell(new DevicesMessage(devices),getSelf());
 
         } else if (message instanceof ConfigureSetForDeviceWithIDMessage) {
+
+            //Speichert den neuen Set für ein Gerät
             Device device = devices.get(((ConfigureSetForDeviceWithIDMessage) message).id);
 
             if (device != null){
@@ -152,18 +187,26 @@ public class DeviceManagementActor extends UntypedActor {
                 device.activSets = activSets;
             }
 
+            //wenn das Gerät aktualiset wurde wird die Konfig gesichert
             this.saveConfig();
-
+            //Antworten des Senders
             getSender().tell(new ConfigureDeviceFinishedMessage(), getSelf());
         }
+        unhandled(message);
     }
 
+    /**
+     *
+     * @param fhemDevice
+     */
     private  void updateFhemDevice(FhemDevice fhemDevice){
         if (!fhemDevice.getName().startsWith("WEB_") || !fhemDevice.getName().startsWith("FHEMWEB")){
 
+            //Suchen des Gerätes in der Hashtable
 //            System.out.println(fhemDevice.getName());
             Device device = devices.get(fhemDevice.getName());
 
+            //setzen des neuen States
             device.state = fhemDevice.getInternals().getSTATE();
 
             devices.put(device.id, device);
@@ -171,12 +214,17 @@ public class DeviceManagementActor extends UntypedActor {
     }
 
 
+    /**
+     * Hinzufügen eines FhemDevice zu der Hashtable
+     * @param fhemDevice
+     */
     private void addFhemDevice(FhemDevice fhemDevice){
         if (!fhemDevice.getName().startsWith("WEB_") || !fhemDevice.getName().startsWith("FHEMWEB")){
             Device device = new Device();
 
             device.id = fhemDevice.getName();
 
+            //Durchlaufen der sets und eintragen in das Device
             for (String a : fhemDevice.getPossibleSets().split(" ")){
                 String[] b = a.split(":");
 
