@@ -13,10 +13,10 @@ import java.io.Serializable;
  * Diese Nachricht wird vom GestureRecognizer erzeugt und enthält eine Geste und ein Skeleton
  */
 public class GestureMessage implements Serializable {
-    //
-    public final GestureRecognizer.Gesture gesture;
+    public final GestureRecognizerActor.Gesture gesture;
     public final Skeleton skeleton;
 
+    public GestureMessage(GestureRecognizerActor.Gesture gesture, Skeleton skeleton) {
     /**
      * Konstruktor zur Erzeugung der Nachricht
      * @param gesture die Geste die gesendet werden soll

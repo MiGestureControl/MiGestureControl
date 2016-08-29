@@ -7,11 +7,10 @@ import akka.actor.UntypedActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
-import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
-import kinector.GestureInterpreter;
-import kinector.GestureRecognizer;
+import kinector.GestureInterpreterActor;
+import kinector.GestureRecognizerActor;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
@@ -31,9 +30,9 @@ public class DispatchActor extends UntypedActor {
     final ActorRef deviceManagementActor
             = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
 
-    final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
+     ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
-    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizerActor.class, gestureInterpreter), "GestureRegognizer");
 
     final Kinector kinector = new Kinector(getSelf());
 
@@ -114,6 +113,10 @@ public class DispatchActor extends UntypedActor {
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
+
+        } else if (message instanceof DepthImageMessage) {
+
+            imageComperatorActor.tell(message, getSelf());
 
         } else if (message instanceof SkeletonMessage) {
 

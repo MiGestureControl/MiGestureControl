@@ -19,11 +19,11 @@ public class StraightLine {
     /**
      * Richtungsvektor, welcher die Richtung die Ausrichtung der Geraden im Koordinatensystem beschreibt.
      */
-    private Vector3 vector;
+    private Vector3 vector = new Vector3();
 
-    /** Konstruktor der Klasse Line.
+    /** Konstruktor der Klasse StraightLine.
      *
-     *  Der Konstruktor der Klasse Line erhält zwei Punkte im Koordinatensystem. Der erste Punkt wird hierbei als Punkt
+     *  Der Konstruktor der Klasse StraightLine erhält zwei Punkte im Koordinatensystem. Der erste Punkt wird hierbei als Punkt
      *  abgelegt, durch welchen die Gerade gemäß der Punktrichtungsgleichung verläuft. Mit Hilfe der beiden Punkte wird
      *  zudem ein Richtungsvektor definiert, welcher die Ausrichtung der Geraden im Raum beschreibt.
      *
@@ -33,9 +33,7 @@ public class StraightLine {
     public StraightLine(double[] firstPoint, double[] secondPoint){
         this.point = firstPoint;
 
-        this.vector.setX(secondPoint[0] - firstPoint[0]);
-        this.vector.setY(secondPoint[1] - firstPoint[1]);
-        this.vector.setZ(secondPoint[2] - firstPoint[2]);
+        this.vector = Vector3.defineVectorFromPointToPoint(firstPoint, secondPoint);
     }
 
     /**
@@ -48,7 +46,7 @@ public class StraightLine {
      *
      * @param givenPoint Punkt im Koordinatensystem.
      */
-    public static double angleToGivenPoint(StraightLine givenStraightLine, double[] givenPoint)
+    public static double calcAngleToGivenPoint(StraightLine givenStraightLine, double[] givenPoint)
     {
         Vector3 tempVector = new Vector3(
                 givenPoint[0] - givenStraightLine.point[0],
@@ -83,7 +81,7 @@ public class StraightLine {
         Vector3 perpendicularVectorToSecondStraightLine = Vector3.calcCrossProduct(secondStraightLine.vector, crossProduct_firstLineSecondLine);
 
         // Wenn Vektor (0,0,0) entspricht, verlaufen die Geraden parallel
-        if (perpendicularVectorToSecondStraightLine.equals(new double[]{0.0,0.0,0.0})) {
+        if (perpendicularVectorToSecondStraightLine.equals(new Vector3(0,0,0))) {
 
             // Punkt mit Werten MAX_VALUE wird zurückgegeben, um ihn bei späterer Prüfung abzufangen
             return new double[]{Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE};
@@ -97,12 +95,12 @@ public class StraightLine {
                 Vector3.calcScalarProduct(perpendicularVectorToSecondStraightLine, firstStraightLine.vector);
 
         // Richtungsvektor der ersten Geraden mit Skalarprodukt multiplizieren
-        double[] tempVector = Vector3.multiplyWithScalar(firstStraightLine.vector, firstScalarProduct);
+        Vector3 tempVector = Vector3.multiplyWithScalar(firstStraightLine.vector, firstScalarProduct);
 
         // Bestimmen des ersten Punktes der Strecke
-        double[] firstPoint = {firstStraightLine.point[0] + tempVector[0],
-                firstStraightLine.point[1] + tempVector[1],
-                firstStraightLine.point[2] + tempVector[2]};
+        double[] firstPoint = {firstStraightLine.point[0] + tempVector.getX(),
+                firstStraightLine.point[1] + tempVector.getY(),
+                firstStraightLine.point[2] + tempVector.getZ()};
 
         // Vektor bestimmten der Senkrecht auf beiden Geraden steht und in Richtung der zweiten Geraden zeigt
         Vector3 perpendicularVectorToFirstStraightLine = Vector3.calcCrossProduct(firstStraightLine.vector, crossProduct_firstLineSecondLine);
@@ -118,19 +116,19 @@ public class StraightLine {
         tempVector = Vector3.multiplyWithScalar(secondStraightLine.vector, secondScalarProduct);
 
         // Bestimmen des ersten Punktes der Strecke
-        double[] secondPoint = {secondStraightLine.point[0] + tempVector[0],
-                secondStraightLine.point[1] + tempVector[1],
-                secondStraightLine.point[2] + tempVector[2]};
+        double[] secondPoint = {secondStraightLine.point[0] + tempVector.getX(),
+                secondStraightLine.point[1] + tempVector.getY(),
+                secondStraightLine.point[2] + tempVector.getZ()};
 
 
         //System.out.println("First point: " + firstPoint[0] + ", " + firstPoint[1] + ", " +  firstPoint[2]);
         //System.out.println("Second point: " + secondPoint[0] + ", " + secondPoint[1] + ", " +  secondPoint[2]);
 
         // Mittelpunkt der Strecke bestimmen
-        double[] middlePointOfLineSegment = {((firstPoint[0] + secondPoint[0]) / 2),
+        double[] middlePointOfStraightLineSegment = {((firstPoint[0] + secondPoint[0]) / 2),
                 ((firstPoint[1] + secondPoint[1]) / 2),
                 ((firstPoint[2] + secondPoint[2]) / 2)};
-        return middlePointOfLineSegment;
+        return middlePointOfStraightLineSegment;
     }
 
 }
