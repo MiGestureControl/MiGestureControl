@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Diese Klasse dient als Aktor und behandelt SkeletonMessages. Anhand der erhaltenen Skelett-Daten werden Gesten erkannt
  * und als neue GestureMessage an den zugehörigen GestureInterpreter verschickt.
  */
-public class GestureRecognizer extends UntypedActor {
+public class GestureRecognizerActor extends UntypedActor {
 
     /** Zugehöriger GestureInterpreter-Aktor, an den bei Erkennen einer Geste eine GestureMessage verschickt wird. */
     private final ActorRef gestureInterpreterActor;
@@ -60,7 +60,7 @@ public class GestureRecognizer extends UntypedActor {
      *
      * @param gestureInterpreterActor Referenz auf den zugehörigen GestureInterpreter-Aktor
      */
-    public GestureRecognizer(ActorRef gestureInterpreterActor){
+    public GestureRecognizerActor(ActorRef gestureInterpreterActor){
         this.gestureInterpreterActor = gestureInterpreterActor;
     }
 
@@ -351,7 +351,7 @@ public class GestureRecognizer extends UntypedActor {
                 }
             }
         }
-        
+
         if(handPosition[0] != HandPosition.Unknown_State){
             previousHandPosition[skeletonID][0] = handPosition[0];
         }

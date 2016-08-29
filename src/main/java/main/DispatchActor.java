@@ -7,11 +7,10 @@ import akka.actor.UntypedActor;
 import connector.FhemConectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
-import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
-import kinector.GestureInterpreter;
-import kinector.GestureRecognizer;
+import kinector.GestureInterpreterActor;
+import kinector.GestureRecognizerActor;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
@@ -35,9 +34,9 @@ public class DispatchActor extends UntypedActor {
     final ActorRef imageComperatorActor
             = system.actorOf(Props.create(ImageComperatorActor.class), "imageComperatorActor");
 
-    final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
+    final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreterActor.class), "GestureInterpreter");
 
-    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
+    final ActorRef gestureRecognizer = system.actorOf(Props.create(GestureRecognizerActor.class, gestureInterpreter), "GestureRegognizer");
 
     final Kinector kinector = new Kinector(getSelf());
 
