@@ -15,7 +15,6 @@ import kinector.GestureRecognizer;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
-import senarios.ImageComperatorActor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,9 +30,6 @@ public class DispatchActor extends UntypedActor {
 
     final ActorRef deviceManagementActor
             = system.actorOf(Props.create(DeviceManagementActor.class, "config.json"), "deviceManagementActor");
-
-    final ActorRef imageComperatorActor
-            = system.actorOf(Props.create(ImageComperatorActor.class), "imageComperatorActor");
 
     final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
@@ -118,10 +114,6 @@ public class DispatchActor extends UntypedActor {
             // hier für deviceManagementActor den Gesten Aktor der antwortet dann wie hier der Dispatcherr
             //this.deviceManagementActor.forward(message, getContext());
             getSender().tell(new ConfigureDeviceFinishedMessage(),getSelf());
-
-        } else if (message instanceof DepthImageMessage) {
-
-            imageComperatorActor.tell(message, getSelf());
 
         } else if (message instanceof SkeletonMessage) {
 

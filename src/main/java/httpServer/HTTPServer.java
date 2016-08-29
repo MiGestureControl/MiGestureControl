@@ -44,7 +44,7 @@ public class HTTPServer extends HttpApp {
 
     /**
      * überschreiben der createRoute Methode ist alles was nötig ist um den Server zu implementieren
-     * @return
+     * @return Route die die Konfiguration des Servers beinhaltet
      */
     @Override
     public Route createRoute() {

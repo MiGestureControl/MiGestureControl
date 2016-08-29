@@ -84,18 +84,18 @@ public class FhemConectorActor extends UntypedActor {
         System.out.println(command);
 
         try {
+            //versuch der Verbindung
             HttpURLConnection con = (HttpURLConnection) this.fhemSendURL.openConnection();
 
-            //add reuqest header
+            //zum reuqest header hinzufügen
             con.setRequestMethod("POST");
-
-            // Send post request
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(command);
             wr.flush();
             wr.close();
 
+            //rückgabe code
             int responseCode = con.getResponseCode();
             //System.out.println("\nSending 'POST' request to URL : " + this.fhemJSONListURL);
             //System.out.println("Post parameters : " + command);
@@ -106,6 +106,7 @@ public class FhemConectorActor extends UntypedActor {
             String inputLine;
             StringBuffer response = new StringBuffer();
 
+            //Einlesen der Antwort
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -133,16 +134,15 @@ public class FhemConectorActor extends UntypedActor {
     private String getContentStringFromURL(URL url) {
 
         HttpURLConnection con = null;
+        //Versuch der Verbindung
         try {
             con = (HttpURLConnection) url.openConnection();
 
 
-            // optional default is GET
+            // Optional
             con.setRequestMethod("GET");
 
-            //optional request header
-            //con.setRequestProperty("User-Agent", "Mozilla/5.0");
-
+            // HTTP-Status-Code
             int responseCode = con.getResponseCode();
             //System.out.println("\nSending 'GET' request to URL : " + url);
             //System.out.println("Response Code : " + responseCode);
@@ -152,13 +152,13 @@ public class FhemConectorActor extends UntypedActor {
             String inputLine;
             StringBuffer response = new StringBuffer();
 
+            //Einlesen der Antwort
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
 
-            //print result
-//            System.out.println(response.toString());
+            //Antwort wird in einen String gewandelt und zurück geliefert
             return response.toString();
         } catch (IOException e) {
             e.printStackTrace();

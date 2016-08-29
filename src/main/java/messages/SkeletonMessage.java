@@ -11,10 +11,18 @@ import java.util.ArrayList;
 public class SkeletonMessage implements Serializable {
     public final ArrayList<Skeleton> skeletons;
 
+    /**
+     * Konstruktor mit
+     * @param skeletons
+     */
     public SkeletonMessage(ArrayList<Skeleton> skeletons) {
         this.skeletons = skeletons;
     }
 
+    /**
+     * Erzeugt eine Formatierte Ausgabe der Nachright
+     * @return Formatierte Ausgabe
+     */
     @Override
     public String toString() {
         return "SkeletonMessage{" +

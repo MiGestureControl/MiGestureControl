@@ -27,7 +27,7 @@ import java.util.List;
 public class DeviceManagementActor extends UntypedActor {
 
     Hashtable<String, Device> devices = new Hashtable();
-    String configPath;
+    String configPath = "config.json";
 
     /**
      * Klassen deklaration für die Konfiguration
@@ -45,6 +45,10 @@ public class DeviceManagementActor extends UntypedActor {
         List<Device> devices = new ArrayList<Device>();
     }
 
+    /**
+     * Konstuktor ohne Konfig
+     */
+    public DeviceManagementActor() {}
     /**
      * Konstruktor bekommt den Pfad der Konfig übergeben
      * @param configPath
@@ -110,7 +114,9 @@ public class DeviceManagementActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         //Liste von Geräten vom Connector
+
         if (message instanceof FhemJsonList) {
+
             FhemJsonList fhemJsonList = (FhemJsonList) message;
 
             //liste wird durchlaufen
@@ -186,6 +192,7 @@ public class DeviceManagementActor extends UntypedActor {
             //Antworten des Senders
             getSender().tell(new ConfigureDeviceFinishedMessage(), getSelf());
         }
+        unhandled(message);
     }
 
     /**
@@ -217,6 +224,7 @@ public class DeviceManagementActor extends UntypedActor {
 
             device.id = fhemDevice.getName();
 
+            //Durchlaufen der sets und eintragen in das Device
             for (String a : fhemDevice.getPossibleSets().split(" ")){
                 String[] b = a.split(":");
 
