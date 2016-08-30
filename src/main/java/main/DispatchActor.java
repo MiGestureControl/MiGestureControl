@@ -10,7 +10,6 @@ import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
 import kinector.fsm.GestureRecognizerFSM;
-import kinector.fsm.GestureRecognizerFSMActivateAll;
 import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;

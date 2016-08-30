@@ -22,13 +22,13 @@ namespace MIGestureControl_KinectEmulator
     {
       InitializeComponent();
 
-      skeleton.Set3DJointPosition(Skeleton.HEAD, 1.0f, 2.0f, 3.0f);
-      skeleton.Set3DJointPosition(Skeleton.HAND_RIGHT, 4.0f, 5.0f, 6.0f);
-      skeleton.Set3DJointPosition(Skeleton.HAND_LEFT, 7.0f, 8.0f, 9.0f);
-      skeleton.Set3DJointPosition(Skeleton.ELBOW_RIGHT, 10.0f, 11.0f, 12.0f);
-      skeleton.Set3DJointPosition(Skeleton.ELBOW_LEFT, 13.0f, 14.0f, 15.0f);
-      skeleton.Set3DJointPosition(Skeleton.SHOULDER_RIGHT, 16.0f, 17.0f, 18.0f);
-      skeleton.Set3DJointPosition(Skeleton.SHOULDER_LEFT, 19.0f, 20.0f, 21.0f);
+      skeleton.Set3DJointPosition(Skeleton.HEAD, 0.0f, 0.58f, 1.75f);
+      skeleton.Set3DJointPosition(Skeleton.HAND_RIGHT, 0.51f, -0.28f, 1.76f);
+      skeleton.Set3DJointPosition(Skeleton.HAND_LEFT, -0.44f, -0.3f, 1.74f);
+      skeleton.Set3DJointPosition(Skeleton.ELBOW_RIGHT, 0.42f, 0.18f, 1.75f);
+      skeleton.Set3DJointPosition(Skeleton.ELBOW_LEFT, -0.4f, 0.2f, 1.76f);
+      skeleton.Set3DJointPosition(Skeleton.SHOULDER_RIGHT, 0.29f, 0.4f, 1.77f);
+      skeleton.Set3DJointPosition(Skeleton.SHOULDER_LEFT, -0.32f, 0.42f, 1.74f);
     }
 
     private void button1_Click(object sender, EventArgs e)

@@ -22,12 +22,11 @@ public class GestureRecognizer extends UntypedActor {
     public enum Gesture { RightHand_PointingTowardsDevice_DefaultActivate, LeftHand_PointingTowardsDevice_DefaultActivate,
         RightHand_PointingTowardsDevice_DefaultDeactivate, LeftHand_PointingTowardsDevice_DefaultDeactivate,
         BothHands_ActivateAll, BothHands_DeactivateAll, RightHand_StretchedUp, LeftHand_StretchedUp, None,
-
-        // neu
-        Pointing_NoAction,
-        Pointing_ActivateDevice,
-        Pointing_DeactiveDevice,
-        Crossing, MovingSidewardOutside, StrechtingUp, RaisingUp, RaisingDown,
+        
+        /* NEU */
+        Pointing,           // Zeigende Hand erkannt
+        ActivateDevice,     // "Gerät aktivieren" erkannt
+        DeactivateDevice,   // "Gerät deaktivieren" erkannt
     }
 
     /** Enums, welche die möglichen erkannten Handzustände beschreiben. */
@@ -92,7 +91,8 @@ public class GestureRecognizer extends UntypedActor {
 
                 // Wenn eine Geste erkannt wurde, wird die GestureMessage an den GestureInterpreter versendet.
                 if(detectedGesture != Gesture.None && detectedGesture != previousDetectedGesture[skeleton.getPlayerID()]){
-                    gestureInterpreterActor.tell(new GestureMessage(detectedGesture, skeleton), ActorRef.noSender());
+                    gestureInterpreterActor.tell(new GestureMessage(detectedGesture, skeleton, 
+                            messages.HelperEnums.Hand.UNKNOWN), ActorRef.noSender());
                 }
 
                 previousDetectedGesture[skeleton.getPlayerID()] = detectedGesture;

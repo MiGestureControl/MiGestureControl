@@ -12,12 +12,12 @@ import java.util.function.Function;
 /**
  * Created by Marc on 25.08.2016.
  */
-public class GestureRecognizerFSMLeftHandPointing extends AbstractGestureRecognizerFSM {
+public class GestureRecognizerFSMHandPointing extends AbstractGestureRecognizerFSM {
 
     /**
      * Minmal distance between hands, to avoid spamming messages
      */
-    private float minimumZDistanceBetweenHands = 0.1f;
+    private final float minimumZDistanceBetweenHands = 0.1f;
 
     @Override
     protected void handleSkeletons(List<Skeleton> skeletons) {
@@ -27,7 +27,15 @@ public class GestureRecognizerFSMLeftHandPointing extends AbstractGestureRecogni
             if (isLeftHandNearerAtDeviceThanRightHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
                 System.out.println("Left hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
                 getSender().tell(
-                        new SkeletonStateMessage(skeleton, Hand.LEFT, GestureRecognizer.Gesture.Pointing_NoAction),
+                        new SkeletonStateMessage(skeleton, Hand.LEFT, GestureRecognizer.Gesture.Pointing),
+                        ActorRef.noSender());
+            }
+            // right hand is declared as pointing when it is more fare away from
+            // the body than the left hand (nearer at device)
+            if (isRightHandNearerAtDeviceThanLeftHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
+                System.out.println("Right hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
+                getSender().tell(
+                        new SkeletonStateMessage(skeleton, Hand.RIGHT, GestureRecognizer.Gesture.Pointing),
                         ActorRef.noSender());
             }
         }
@@ -35,6 +43,10 @@ public class GestureRecognizerFSMLeftHandPointing extends AbstractGestureRecogni
 
     private boolean isLeftHandNearerAtDeviceThanRightHand(Skeleton skeleton) {
         return skeleton.get3DJointZ(Skeleton.HAND_LEFT) < skeleton.get3DJointZ(Skeleton.HAND_RIGHT);
+    }
+    
+    private boolean isRightHandNearerAtDeviceThanLeftHand(Skeleton skeleton) {
+        return skeleton.get3DJointZ(Skeleton.HAND_RIGHT) < skeleton.get3DJointZ(Skeleton.HAND_LEFT);
     }
 
     private boolean areHandsFarEnoughFromEachOther(Skeleton skeleton) {

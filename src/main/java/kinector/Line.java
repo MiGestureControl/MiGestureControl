@@ -1,6 +1,8 @@
 package kinector;
 
+import edu.ufl.digitalworlds.j4k.Skeleton;
 import java.util.Arrays;
+import messages.HelperEnums.Hand;
 
 /**
  * Created by johan on 16.03.2016.
@@ -114,5 +116,25 @@ public class Line {
         return middlePoint;
     }
 
+    /** Methode zum Ermitteln einer neuen Line.
+     *
+     * Diese Methode ermittelt eine neue Line der jeweils zeigenden Hand.
+     * Hierfür werden entweder linker oder rechter Ellbogen- und Hand-Knochen der Skelett-Daten verwendet,
+     * abhängig davon welche Hand als zeigende Hand erkannt wurde.
+     *
+     * @param skeleton Skelett-Daten zum Ermitteln einer Line
+     * @return Neue Line, die anhand der Skelett-Daten ermittelt wurde
+     */
+    public static Line getPointingLine(Skeleton skeleton, Hand hand)
+    {
+        // Bestimmen der Hand-Position anhand des Skelettes
+        if (hand == Hand.LEFT) {
+            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_RIGHT), skeleton.get3DJoint(Skeleton.HAND_RIGHT));
+        }
+        else if (hand == Hand.RIGHT) {
+            return new Line(skeleton.get3DJoint(Skeleton.ELBOW_LEFT), skeleton.get3DJoint(Skeleton.HAND_LEFT));
+        }
 
+        return null;
+    }
 }
