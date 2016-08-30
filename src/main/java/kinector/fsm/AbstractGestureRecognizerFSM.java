@@ -2,12 +2,8 @@ package kinector.fsm;
 
 import akka.actor.UntypedActor;
 import edu.ufl.digitalworlds.j4k.Skeleton;
-import kinector.GestureRecognizer;
 import messages.HelperEnums.Hand;
 import messages.SingleSkeletonMessage;
-import messages.SkeletonMessage;
-
-import java.util.List;
 
 /**
  * Basisklasse aller Sub-Automaten für die Erkennung von Gesten
