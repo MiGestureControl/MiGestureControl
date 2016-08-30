@@ -1,7 +1,7 @@
 package messages;
 
 import edu.ufl.digitalworlds.j4k.Skeleton;
-import kinector.GestureRecognizer;
+import kinector.fsm.GestureRecognizerFSM;
 import messages.HelperEnums.Hand;
 
 /**
@@ -11,9 +11,9 @@ public class SkeletonStateMessage {
 
     public Skeleton skeleton;
     public Hand affectedHand;
-    public GestureRecognizer.Gesture gesture;
+    public GestureRecognizerFSM.Gesture gesture;
 
-    public SkeletonStateMessage(Skeleton _skeleton, Hand _affectedHand, GestureRecognizer.Gesture _gesture) {
+    public SkeletonStateMessage(Skeleton _skeleton, Hand _affectedHand, GestureRecognizerFSM.Gesture _gesture) {
         skeleton = _skeleton;
         affectedHand = _affectedHand;
         gesture = _gesture;

@@ -6,7 +6,6 @@ import akka.actor.Props;
 import akka.actor.UntypedActor;
 import connector.AudioActor;
 import connector.FhemConectorActor;
-import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
 import edu.ufl.digitalworlds.j4k.Skeleton;
@@ -15,12 +14,10 @@ import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import httpServer.HTTPServer;
 import kinector.GestureInterpreter;
-import kinector.GestureRecognizer;
 import kinector.Kinector;
 import messages.*;
 import scala.concurrent.duration.Duration;
 import senarios.ImageComperatorActor;
-import tcpServer.TCPServer;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,8 +30,8 @@ public class DispatchActor extends UntypedActor {
     final ActorSystem system = this.getContext().system();
 
     final ActorRef fhemConector
-            //= system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
-            = system.actorOf(Props.create(MockupConnectorActor.class), "FhemConector");
+            = system.actorOf(Props.create(FhemConectorActor.class), "FhemConector");
+            //= system.actorOf(Props.create(MockupConnectorActor.class), "FhemConector");
 
     final ActorRef audioActor = system.actorOf(Props.create(AudioActor.class), "AudioActor");
 
@@ -47,8 +44,6 @@ public class DispatchActor extends UntypedActor {
     final ActorRef gestureInterpreter = system.actorOf(Props.create(GestureInterpreter.class), "GestureInterpreter");
 
     final ActorRef gestureRecognizer
-            //= system.actorOf(Props.create(GestureRecognizer.class, gestureInterpreter), "GestureRegognizer");
-            //= system.actorOf(Props.create(GestureRecognizerFSMActivateAll.class, gestureInterpreter), "GestureRecognizer");
             = system.actorOf(Props.create(GestureRecognizerFSM.class, gestureInterpreter), "GestureRecognizer");
 
     final Kinector kinector = new Kinector(getSelf());
@@ -62,7 +57,6 @@ public class DispatchActor extends UntypedActor {
 
     public DispatchActor() {
         new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8081, system);
-        ActorRef tcpServer = system.actorOf(TCPServer.props(this.getSelf()), "TcpServer");
 
         system.scheduler().schedule(
                 Duration.Zero(),
@@ -72,17 +66,6 @@ public class DispatchActor extends UntypedActor {
                 system.dispatcher(),
                 getSelf()
         );
-
-        // mockup code for schedule a fake "turn device on" message to actor system
-        /*
-        system.scheduler().scheduleOnce(
-                Duration.create(10, TimeUnit.SECONDS),
-                deviceManagementActor,
-                new SetAllDevicesMessage(DeviceState.ON),
-                system.dispatcher(),
-                getSelf()
-        );
-        */
     }
 
     @Override

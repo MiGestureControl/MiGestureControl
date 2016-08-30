@@ -3,21 +3,13 @@ package kinector;
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import deviceManagement.models.Device;
+import kinector.fsm.GestureRecognizerFSM;
 import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
 import edu.ufl.digitalworlds.j4k.Skeleton;
 import messages.*;
 import messages.HelperEnums.Hand;
-
-import javax.sound.sampled.*;
-import java.io.File;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Hashtable;
-
-import static kinector.GestureRecognizer.getPointingLine;
 
 /** Aktor-Klasse zum Interpretieren von erkannten Gesten.
  *
@@ -67,18 +59,18 @@ public class GestureInterpreter extends UntypedActor {
             Hand pointingHand = ((GestureMessage) message).hand;
 
             // Empfangene Gesten-Daten
-            GestureRecognizer.Gesture detectedGesture = ((GestureMessage) message).gesture;
+            GestureRecognizerFSM.Gesture detectedGesture = ((GestureMessage) message).gesture;
 
             // Abrufen der Hand-Gesten
             //GestureRecognizer.Hand[] handGestures = GestureRecognizer.getHandPosition(skeleton);
 
             if (HandConfigModeActive_RightHand &&
-                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll ||
-                    detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
+                    (detectedGesture != GestureRecognizerFSM.Gesture.BothHands_ActivateAll ||
+                    detectedGesture != GestureRecognizerFSM.Gesture.BothHands_DeactivateAll)) {
                 getDevicePosition(skeleton, pointingHand);
             } else if(HandConfigModeActive_LeftHand &&
-                    (detectedGesture != GestureRecognizer.Gesture.BothHands_ActivateAll ||
-                            detectedGesture != GestureRecognizer.Gesture.BothHands_DeactivateAll)) {
+                    (detectedGesture != GestureRecognizerFSM.Gesture.BothHands_ActivateAll ||
+                            detectedGesture != GestureRecognizerFSM.Gesture.BothHands_DeactivateAll)) {
                 getDevicePosition(skeleton, pointingHand);
             } else {
                 interpretGesture(skeleton, detectedGesture, pointingHand);
@@ -119,9 +111,9 @@ public class GestureInterpreter extends UntypedActor {
      * @param skeleton Empfangene Skelett-Daten
      * @param gesture  Empfangene Gesten-Daten
      */
-    private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, Hand pointingHand) {
-        if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            if (gesture == GestureRecognizer.Gesture.StretchedUp) {
+    private void interpretGesture(Skeleton skeleton, GestureRecognizerFSM.Gesture gesture, Hand pointingHand) {
+        if (gesture != GestureRecognizerFSM.Gesture.BothHands_ActivateAll && gesture != GestureRecognizerFSM.Gesture.BothHands_DeactivateAll) {
+            if (gesture == GestureRecognizerFSM.Gesture.StretchedUp) {
                 dispatcher.tell(new FlashMessage(), getSelf());
             } else {
                 Device device = getDevice(skeleton, pointingHand);
@@ -145,10 +137,10 @@ public class GestureInterpreter extends UntypedActor {
                     }
                 }
             }
-        } else if (gesture == GestureRecognizer.Gesture.BothHands_ActivateAll) {
+        } else if (gesture == GestureRecognizerFSM.Gesture.BothHands_ActivateAll) {
             System.out.println("ALL on");
             dispatcher.tell(new SetAllDevicesMessage(DeviceState.ON), getSelf());
-        } else if (gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll) {
+        } else if (gesture == GestureRecognizerFSM.Gesture.BothHands_DeactivateAll) {
             System.out.println("ALL off");
             dispatcher.tell(new SetAllDevicesMessage(DeviceState.OFF), getSelf());
         }
