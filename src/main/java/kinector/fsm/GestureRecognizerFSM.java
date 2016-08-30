@@ -4,7 +4,6 @@ import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
 import edu.ufl.digitalworlds.j4k.Skeleton;
-import kinector.GestureRecognizer;
 import messages.GestureMessage;
 import messages.HelperEnums.Hand;
 import messages.SingleSkeletonMessage;
@@ -123,7 +122,7 @@ public class GestureRecognizerFSM extends UntypedActor {
             {
                 // Sende "ActivateDevice"-Geste an den Gesten-Interpreter
                 Hand pointingHand = current == State.LEFT_CONTROLLING ? Hand.RIGHT : Hand.LEFT;
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.ActivateDevice,
+                messageTarget.tell(new GestureMessage(Gesture.ActivateDevice,
                         skeletons[playerID], pointingHand), ActorRef.noSender());
                 // Geste ist vollständig abgeschlossen, setze Zustand des Automaten in den
                 // Ruhezustand zurück
@@ -135,7 +134,7 @@ public class GestureRecognizerFSM extends UntypedActor {
             {
                 // Sende "DeactivateDevice"-Geste an den Gesten-Interpreter
                 Hand pointingHand = current == State.LEFT_CONTROLLING ? Hand.RIGHT : Hand.LEFT;
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.DeactivateDevice,
+                messageTarget.tell(new GestureMessage(Gesture.DeactivateDevice,
                         skeletons[playerID], pointingHand), ActorRef.noSender());
                 // Geste ist vollständig abgeschlossen, setze Zustand des Automaten in den
                 // Ruhezustand zurück
@@ -146,7 +145,7 @@ public class GestureRecognizerFSM extends UntypedActor {
             case ALL_DEVICES_ON:
             {
                 // Sende "BothHands_ActivateAll"-Geste an den Gesten-Interpreter
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.BothHands_ActivateAll,
+                messageTarget.tell(new GestureMessage(Gesture.BothHands_ActivateAll,
                         skeletons[playerID], Hand.BOTH), ActorRef.noSender());
                 break;
             }
@@ -154,7 +153,7 @@ public class GestureRecognizerFSM extends UntypedActor {
             case ALL_DEVICES_OFF:
             {
                 // Sende "BothHands_DeactivateAll"-Geste an den Gesten-Interpreter
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.BothHands_DeactivateAll,
+                messageTarget.tell(new GestureMessage(Gesture.BothHands_DeactivateAll,
                         skeletons[playerID], Hand.BOTH), ActorRef.noSender());
                 break;
             }
@@ -162,7 +161,7 @@ public class GestureRecognizerFSM extends UntypedActor {
             case PLAY_SOUND:
             {
                 // Sende "StretchedUp"-Geste an den Gesten-Interpreter
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.StretchedUp,
+                messageTarget.tell(new GestureMessage(Gesture.StretchedUp,
                         skeletons[playerID], Hand.UNKNOWN), ActorRef.noSender());
                 break;
             }
@@ -208,15 +207,15 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // -> ALL_DEVICES_ON, wenn Hände oberhalb des Kopfes überkreuzt sind
                 // -> PLAY_SOUND, wenn linke oder rechte Hand gerade nach oben zeigt
 
-                if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.Pointing)
+                if(message.affectedHand == Hand.LEFT && message.gesture == Gesture.Pointing)
                     setState(skeletonID, State.RIGHT_CONTROLLING);
-                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.Pointing)
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == Gesture.Pointing)
                     setState(skeletonID, State.LEFT_CONTROLLING);
-                else if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_ActivateAll)
+                else if(message.affectedHand == Hand.BOTH && message.gesture == Gesture.BothHands_ActivateAll)
                     setState(skeletonID, State.ALL_DEVICES_ON);
-                else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                else if(message.affectedHand == Hand.LEFT && message.gesture == Gesture.StretchedUp)
                     setState(skeletonID, State.PLAY_SOUND);
-                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == Gesture.StretchedUp)
                     setState(skeletonID, State.PLAY_SOUND);
                 break;
             }
@@ -228,11 +227,11 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // -> DEVICE_OFF, linke (steuernde) Hand wurde unter den Kopf gesenkt
                 // -> PLAY_SOUND, rechte (zeigende) Hand wird aus der Zeigeposition gerade nach oben gestreckt
 
-                if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
+                if(message.affectedHand == Hand.LEFT && message.gesture == Gesture.ActivateDevice)
                     setState(skeletonID, State.DEVICE_ON);
-                else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
+                else if(message.affectedHand == Hand.LEFT && message.gesture == Gesture.DeactivateDevice)
                     setState(skeletonID, State.DEVICE_OFF);
-                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == Gesture.StretchedUp)
                     setState(skeletonID, State.PLAY_SOUND);
                 break;
             }
@@ -244,11 +243,11 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // -> DEVICE_OFF, rechte (steuernde) Hand wurde unter den Kopf gesenkt
                 // -> PLAY_SOUND, linke (zeigende) Hand wird aus der Zeigeposition gerade nach oben gestreckt
 
-                if (message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
+                if (message.affectedHand == Hand.RIGHT && message.gesture == Gesture.ActivateDevice)
                     setState(skeletonID, State.DEVICE_ON);
-                else if (message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
+                else if (message.affectedHand == Hand.RIGHT && message.gesture == Gesture.DeactivateDevice)
                     setState(skeletonID, State.DEVICE_OFF);
-                else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                else if(message.affectedHand == Hand.LEFT && message.gesture == Gesture.StretchedUp)
                     setState(skeletonID, State.PLAY_SOUND);
                 break;
             }
@@ -259,9 +258,9 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // -> ALL_DEVICES_OFF, wenn Hände oberhalb des Kopfes entkreuzt wurden
                 // -> IDLE, wenn Hände nach der Überkreuzung herunter genommen werden
 
-                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll)
+                if(message.affectedHand == Hand.BOTH && message.gesture == Gesture.BothHands_DeactivateAll)
                     setState(skeletonID, State.ALL_DEVICES_OFF);
-                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.None)
+                if(message.affectedHand == Hand.BOTH && message.gesture == Gesture.None)
                     setState(skeletonID, State.IDLE);
                 break;
             }
@@ -272,9 +271,9 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // -> ALL_DEVICES_ON, wenn Hände oberhalb des Kopfes gekreuzt werden
                 // -> IDLE, wenn Hände nach der Entkreuzung herunter genommen werden
 
-                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_ActivateAll)
+                if(message.affectedHand == Hand.BOTH && message.gesture == Gesture.BothHands_ActivateAll)
                     setState(skeletonID, State.ALL_DEVICES_ON);
-                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.None)
+                if(message.affectedHand == Hand.BOTH && message.gesture == Gesture.None)
                     setState(skeletonID, State.IDLE);
                 break;
             }
