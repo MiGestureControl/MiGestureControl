@@ -27,6 +27,7 @@ public class GestureRecognizer extends UntypedActor {
         Pointing,           // Zeigende Hand erkannt
         ActivateDevice,     // "Gerät aktivieren" erkannt
         DeactivateDevice,   // "Gerät deaktivieren" erkannt
+        StretchedUp,        // Nach oben gestreckter Arm erkannt
     }
 
     /** Enums, welche die möglichen erkannten Handzustände beschreiben. */

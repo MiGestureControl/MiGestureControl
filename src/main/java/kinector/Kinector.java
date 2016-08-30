@@ -47,7 +47,7 @@ public class Kinector extends J4KSDK {
                 skelIterator.remove();
             }
 
-            else if(skeleton.get3DJointZ(Skeleton.HEAD) < 1.4){
+            else if(skeleton.get3DJointZ(Skeleton.HEAD) < 0.5){
                 skelIterator.remove();
             }
         }

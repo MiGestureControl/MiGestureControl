@@ -121,10 +121,7 @@ public class GestureInterpreter extends UntypedActor {
      */
     private void interpretGesture(Skeleton skeleton, GestureRecognizer.Gesture gesture, Hand pointingHand) {
         if (gesture != GestureRecognizer.Gesture.BothHands_ActivateAll && gesture != GestureRecognizer.Gesture.BothHands_DeactivateAll) {
-            if (gesture == GestureRecognizer.Gesture.RightHand_StretchedUp) {
-                dispatcher.tell(new FlashMessage(), getSelf());
-
-            } else if (gesture == GestureRecognizer.Gesture.LeftHand_StretchedUp) {
+            if (gesture == GestureRecognizer.Gesture.StretchedUp) {
                 dispatcher.tell(new FlashMessage(), getSelf());
             } else {
                 Device device = getDevice(skeleton, pointingHand);

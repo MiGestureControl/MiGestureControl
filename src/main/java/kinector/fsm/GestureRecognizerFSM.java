@@ -39,10 +39,12 @@ public class GestureRecognizerFSM extends UntypedActor {
     private ActorRef messageTarget;
     private Skeleton[] skeletons;
     private State[] currentState;
-    private List<ActorRef> gestureStateMachines;
+    //private List<ActorRef> gestureStateMachines;
 
     private ActorRef fsmPointing;
     private ActorRef fsmRaising;
+    private ActorRef fsmCrossing;
+    private ActorRef fsmFlashing;
 
     public GestureRecognizerFSM(ActorRef _messageTarget)
     {
@@ -89,14 +91,12 @@ public class GestureRecognizerFSM extends UntypedActor {
                 next = State.IDLE;
                 break;
             }
-            
-            /*
+
             case ALL_DEVICES_ON:
             {
                 // send all devices on message
                 messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.BothHands_ActivateAll,
                         skeletons[playerID], Hand.BOTH), ActorRef.noSender());
-                next = State.IDLE;
                 break;
             }
 
@@ -105,28 +105,27 @@ public class GestureRecognizerFSM extends UntypedActor {
                 // send all devices off message
                 messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.BothHands_DeactivateAll,
                         skeletons[playerID], Hand.BOTH), ActorRef.noSender());
-                next = State.IDLE;
                 break;
             }
 
-            case FLASH:
+            case PLAY_SOUND:
             {
                 // send flash message
-                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.StrechtingUp,
+                messageTarget.tell(new GestureMessage(GestureRecognizer.Gesture.StretchedUp,
                         skeletons[playerID], Hand.UNKNOWN), ActorRef.noSender());
-                next = State.IDLE;
                 break;
             }
-            */
         }
         return next;
     }
 
     private void registerGestureStateMachines()
     {
-        gestureStateMachines = new ArrayList<>();
+        //gestureStateMachines = new ArrayList<>();
         fsmPointing = (createGestureStateMachine(GestureRecognizerFSMHandPointing.class));
         fsmRaising = (createGestureStateMachine(GestureRecognizerFSMHandRaising.class));
+        fsmCrossing = (createGestureStateMachine(GestureRecognizerFSMHandsCrossing.class));
+        fsmFlashing = (createGestureStateMachine(GestureRecognizerFSMHandFlashing.class));
         // TODO: more to come...
     }
 
@@ -156,6 +155,12 @@ public class GestureRecognizerFSM extends UntypedActor {
                     setState(skeletonID, State.RIGHT_CONTROLLING);
                 else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.Pointing)
                     setState(skeletonID, State.LEFT_CONTROLLING);
+                else if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_ActivateAll)
+                    setState(skeletonID, State.ALL_DEVICES_ON);
+                else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                    setState(skeletonID, State.PLAY_SOUND);
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                    setState(skeletonID, State.PLAY_SOUND);
                 break;
             }
 
@@ -165,15 +170,37 @@ public class GestureRecognizerFSM extends UntypedActor {
                     setState(skeletonID, State.DEVICE_ON);
                 else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
                     setState(skeletonID, State.DEVICE_OFF);
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                    setState(skeletonID, State.PLAY_SOUND);
                 break;
             }
 
             case RIGHT_CONTROLLING:
             {
-                if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
+                if (message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
                     setState(skeletonID, State.DEVICE_ON);
-                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
+                else if (message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
                     setState(skeletonID, State.DEVICE_OFF);
+                else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.StretchedUp)
+                    setState(skeletonID, State.PLAY_SOUND);
+                break;
+            }
+
+            case ALL_DEVICES_ON:
+            {
+                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_DeactivateAll)
+                    setState(skeletonID, State.ALL_DEVICES_OFF);
+                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.None)
+                    setState(skeletonID, State.IDLE);
+                break;
+            }
+
+            case ALL_DEVICES_OFF:
+            {
+                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.BothHands_ActivateAll)
+                    setState(skeletonID, State.ALL_DEVICES_ON);
+                if(message.affectedHand == Hand.BOTH && message.gesture == GestureRecognizer.Gesture.None)
+                    setState(skeletonID, State.IDLE);
                 break;
             }
         }
@@ -190,6 +217,8 @@ public class GestureRecognizerFSM extends UntypedActor {
             {
                 case IDLE:
                 {
+                    fsmFlashing.tell(message, getSelf());
+                    fsmCrossing.tell(message, getSelf());
                     fsmPointing.tell(message, getSelf());
                     break;
                 }
@@ -197,7 +226,14 @@ public class GestureRecognizerFSM extends UntypedActor {
                 case RIGHT_CONTROLLING:
                 {
                     ((SingleSkeletonMessage)message).hand = currentState == State.LEFT_CONTROLLING ? Hand.LEFT : Hand.RIGHT;
+                    fsmFlashing.tell(message, getSelf());
                     fsmRaising.tell(message, getSelf());
+                    break;
+                }
+                case ALL_DEVICES_ON:
+                case ALL_DEVICES_OFF:
+                {
+                    fsmCrossing.tell(message, getSelf());
                     break;
                 }
             }

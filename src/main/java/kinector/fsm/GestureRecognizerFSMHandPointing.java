@@ -40,11 +40,13 @@ public class GestureRecognizerFSMHandPointing extends AbstractGestureRecognizerF
     }
 
     private boolean isLeftHandNearerAtDeviceThanRightHand(Skeleton skeleton) {
-        return skeleton.get3DJointZ(Skeleton.HAND_LEFT) < skeleton.get3DJointZ(Skeleton.HAND_RIGHT);
+        return skeleton.get3DJointZ(Skeleton.HAND_LEFT) < skeleton.get3DJointZ(Skeleton.HAND_RIGHT) &&
+                skeleton.get3DJointY(Skeleton.HAND_LEFT) < skeleton.get3DJointY(Skeleton.HEAD);
     }
     
     private boolean isRightHandNearerAtDeviceThanLeftHand(Skeleton skeleton) {
-        return skeleton.get3DJointZ(Skeleton.HAND_RIGHT) < skeleton.get3DJointZ(Skeleton.HAND_LEFT);
+        return skeleton.get3DJointZ(Skeleton.HAND_RIGHT) < skeleton.get3DJointZ(Skeleton.HAND_LEFT) &&
+                skeleton.get3DJointY(Skeleton.HAND_RIGHT) < skeleton.get3DJointY(Skeleton.HEAD);
     }
 
     private boolean areHandsFarEnoughFromEachOther(Skeleton skeleton) {
