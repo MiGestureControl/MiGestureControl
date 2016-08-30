@@ -9,6 +9,7 @@ import connector.FhemConectorActor;
 import connector.MockupConnectorActor;
 import connector.models.FhemJsonList;
 import deviceManagement.DeviceManagementActor;
+import edu.ufl.digitalworlds.j4k.Skeleton;
 import kinector.fsm.GestureRecognizerFSM;
 import messages.DevicesMessage;
 import messages.HelperEnums.DeviceState;
@@ -21,6 +22,7 @@ import scala.concurrent.duration.Duration;
 import senarios.ImageComperatorActor;
 import tcpServer.TCPServer;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -59,7 +61,7 @@ public class DispatchActor extends UntypedActor {
 
 
     public DispatchActor() {
-        //new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8080, system);
+        new HTTPServer(this.getSelf(), this.system).bindRoute("127.0.0.1", 8081, system);
         ActorRef tcpServer = system.actorOf(TCPServer.props(this.getSelf()), "TcpServer");
 
         system.scheduler().schedule(
@@ -150,8 +152,12 @@ public class DispatchActor extends UntypedActor {
             imageComperatorActor.tell(message, getSelf());
 
         } else if (message instanceof SkeletonMessage) {
-
-            this.gestureRecognizer.tell(message, getSelf());
+            List<Skeleton> skeletonList = ((SkeletonMessage)message).skeletons;
+            for(Skeleton skeleton : skeletonList)
+            {
+                SingleSkeletonMessage single = new SingleSkeletonMessage(skeleton);
+                this.gestureRecognizer.tell(single, getSelf());
+            }
         } else if (message instanceof FlashMessage) {
 
             this.audioActor.tell(message, getSelf());

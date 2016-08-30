@@ -20,24 +20,22 @@ public class GestureRecognizerFSMHandPointing extends AbstractGestureRecognizerF
     private final float minimumZDistanceBetweenHands = 0.1f;
 
     @Override
-    protected void handleSkeletons(List<Skeleton> skeletons) {
-        for(Skeleton skeleton : skeletons) {
-            // left hand is declared as pointing when it is more far away from the
-            // body than the right hand (nearer at device)
-            if (isLeftHandNearerAtDeviceThanRightHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
-                System.out.println("Left hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
-                getSender().tell(
-                        new SkeletonStateMessage(skeleton, Hand.LEFT, GestureRecognizer.Gesture.Pointing),
-                        ActorRef.noSender());
-            }
-            // right hand is declared as pointing when it is more fare away from
-            // the body than the left hand (nearer at device)
-            if (isRightHandNearerAtDeviceThanLeftHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
-                System.out.println("Right hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
-                getSender().tell(
-                        new SkeletonStateMessage(skeleton, Hand.RIGHT, GestureRecognizer.Gesture.Pointing),
-                        ActorRef.noSender());
-            }
+    protected void handleSkeleton(Skeleton skeleton, Hand hand) {
+        // left hand is declared as pointing when it is more far away from the
+        // body than the right hand (nearer at device)
+        if (isLeftHandNearerAtDeviceThanRightHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
+            //System.out.println("Left hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
+            getSender().tell(
+                    new SkeletonStateMessage(skeleton, Hand.LEFT, GestureRecognizer.Gesture.Pointing),
+                    ActorRef.noSender());
+        }
+        // right hand is declared as pointing when it is more fare away from
+        // the body than the left hand (nearer at device)
+        if (isRightHandNearerAtDeviceThanLeftHand(skeleton) && areHandsFarEnoughFromEachOther(skeleton)) {
+            //System.out.println("Right hand pointing, dist=" + getZDistanceBetweenHands(skeleton));
+            getSender().tell(
+                    new SkeletonStateMessage(skeleton, Hand.RIGHT, GestureRecognizer.Gesture.Pointing),
+                    ActorRef.noSender());
         }
     }
 

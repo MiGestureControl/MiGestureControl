@@ -34,67 +34,68 @@ public class GestureRecognizerFSMHandRaising extends AbstractGestureRecognizerFS
     };
     
     @Override
-    protected void handleSkeletons(List<Skeleton> skeletons) {
-        leftHandStates = handleHandStates(skeletons, leftHandStates, Skeleton.HAND_LEFT);
-        rightHandStates = handleHandStates(skeletons, rightHandStates, Skeleton.HAND_RIGHT);
+    protected void handleSkeleton(Skeleton skeleton, Hand hand) {
+        int id = skeleton.getPlayerID();
+        if(hand == Hand.LEFT)
+            leftHandStates[id] = handleHandState(skeleton, leftHandStates[id], Skeleton.HAND_LEFT);
+        else if(hand == Hand.RIGHT)
+            rightHandStates[id] = handleHandState(skeleton, rightHandStates[id], Skeleton.HAND_RIGHT);
     }
     
-    private State[] handleHandStates(List<Skeleton> skeletons, State[] currentStates, int bone) {
-        for(Skeleton skeleton : skeletons) {
-            int i = skeleton.getPlayerID();
-            switch(currentStates[i])
+    private State handleHandState(Skeleton skeleton, State currentState, int bone) {
+        int i = skeleton.getPlayerID();
+        switch(currentState)
+        {
+            case IDLE:
             {
-                case IDLE:
-                {
-                    if(isBoneLowerThanHead(skeleton, bone))
-                        currentStates[i] = State.LOWER_THAN_HEAD;
-                    else if(isBoneHigherThanHead(skeleton, bone))
-                        currentStates[i] = State.HIGHER_THAN_HEAD;
-                    break;
-                }
-                case LOWER_THAN_HEAD:
-                {
-                    if(isBoneHigherThanHead(skeleton, bone))
-                        currentStates[i] = State.HIGHER_THAN_HEAD_RISING;
-                    break;
-                }
-                case LOWER_THAN_HEAD_SINKING:
-                {
-                    if(isBoneLowerThanHead(skeleton, bone))
-                        currentStates[i] = State.LOWER_THAN_HEAD;
-                    else if(isBoneHigherThanHead(skeleton, bone))
-                        currentStates[i] = State.HIGHER_THAN_HEAD_RISING;
-                    break;
-                }
-                case HIGHER_THAN_HEAD:
-                {
-                    if(isBoneLowerThanHead(skeleton, bone))
-                        currentStates[i] = State.LOWER_THAN_HEAD_SINKING;
-                    break;
-                }
-                case HIGHER_THAN_HEAD_RISING:
-                {
-                    if(isBoneHigherThanHead(skeleton, bone))
-                        currentStates[i] = State.HIGHER_THAN_HEAD;
-                    else if(isBoneLowerThanHead(skeleton, bone))
-                        currentStates[i] = State.LOWER_THAN_HEAD_SINKING;
-                    break;
-                }
+                if(isBoneLowerThanHead(skeleton, bone))
+                    currentState = State.LOWER_THAN_HEAD;
+                else if(isBoneHigherThanHead(skeleton, bone))
+                    currentState = State.HIGHER_THAN_HEAD;
+                break;
             }
-            
-            if(currentStates[i] == State.HIGHER_THAN_HEAD_RISING) {
-                getSender().tell(new SkeletonStateMessage(skeleton, 
-                        bone == Skeleton.HAND_LEFT ? Hand.LEFT : Hand.RIGHT, 
-                        GestureRecognizer.Gesture.ActivateDevice), ActorRef.noSender());
+            case LOWER_THAN_HEAD:
+            {
+                if(isBoneHigherThanHead(skeleton, bone))
+                    currentState = State.HIGHER_THAN_HEAD_RISING;
+                break;
             }
-            else if(currentStates[i] == State.LOWER_THAN_HEAD_SINKING) {
-                currentStates[i] = State.LOWER_THAN_HEAD;
-                getSender().tell(new SkeletonStateMessage(skeleton, 
-                        bone == Skeleton.HAND_LEFT ? Hand.LEFT : Hand.RIGHT, 
-                        GestureRecognizer.Gesture.DeactivateDevice), ActorRef.noSender());
+            case LOWER_THAN_HEAD_SINKING:
+            {
+                if(isBoneLowerThanHead(skeleton, bone))
+                    currentState = State.LOWER_THAN_HEAD;
+                else if(isBoneHigherThanHead(skeleton, bone))
+                    currentState = State.HIGHER_THAN_HEAD_RISING;
+                break;
+            }
+            case HIGHER_THAN_HEAD:
+            {
+                if(isBoneLowerThanHead(skeleton, bone))
+                    currentState = State.LOWER_THAN_HEAD_SINKING;
+                break;
+            }
+            case HIGHER_THAN_HEAD_RISING:
+            {
+                if(isBoneHigherThanHead(skeleton, bone))
+                    currentState = State.HIGHER_THAN_HEAD;
+                else if(isBoneLowerThanHead(skeleton, bone))
+                    currentState = State.LOWER_THAN_HEAD_SINKING;
+                break;
             }
         }
-        return currentStates;
+
+        if(currentState == State.HIGHER_THAN_HEAD_RISING) {
+            getSender().tell(new SkeletonStateMessage(skeleton,
+                    bone == Skeleton.HAND_LEFT ? Hand.LEFT : Hand.RIGHT,
+                    GestureRecognizer.Gesture.ActivateDevice), ActorRef.noSender());
+        }
+        else if(currentState == State.LOWER_THAN_HEAD_SINKING) {
+            currentState = State.LOWER_THAN_HEAD;
+            getSender().tell(new SkeletonStateMessage(skeleton,
+                    bone == Skeleton.HAND_LEFT ? Hand.LEFT : Hand.RIGHT,
+                    GestureRecognizer.Gesture.DeactivateDevice), ActorRef.noSender());
+        }
+        return currentState;
     }
     
     private boolean isBoneLowerThanHead(Skeleton skeleton, int bone) {

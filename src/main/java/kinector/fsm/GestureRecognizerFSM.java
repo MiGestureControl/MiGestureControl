@@ -8,6 +8,7 @@ import edu.ufl.digitalworlds.j4k.Skeleton;
 import kinector.GestureRecognizer;
 import messages.GestureMessage;
 import messages.HelperEnums.Hand;
+import messages.SingleSkeletonMessage;
 import messages.SkeletonMessage;
 import messages.SkeletonStateMessage;
 
@@ -39,6 +40,9 @@ public class GestureRecognizerFSM extends UntypedActor {
     private Skeleton[] skeletons;
     private State[] currentState;
     private List<ActorRef> gestureStateMachines;
+
+    private ActorRef fsmPointing;
+    private ActorRef fsmRaising;
 
     public GestureRecognizerFSM(ActorRef _messageTarget)
     {
@@ -121,8 +125,8 @@ public class GestureRecognizerFSM extends UntypedActor {
     private void registerGestureStateMachines()
     {
         gestureStateMachines = new ArrayList<>();
-        gestureStateMachines.add(createGestureStateMachine(GestureRecognizerFSMHandPointing.class));
-        gestureStateMachines.add(createGestureStateMachine(GestureRecognizerFSMHandRaising.class));
+        fsmPointing = (createGestureStateMachine(GestureRecognizerFSMHandPointing.class));
+        fsmRaising = (createGestureStateMachine(GestureRecognizerFSMHandRaising.class));
         // TODO: more to come...
     }
 
@@ -157,29 +161,47 @@ public class GestureRecognizerFSM extends UntypedActor {
 
             case LEFT_CONTROLLING:
             {
-                if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
-                    setState(skeletonID, State.DEVICE_ON);
-                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
-                    setState(skeletonID, State.DEVICE_OFF);
-            }
-
-            case RIGHT_CONTROLLING:
-            {
                 if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
                     setState(skeletonID, State.DEVICE_ON);
                 else if(message.affectedHand == Hand.LEFT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
                     setState(skeletonID, State.DEVICE_OFF);
+                break;
+            }
+
+            case RIGHT_CONTROLLING:
+            {
+                if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.ActivateDevice)
+                    setState(skeletonID, State.DEVICE_ON);
+                else if(message.affectedHand == Hand.RIGHT && message.gesture == GestureRecognizer.Gesture.DeactivateDevice)
+                    setState(skeletonID, State.DEVICE_OFF);
+                break;
             }
         }
     }
 
     @Override
     public void onReceive(Object message) throws Exception {
-        if(message instanceof SkeletonMessage) {
-            // pass skeleton message to all child state machines
-            for (ActorRef fsmRef : gestureStateMachines) {
-                fsmRef.tell(message, ActorRef.noSender());
+        if(message instanceof SingleSkeletonMessage) {
+            Skeleton skeleton = ((SingleSkeletonMessage)message).skeleton;
+            State currentState = getState(skeleton.getPlayerID());
+
+            // pass skeleton message to child state machine
+            switch(currentState)
+            {
+                case IDLE:
+                {
+                    fsmPointing.tell(message, getSelf());
+                    break;
+                }
+                case LEFT_CONTROLLING:
+                case RIGHT_CONTROLLING:
+                {
+                    ((SingleSkeletonMessage)message).hand = currentState == State.LEFT_CONTROLLING ? Hand.LEFT : Hand.RIGHT;
+                    fsmRaising.tell(message, getSelf());
+                    break;
+                }
             }
+
         }
         else if(message instanceof SkeletonStateMessage) {
             handleSkeletonStateMessage((SkeletonStateMessage)message);
